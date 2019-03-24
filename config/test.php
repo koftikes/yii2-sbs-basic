@@ -1,5 +1,7 @@
 <?php
 
+use app\models\user\UserMaster;
+
 /**
  * Application configuration shared by all test types
  */
@@ -13,7 +15,7 @@ return yii\helpers\ArrayHelper::merge(
                 'basePath' => __DIR__ . '/../web/assets',
             ],
             'user' => [
-                'identityClass' => 'app\models\User',
+                'identityClass' => UserMaster::class,
             ],
             'urlManager' => [
                 'showScriptName' => true,

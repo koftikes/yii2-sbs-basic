@@ -1,5 +1,8 @@
 <?php
 
+use app\models\user\UserMaster;
+use sbs\behaviors\LastVisitBehavior;
+
 return yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/main.php',
     require __DIR__ . '/main-local.php',
@@ -7,8 +10,9 @@ return yii\helpers\ArrayHelper::merge(
         'id' => 'basic',
         'components' => [
             'user' => [
-                'identityClass' => 'app\models\User',
+                'identityClass' => UserMaster::class,
                 'enableAutoLogin' => true,
+                'as afterLogin' => LastVisitBehavior::class,
             ],
             'errorHandler' => [
                 'errorAction' => 'site/error',

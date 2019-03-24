@@ -1,24 +1,26 @@
 <?php
 
-namespace app\models;
+namespace app\models\user;
 
 use Yii;
 use yii\base\Model;
 
 /**
- * LoginForm is the model behind the login form.
+ * Class LoginForm is the model behind the login form.
+ * @package app\models\user
  *
- * @property User|null $user This property is read-only.
- *
+ * @property UserMaster|null $user This property is read-only.
  */
 class LoginForm extends Model
 {
-    public $username;
+    public $login;
     public $password;
     public $rememberMe = true;
 
-    private $_user = false;
-
+    /**
+     * @var UserMaster|null
+     */
+    private $_user;
 
     /**
      * @return array the validation rules.
@@ -26,11 +28,8 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            // username and password are both required
-            [['username', 'password'], 'required'],
-            // rememberMe must be a boolean value
+            [['login', 'password'], 'required'],
             ['rememberMe', 'boolean'],
-            // password is validated by validatePassword()
             ['password', 'validatePassword'],
         ];
     }
@@ -38,17 +37,14 @@ class LoginForm extends Model
     /**
      * Validates the password.
      * This method serves as the inline validation for password.
-     *
-     * @param string $attribute the attribute currently being validated
-     * @param array $params the additional name-value pairs given in the rule
      */
-    public function validatePassword($attribute, $params)
+    public function validatePassword()
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();
-
             if (!$user || !$user->validatePassword($this->password)) {
-                $this->addError($attribute, 'Incorrect username or password.');
+                $this->addError('login');
+                $this->addError('password', 'Incorrect username or password.');
             }
         }
     }
@@ -60,20 +56,20 @@ class LoginForm extends Model
     public function login()
     {
         if ($this->validate()) {
-            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? 3600*24*30 : 0);
+            return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->params['user.rememberMeDuration'] : 0);
         }
         return false;
     }
 
     /**
-     * Finds user by [[username]]
+     * Finds user by [[login]]
      *
-     * @return User|null
+     * @return UserMaster|null
      */
     public function getUser()
     {
-        if ($this->_user === false) {
-            $this->_user = User::findByUsername($this->username);
+        if (!$this->_user instanceof UserMaster) {
+            $this->_user = UserMaster::findByLogin($this->login);
         }
 
         return $this->_user;
