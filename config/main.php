@@ -1,5 +1,8 @@
 <?php
 
+use yii\caching\FileCache;
+use yii\log\FileTarget;
+
 return [
     'basePath' => dirname(__DIR__),
     'language' => 'en-US',
@@ -10,13 +13,13 @@ return [
     ],
     'components' => [
         'cache' => [
-            'class' => 'yii\caching\FileCache',
+            'class' => FileCache::class,
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
             'targets' => [
                 [
-                    'class' => 'yii\log\FileTarget',
+                    'class' => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],

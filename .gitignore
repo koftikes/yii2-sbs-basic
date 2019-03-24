@@ -20,6 +20,8 @@ Thumbs.db
 
 # composer itself is not needed
 composer.phar
+# during development add composer.lock to git ignore
+composer.lock
 
 # Mac DS_Store Files
 .DS_Store

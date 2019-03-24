@@ -1,23 +1,24 @@
 {
-    "name": "yiisoft/yii2-app-basic",
+    "name": "yiisoft/yii2-sbs-basic",
     "description": "Yii 2 Basic Project Template",
     "keywords": ["yii2", "framework", "basic", "project template"],
     "homepage": "http://www.yiiframework.com/",
     "type": "project",
     "license": "BSD-3-Clause",
     "support": {
-        "issues": "https://github.com/yiisoft/yii2/issues?state=open",
-        "forum": "http://www.yiiframework.com/forum/",
-        "wiki": "http://www.yiiframework.com/wiki/",
-        "irc": "irc://irc.freenode.net/yii",
+        "issues": "https://github.com/koftikes/yii2-sbs-basic/issues?state=open",
+        "wiki": "https://github.com/koftikes/yii2-sbs-basic/wiki",
         "source": "https://github.com/yiisoft/yii2"
     },
     "minimum-stability": "stable",
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=7.0.0",
         "yiisoft/yii2": "~2.0.14",
         "yiisoft/yii2-bootstrap": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0"
+        "yiisoft/yii2-swiftmailer": "~2.0.0",
+
+        "sbs/yii2-core-kit": "dev-master",
+        "sbs/yii2-transliterator-helper": "^0.2.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.0.0",
@@ -41,6 +42,7 @@
         {
             "type": "composer",
             "url": "https://asset-packagist.org"
-        }
+        },
+        {"type": "vcs", "url": "https://github.com/koftikes/yii2-core-kit.git"}
     ]
 }

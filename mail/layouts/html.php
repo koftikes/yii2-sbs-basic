@@ -17,6 +17,7 @@ use yii\helpers\Html;
     <?php $this->beginBody() ?>
     <?= $content ?>
     <?php $this->endBody() ?>
+    <p>With respect, administration portal <?= Yii::$app->name; ?></p>
 </body>
 </html>
 <?php $this->endPage() ?>
