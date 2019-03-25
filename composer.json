@@ -18,7 +18,8 @@
         "yiisoft/yii2-swiftmailer": "~2.1.0",
 
         "sbs/yii2-core-kit": "dev-master",
-        "sbs/yii2-transliterator-helper": "^0.2.1"
+        "sbs/yii2-transliterator-helper": "^0.2.1",
+        "kartik-v/yii2-widgets": "^3.4"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

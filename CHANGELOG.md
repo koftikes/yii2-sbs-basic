@@ -10,6 +10,10 @@
 ### In Development
 
 
+### 25-03-2019
+* Update Alert widget - renders a message from session flash.
+* Included **kartik-v/yii2-widgets** version ^3.4.
+
 ### 24-03-2019
 * Advanced work with user:
     * Added initial migration for UserMaster and UserProfile
