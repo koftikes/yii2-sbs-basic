@@ -1,19 +1,19 @@
 <?php
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-
-/* @var $model app\models\user\LoginForm */
+/**
+ * @var $this yii\web\View
+ * @var $form kartik\form\ActiveForm
+ * @var $model app\models\user\LoginForm
+ */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use kartik\form\ActiveForm;
 
 $this->title = 'Login';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="login">
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>Please fill out the following fields to login:</p>
+    <p class="text-muted">Please fill out the following fields to login:</p>
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-login']); ?>
