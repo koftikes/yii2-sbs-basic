@@ -3,7 +3,7 @@
 namespace app\widgets;
 
 use Yii;
-use yii\bootstrap\Widget;
+use yii\bootstrap4\Widget;
 use kartik\growl\Growl;
 
 /**
@@ -52,10 +52,10 @@ class Alert extends Widget
     public $closeButton = [];
 
     public $alertIcon = [
-        self::ERROR => 'glyphicon glyphicon-remove-sign',
-        self::WARNING => 'glyphicon glyphicon-exclamation-sign',
-        self::SUCCESS => 'glyphicon glyphicon-ok-sign',
-        self::INFO => 'glyphicon glyphicon-info-sign',
+        self::ERROR => 'fas fa-times-circle',
+        self::WARNING => 'fas fa-exclamation-circle',
+        self::SUCCESS => 'fas fa-check-circle',
+        self::INFO => 'fas fa-info-circle',
     ];
 
     /**

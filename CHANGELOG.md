@@ -10,6 +10,10 @@
 ### In Development
 
 
+### 28-03-2019
+* Update Bootstrap to v4.3.1
+* Remove github hooks and vagrant. 
+
 ### 25-03-2019
 * Update Alert widget - renders a message from session flash.
 * Included **kartik-v/yii2-widgets** version ^3.4.

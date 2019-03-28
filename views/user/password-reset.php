@@ -1,18 +1,19 @@
 <?php
-
-/* @var $this yii\web\View */
-/* @var $form yii\bootstrap\ActiveForm */
-/* @var $model app\models\user\PasswordResetForm */
+/**
+ * @var $this yii\web\View
+ * @var $form kartik\form\ActiveForm
+ * @var $model app\models\user\PasswordResetForm
+ */
 
 use yii\helpers\Html;
-use yii\bootstrap\ActiveForm;
+use kartik\form\ActiveForm;
 
 $this->title = 'Password Reset';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="password-reset">
     <h1><?= Html::encode($this->title) ?></h1>
-    <p>Please choose your new password:</p>
+    <p class="text-muted">Please choose your new password:</p>
     <div class="row">
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-password-reset']); ?>
