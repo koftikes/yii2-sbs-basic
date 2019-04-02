@@ -81,7 +81,7 @@ the installed application. You only need to do these once for all.
    /path/to/php-bin/php /path/to/yii-application/init --env=Development --overwrite=All
    ```
 
-2. Create a new database and adjust the `components['db']` configuration in `/path/to/yii-application/config/main-local.php` accordingly.
+2. Create a new database and adjust the `components['db']` configuration in `/path/to/yii-application/config/common-local.php` accordingly.
 
 3. Open a console terminal, apply migrations with command `/path/to/php-bin/php /path/to/yii-application/yii migrate`.
 
@@ -210,7 +210,7 @@ CONFIGURATION
 
 ### Database
 
-Edit the file `config/main-local.php` with real data, for example:
+Edit the file `config/common-local.php` with real data, for example:
 
 ```php
 return [
@@ -292,7 +292,7 @@ To execute acceptance tests do the following:
    tests/bin/yii migrate
    ```
 
-   The database configuration can be found at `config/main-local.php`.
+   The database configuration can be found at `config/common-local.php`.
 
 
 6. Start web server:

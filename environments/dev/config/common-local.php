@@ -3,17 +3,13 @@
 $config = [
     'components' => [
         'db' => [
-            'class' => 'yii\db\Connection',
             'dsn' => 'mysql:host=localhost;dbname=yii2_basic',
             'username' => 'root',
             'password' => 'root',
-            'charset' => 'utf8',
         ],
         'mailer' => [
-            'class' => 'yii\swiftmailer\Mailer',
-            // By default application send all mails to a file.
-            // For production environment you have set 'useFileTransport' to false
-            // and configure a transport for the mailer to send real emails.
+            // By default application send all mails to a file. For production environment you have
+            // set 'useFileTransport' to false and configure a transport for the mailer to send real emails.
             'useFileTransport' => true,
         ],
         'request' => [
@@ -28,8 +24,8 @@ if (YII_ENV_TEST) {
     $config['components']['db']['dsn'] = 'mysql:host=localhost;dbname=yii2_basic_tests';
 }
 
-if (!YII_ENV_TEST) {
-    // configuration adjustments for 'dev' environment
+// configuration adjustments for 'dev' environment
+if (YII_ENV_DEV) {
     $config['bootstrap'][] = 'debug';
     $config['modules']['debug'] = [
         'class' => 'yii\debug\Module'

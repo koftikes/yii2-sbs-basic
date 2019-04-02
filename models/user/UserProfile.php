@@ -21,8 +21,8 @@ use yii\db\ActiveRecord;
 class UserProfile extends ActiveRecord
 {
     const GENDER_THING = 0;
-    const GENDER_FEMALE = 1;
-    const GENDER_MALE = 2;
+    const GENDER_MALE = 1;
+    const GENDER_FEMALE = 2;
 
     const SUBSCRIBE_NOT_ACTIVE = 0;
     const SUBSCRIBE_ACTIVE = 1;
@@ -57,6 +57,7 @@ class UserProfile extends ActiveRecord
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function attributeLabels()
     {

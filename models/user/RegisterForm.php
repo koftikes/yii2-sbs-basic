@@ -67,9 +67,9 @@ class RegisterForm extends Model
                     return $user;
                 }
             }
-            throw new Exception('Unable to save record.');
+            throw new Exception('Unable to save record by unknown reason.');
         } catch (\Exception $exception) {
-            $this->addError($exception->getMessage());
+            $this->addError('email', $exception->getMessage());
             $transaction->rollBack();
         }
 

@@ -3,12 +3,15 @@
 * Move console files and scripts to one directory
 * Initials fixtures (?)
 * Admin module 
-* Update tests
 * Code style checks
 * Travis CI 
 
 ### In Development
 
+
+### 02-04-2019
+* Added initial Users fixtures
+* Update tests add test fixtures
 
 ### 28-03-2019
 * Update Bootstrap to v4.3.1

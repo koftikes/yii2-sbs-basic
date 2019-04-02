@@ -40,7 +40,7 @@ return [
             'tests/bin/yii',
         ],
         'setCookieValidationKey' => [
-            'config/main-local.php',
+            'config/common-local.php',
         ],
     ],
     'Production' => [
@@ -53,7 +53,7 @@ return [
             'yii',
         ],
         'setCookieValidationKey' => [
-            'config/main-local.php',
+            'config/common-local.php',
         ],
     ],
 ];

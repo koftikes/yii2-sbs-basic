@@ -1,7 +1,9 @@
 <?php
 
-use yii\caching\FileCache;
+use yii\db\Connection;
 use yii\log\FileTarget;
+use yii\caching\FileCache;
+use yii\swiftmailer\Mailer;
 
 return [
     'basePath' => dirname(__DIR__),
@@ -12,6 +14,13 @@ return [
         '@npm' => '@vendor/npm-asset',
     ],
     'components' => [
+        'db' => [
+            'class' => Connection::class,
+            'charset' => 'utf8',
+        ],
+        'mailer' => [
+            'class' => Mailer::class,
+        ],
         'cache' => [
             'class' => FileCache::class,
         ],

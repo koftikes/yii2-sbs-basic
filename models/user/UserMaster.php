@@ -70,6 +70,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnore
      */
     public function attributeLabels()
     {
@@ -218,7 +219,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (empty($token)) {
+        if (!$token) {
             return false;
         }
         $timestamp = (int)substr($token, strrpos($token, '_') + 1);
