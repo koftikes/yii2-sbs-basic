@@ -27,12 +27,7 @@ class RegisterForm extends Model
             [['password', 'password_repeat', 'email', 'name'], 'required'],
             ['email', 'email'],
             [['email', 'name'], 'string', 'max' => 255],
-            [
-                'email',
-                'unique',
-                'targetClass' => UserMaster::class,
-                'message' => Yii::t('app', 'This email address has already been taken.')
-            ],
+            ['email', 'unique', 'targetClass' => UserMaster::class],
             ['password', 'string', 'min' => 6],
             [
                 'password_repeat',
@@ -67,7 +62,7 @@ class RegisterForm extends Model
                     return $user;
                 }
             }
-            throw new Exception('Unable to save record by unknown reason.');
+            throw new Exception(Yii::t('app','Unable to save record by unknown reason.'));
         } catch (\Exception $exception) {
             $this->addError('email', $exception->getMessage());
             $transaction->rollBack();

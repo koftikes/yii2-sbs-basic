@@ -12,11 +12,9 @@ return yii\helpers\ArrayHelper::merge(
         'id' => 'basic-tests',
         'aliases' => ['@tests' => '@app/tests'],
         'components' => [
-            'assetManager' => [
-                'basePath' => '@app/web/assets',
-            ],
             'user' => [
                 'identityClass' => UserMaster::class,
+                'loginUrl' => ['user/login'],
             ],
             'urlManager' => [
                 'showScriptName' => true,

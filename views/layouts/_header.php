@@ -27,6 +27,12 @@ if (Yii::$app->user->isGuest) {
         ]
     ]);
 } else {
+    echo NavX::widget([
+        'options' => ['class' => 'navbar-nav justify-content-end'],
+        'items' => [
+            ['label' => 'Admin Panel', 'url' => ['/admin/statistic']],
+        ]
+    ]);
     echo Html::beginForm(['/user/logout'], 'post', ['class' => 'form-inline my-2 my-lg-0'])
         . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-outline-success logout'])
         . Html::endForm();

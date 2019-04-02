@@ -11,6 +11,7 @@ return yii\helpers\ArrayHelper::merge(
         'components' => [
             'user' => [
                 'identityClass' => UserMaster::class,
+                'loginUrl' => ['user/login'],
                 'enableAutoLogin' => true,
                 'as afterLogin' => LastVisitBehavior::class,
             ],
