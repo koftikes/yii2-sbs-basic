@@ -6,13 +6,14 @@ use app\models\user\UserMaster;
  * Application configuration shared by all test types
  */
 return yii\helpers\ArrayHelper::merge(
-    require __DIR__ . '/main.php',
-    require __DIR__ . '/main-local.php',
+    require __DIR__ . '/common.php',
+    require __DIR__ . '/common-local.php',
     [
         'id' => 'basic-tests',
+        'aliases' => ['@tests' => '@app/tests'],
         'components' => [
             'assetManager' => [
-                'basePath' => __DIR__ . '/../web/assets',
+                'basePath' => '@app/web/assets',
             ],
             'user' => [
                 'identityClass' => UserMaster::class,

@@ -34,6 +34,7 @@ class ContactForm extends Model
 
     /**
      * @return array customized attribute labels
+     * @codeCoverageIgnore
      */
     public function attributeLabels()
     {
@@ -49,16 +50,15 @@ class ContactForm extends Model
      */
     public function contact($email)
     {
-        if ($this->validate()) {
-            Yii::$app->mailer->compose()
-                ->setTo($email)
-                ->setFrom([$this->email => $this->name])
-                ->setSubject($this->subject)
-                ->setTextBody($this->body)
-                ->send();
-
-            return true;
+        if (!$this->validate()) {
+            return false;
         }
-        return false;
+
+        return Yii::$app->mailer->compose()
+            ->setTo($email)
+            ->setFrom([$this->email => $this->name])
+            ->setSubject($this->subject)
+            ->setTextBody($this->body)
+            ->send();
     }
 }

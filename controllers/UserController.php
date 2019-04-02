@@ -126,14 +126,10 @@ class UserController extends Controller
     public function actionPasswordResetRequest()
     {
         $model = new PasswordResetRequestForm();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            if ($model->sendEmail()) {
-                Yii::$app->session->setFlash('success', Yii::t('app', 'Check your email for further instructions.'));
+        if ($model->load(Yii::$app->request->post()) && $model->sendEmail()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'Check your email for further instructions.'));
 
-                return $this->goHome();
-            }
-            Yii::$app->session->setFlash('error',
-                Yii::t('app', 'Sorry, we are unable to reset password for this email address.'));
+            return $this->goHome();
         }
 
         return $this->render('password-reset-request', ['model' => $model]);
