@@ -4,6 +4,9 @@ use yii\db\Connection;
 use yii\log\FileTarget;
 use yii\caching\FileCache;
 use yii\swiftmailer\Mailer;
+use app\modules\admin\AdminModule;
+use kartik\grid\Module as GridModule;
+use kartik\icons\FontAwesomeAsset;
 
 return [
     'basePath' => dirname(__DIR__),
@@ -33,6 +36,21 @@ return [
                 ],
             ],
         ],
+        'assetManager' => [
+            'basePath' => '@app/web/assets',
+            'bundles' => [
+                FontAwesomeAsset::class => [
+                    'js' => [],
+                    'css' => [
+                        'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
+                    ]
+                ]
+            ]
+        ],
+    ],
+    'modules' => [
+        'gridview' => ['class' => GridModule::class],
+        'admin' => ['class' => AdminModule::class],
     ],
     'params' => require __DIR__ . '/params.php',
 ];

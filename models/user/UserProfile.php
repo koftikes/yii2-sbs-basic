@@ -4,6 +4,7 @@ namespace app\models\user;
 
 use Yii;
 use yii\db\ActiveRecord;
+use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * This is the model class for table "{{%user_profile}}".
@@ -41,10 +42,12 @@ class UserProfile extends ActiveRecord
     public function rules()
     {
         return [
+            [['name', 'phone'], 'trim'],
             [['DOB'], 'safe'],
             [['gender', 'subscribe'], 'integer'],
             [['info'], 'string'],
             [['name', 'phone'], 'string', 'max' => 255],
+            [['phone'], PhoneInputValidator::class],
             [
                 ['user_id'],
                 'exist',
@@ -57,7 +60,7 @@ class UserProfile extends ActiveRecord
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
+     * {@codeCoverageIgnore}
      */
     public function attributeLabels()
     {

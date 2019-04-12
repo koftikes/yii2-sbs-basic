@@ -3,10 +3,10 @@
 namespace app\models\user;
 
 use Yii;
-use yii\base\NotSupportedException;
-use sbs\behaviors\DateTimeBehavior;
 use yii\db\ActiveRecord;
 use yii\web\IdentityInterface;
+use yii\base\NotSupportedException;
+use sbs\behaviors\DateTimeBehavior;
 
 /**
  * This is the model class for table "{{%user_master}}".
@@ -30,7 +30,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
 {
     const STATUS_PENDING = 0;
     const STATUS_ACTIVE = 1;
-    const STATUS_DELETED = 10;
+    const STATUS_BLOCKED = 10;
 
     /**
      * {@inheritdoc}
@@ -56,7 +56,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     public function rules()
     {
         return [
-            ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_ACTIVE, self::STATUS_DELETED]],
+            ['status', 'in', 'range' => [self::STATUS_PENDING, self::STATUS_ACTIVE, self::STATUS_BLOCKED]],
             [['email', 'auth_key', 'password_hash'], 'required'],
             [['status'], 'integer'],
             [['create_date', 'update_date', 'last_visit'], 'safe'],
@@ -70,7 +70,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnore
+     * {@codeCoverageIgnore}
      */
     public function attributeLabels()
     {
@@ -131,7 +131,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     /**
      * Generates "remember me" authentication key
      *
-     * @throws \yii\base\Exception
+     * @throws yii\base\Exception
      */
     public function generateAuthKey()
     {
@@ -141,7 +141,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     /**
      * Generates token for email confirmation
      *
-     * @throws \yii\base\Exception
+     * @throws yii\base\Exception
      */
     public function generateRegisterConfirmToken()
     {
@@ -186,7 +186,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
      *
      * @param string $password
      *
-     * @throws \yii\base\Exception
+     * @throws yii\base\Exception
      */
     public function setPassword($password)
     {
@@ -196,7 +196,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     /**
      * Generates new password reset token
      *
-     * @throws \yii\base\Exception
+     * @throws yii\base\Exception
      */
     public function generatePasswordResetToken()
     {
@@ -248,7 +248,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
      * @param $email
      * @param $password
      * @return UserMaster
-     * @throws \yii\base\Exception
+     * @throws yii\base\Exception
      */
     public static function create($email, $password)
     {
@@ -282,10 +282,25 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * @return \yii\db\ActiveQuery
+     * @return yii\db\ActiveQuery
      */
     public function getProfile()
     {
         return $this->hasOne(UserProfile::class, ['user_id' => 'id']);
+    }
+
+    /**
+     * @param null|integer $status
+     * @return array|string
+     */
+    public static function statuses($status = null)
+    {
+        $data = [
+            UserMaster::STATUS_PENDING => Yii::t('app', 'Pending'),
+            UserMaster::STATUS_ACTIVE => Yii::t('app', 'Active'),
+            UserMaster::STATUS_BLOCKED => Yii::t('app', 'Blocked')
+        ];
+
+        return $status !== null ? $data[$status] : $data;
     }
 }

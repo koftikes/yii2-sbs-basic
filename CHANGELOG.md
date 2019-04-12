@@ -2,12 +2,22 @@
 * Registration using social network
 * Move console files and scripts to one directory
 * Initials fixtures (?)
-* Admin module 
 * Code style checks
 * Travis CI 
+* Universal modal window
 
 ### In Development
 
+
+### 12-04-2019
+* Added Admin Module
+    * Added statistic page. 
+    * Added workflow work with users.
+* Updated FontAwesomeAsset to use CSS instead of JS version.
+* Included **kartik-v/yii2-grid** version ^3.3.
+* Included **trntv/probe** version ^1.0.
+* Included **borales/yii2-phone-input** version ^0.1.
+* Included **machour/yii2-jquery-flot** version 1.0.x-dev.
 
 ### 02-04-2019
 * Added initial Users fixtures
