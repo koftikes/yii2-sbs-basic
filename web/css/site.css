@@ -49,3 +49,27 @@ a.asc:after, a.desc:after {
     padding: 10px 20px;
     margin: 0 0 15px 0;
 }
+
+/**
+* Mini fix for using yii\grid\ActionColumn with Bootstrap 4.
+*/
+a:-webkit-any-link {
+    text-decoration: none;
+}
+
+.glyphicon {
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+}
+
+.glyphicon-eye-open:before {
+    content: "\f06e";
+}
+
+.glyphicon-pencil:before {
+    content: "\f303";
+}
+
+.glyphicon-trash:before {
+    content: "\f2ed";
+}

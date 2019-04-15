@@ -1,16 +1,17 @@
 <?php
+
 /**
  * @var $this yii\web\View
- * @var $model app\modules\admin\models\UserForm
+ * @var $model app\models\News
  */
 
-$this->title = 'Create User';
+$this->title = 'Create News Category';
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
-    ['label' => 'Users', 'url' => ['user/index']],
+    ['label' => 'News Categories', 'url' => ['news-category/index']],
     'Create'
 ];
 ?>
-<div class="admin-user-create">
+<div class="admin-news-category-create">
     <?= $this->render('_form', ['model' => $model]); ?>
 </div>

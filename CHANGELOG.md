@@ -2,15 +2,28 @@
 * Registration using social network
 * Move console files and scripts to one directory
 * Initials fixtures (?)
-* Code style checks
+* Code style checks (fixed all code style).
 * Travis CI 
 * Universal modal window
+* Add translate to all views.
+* Add pretty URL.
+* Add ability work with images.
+* Add author behavior with ability run console command.  
 
 ### In Development
 
+### 11-06-2019
+* Added News Module:
+    * Added migration for News and NewsCategory.
+    * Added part to Admin Module for editing News and NewsCategory.
+* Fixed all breadcrumbs.
+* Update **sbs/yii2-transliterator-helper** to version ^0.3.
+* Included **kartik-v/yii2-detail-view** version ^1.8.
+* Included **vova07/yii2-imperavi-widget** version ^2.0.
+* Included **dkhlystov/yii2-treegrid** version ^0.1.
 
 ### 12-04-2019
-* Added Admin Module
+* Added Admin Module:
     * Added statistic page. 
     * Added workflow work with users.
 * Updated FontAwesomeAsset to use CSS instead of JS version.

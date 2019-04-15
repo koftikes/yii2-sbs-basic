@@ -7,6 +7,7 @@ use yii\swiftmailer\Mailer;
 use app\modules\admin\AdminModule;
 use kartik\grid\Module as GridModule;
 use kartik\icons\FontAwesomeAsset;
+use sbs\controllers\TransliterationController;
 
 return [
     'basePath' => dirname(__DIR__),
@@ -15,6 +16,11 @@ return [
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset',
+    ],
+    'controllerMap' => [
+        'transliteration' => [
+            'class' => TransliterationController::class,
+        ]
     ],
     'components' => [
         'db' => [

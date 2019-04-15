@@ -1,16 +1,17 @@
 <?php
+
 /**
  * @var $this yii\web\View
- * @var $model app\modules\admin\models\UserForm
+ * @var $model app\models\News
  */
 
-$this->title = 'Create User';
+$this->title = 'Create News';
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
-    ['label' => 'Users', 'url' => ['user/index']],
+    ['label' => 'News', 'url' => ['news/index']],
     'Create'
 ];
 ?>
-<div class="admin-user-create">
+<div class="admin-news-create">
     <?= $this->render('_form', ['model' => $model]); ?>
 </div>

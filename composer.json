@@ -18,7 +18,7 @@
         "yiisoft/yii2-swiftmailer": "~2.1.0",
 
         "sbs/yii2-core-kit": "dev-master",
-        "sbs/yii2-transliterator-helper": "^0.2.1",
+        "sbs/yii2-transliterator-helper": "^0.3",
 
         "kartik-v/yii2-widgets": "^3.4",
         "kartik-v/yii2-nav-x": "^1.2",
@@ -27,7 +27,10 @@
         "kartik-v/yii2-grid": "^3.3",
         "trntv/probe": "^1.0",
         "borales/yii2-phone-input": "^0.1",
-        "machour/yii2-jquery-flot": "1.0.x-dev"
+        "machour/yii2-jquery-flot": "1.0.x-dev",
+        "kartik-v/yii2-detail-view": "^1.8",
+        "vova07/yii2-imperavi-widget": "^2.0",
+        "dkhlystov/yii2-treegrid": "^0.1"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

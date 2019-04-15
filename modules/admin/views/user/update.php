@@ -4,12 +4,14 @@
  * @var $model app\modules\admin\models\UserForm
  */
 
-use yii\helpers\Html;
-
-$this->title = 'Update User #' . $model->user->id;
-$this->params['breadcrumbs'] = [['label' => 'Admin Users', 'url' => ['user/index']], $this->title];
+$this->title = 'Update User: ' . $model->user->username;
+$this->params['breadcrumbs'] = [
+    ['label' => 'Admin Panel', 'url' => ['statistic/index']],
+    ['label' => 'Users', 'url' => ['user/index']],
+    $model->user->username,
+    'Update'
+];
 ?>
 <div class="admin-user-update">
-    <h3><?= Html::encode($this->title); ?></h3>
     <?= $this->render('_form', ['model' => $model]); ?>
 </div>

@@ -75,7 +75,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app', 'ID'),
+            'id' => '#',
             'email' => Yii::t('app', 'Email'),
             'email_confirm_token' => Yii::t('app', 'Email Confirm'),
             'auth_key' => Yii::t('app', 'Auth Key'),
