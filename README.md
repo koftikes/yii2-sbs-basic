@@ -52,7 +52,14 @@ at [getcomposer.org](http://getcomposer.org/doc/00-intro.md#installation-nix).
 You can then install this project template using the following command:
 
 ~~~
-php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic yii-application
+php composer.phar create-project --prefer-dist --stability=dev yiisoft/yii2-app-basic basic
+~~~
+
+Now you should be able to access the application through the following URL, assuming `basic` is the directory
+directly under the Web root.
+
+~~~
+http://localhost/basic/web/
 ~~~
 
 The command installs the application in a directory named `yii-application`. You can choose a different directory name if you want.

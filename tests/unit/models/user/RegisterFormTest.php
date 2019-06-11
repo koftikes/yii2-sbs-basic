@@ -55,7 +55,7 @@ class RegisterFormTest extends Unit
         expect($form->getFirstError('name'))
             ->equals('Name cannot be blank.');
         expect($form->getFirstError('email'))
-            ->equals('This email address has already been taken.');
+            ->equals('Email "manager@example.com" has already been taken.');
         expect($form->getFirstError('password_repeat'))
             ->equals('Password Repeat cannot be blank.');
     }

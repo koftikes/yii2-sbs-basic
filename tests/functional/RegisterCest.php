@@ -71,7 +71,7 @@ class RegisterCest
         $I->dontSeeValidationError('Name cannot be blank.');
         $I->dontSeeValidationError('Password cannot be blank.');
         $I->dontSeeValidationError('Password Repeat cannot be blank.');
-        $I->seeValidationError('This email address has already been taken.');
+        $I->seeValidationError('Email "admin@example.com" has already been taken.');
     }
 
     public function registerSuccessfully(FunctionalTester $I)
