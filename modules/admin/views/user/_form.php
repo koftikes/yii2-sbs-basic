@@ -16,7 +16,7 @@ use borales\extensions\phoneInput\PhoneInput;
     'id' => 'admin-user-form',
     'type' => ActiveForm::TYPE_HORIZONTAL
 ]); ?>
-<div class="box-body">
+<div class="admin-user-form">
     <?= $form->field($model->user, 'email'); ?>
     <?php if ($model->user->isNewRecord): ?>
         <?= $form->field($model, 'password')->passwordInput(); ?>
@@ -42,7 +42,7 @@ use borales\extensions\phoneInput\PhoneInput;
     <?= $form->field($model->profile, 'info')->textarea(['rows' => 10]); ?>
 </div>
 <div class="box-footer">
-    <?php echo Html::submitButton(($model->user->isNewRecord) ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
-        ['class' => 'btn btn-primary']); ?>
+    <?= Html::submitButton($model->user->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->user->isNewRecord ? 'btn btn-success' : 'btn btn-primary']); ?>
 </div>
 <?php ActiveForm::end(); ?>

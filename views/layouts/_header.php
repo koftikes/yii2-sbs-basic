@@ -13,8 +13,9 @@ NavBar::begin([
 echo NavX::widget([
     'options' => ['class' => 'navbar-nav mr-auto'],
     'items' => [
+        ['label' => 'News', 'url' => ['/news/index']],
+        ['label' => 'Contact', 'url' => ['/site/contact']],
         ['label' => 'About', 'url' => ['/site/about']],
-        ['label' => 'Contact', 'url' => ['/site/contact']]
     ]
 ]);
 
@@ -30,7 +31,11 @@ if (Yii::$app->user->isGuest) {
     echo NavX::widget([
         'options' => ['class' => 'navbar-nav justify-content-end'],
         'items' => [
-            ['label' => 'Admin Panel', 'url' => ['/admin/statistic']],
+            [
+                'label' => 'Admin Panel',
+                'url' => ['/admin/statistic'],
+                'active' => false !== strpos($this->context->route, 'admin')
+            ],
         ]
     ]);
     echo Html::beginForm(['/user/logout'], 'post', ['class' => 'form-inline my-2 my-lg-0'])

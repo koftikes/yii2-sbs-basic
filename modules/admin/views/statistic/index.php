@@ -7,8 +7,9 @@
 use yii\helpers\Html;
 use app\models\user\UserMaster;
 
-$this->title = 'System Statistic';
 $this->registerJs("window.paceOptions = { ajax: false }", yii\web\View::POS_HEAD);
+$this->title = 'System Statistic';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-statistic">
     <h1><?= Html::encode($this->title) ?></h1>
