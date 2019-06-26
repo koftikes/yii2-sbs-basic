@@ -24,10 +24,13 @@ use yii\helpers\ArrayHelper;
  *
  * @property News[]         $news
  * @property NewsCategory   $parent
- * @property NewsCategory[] $newsCategories
+ * @property NewsCategory[] $children
  */
 class NewsCategory extends ActiveRecord
 {
+    const STATUS_DISABLE = 0;
+    const STATUS_ENABLE  = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -52,10 +55,11 @@ class NewsCategory extends ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
+            ['status', 'in', 'range' => [self::STATUS_DISABLE, self::STATUS_ENABLE]],
+            [['name','slug'], 'required'],
             [['description'], 'string'],
             [['parent_id', 'status'], 'integer'],
-            [['slug', 'create_date', 'update_date'], 'safe'],
+            [['create_date', 'update_date'], 'safe'],
             [['name', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
             [
@@ -70,6 +74,7 @@ class NewsCategory extends ActiveRecord
 
     /**
      * {@inheritdoc}
+     * {@codeCoverageIgnore}
      */
     public function attributeLabels()
     {
@@ -104,7 +109,7 @@ class NewsCategory extends ActiveRecord
     /**
      * @return yii\db\ActiveQuery
      */
-    public function getNewsCategories()
+    public function getChildren()
     {
         return $this->hasMany(NewsCategory::class, ['parent_id' => 'id']);
     }

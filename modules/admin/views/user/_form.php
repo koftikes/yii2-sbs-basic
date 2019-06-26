@@ -7,7 +7,7 @@
 use yii\helpers\Html;
 use kartik\widgets\ActiveForm;
 use kartik\widgets\DatePicker;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use app\models\user\UserProfile;
 use borales\extensions\phoneInput\PhoneInput;
 
@@ -22,7 +22,7 @@ use borales\extensions\phoneInput\PhoneInput;
         <?= $form->field($model, 'password')->passwordInput(); ?>
         <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
     <?php endif; ?>
-    <?= $form->field($model->user, 'status')->dropDownList(UserMaster::statuses()); ?>
+    <?= $form->field($model->user, 'status')->dropDownList(User::statuses()); ?>
     <?= $form->field($model->profile, 'name')->textInput(['maxlength' => 255]); ?>
     <?= $form->field($model->profile, 'phone')->widget(PhoneInput::class); ?>
     <?= $form->field($model->profile, 'gender')->dropDownlist([

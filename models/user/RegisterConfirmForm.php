@@ -12,7 +12,7 @@ use yii\base\Model;
 class RegisterConfirmForm extends Model
 {
     /**
-     * @var UserMaster|null
+     * @var User|null
      */
     private $_user;
 
@@ -28,8 +28,8 @@ class RegisterConfirmForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidArgumentException('Register confirm token cannot be blank.');
         }
-        $this->_user = UserMaster::findByRegisterConfirmToken($token);
-        if (!$this->_user instanceof UserMaster) {
+        $this->_user = User::findByRegisterConfirmToken($token);
+        if (!$this->_user instanceof User) {
             throw new InvalidArgumentException('Wrong register confirm token.');
         }
         parent::__construct($config);
@@ -43,7 +43,7 @@ class RegisterConfirmForm extends Model
     public function confirm()
     {
         $user = $this->_user;
-        $user->status = UserMaster::STATUS_ACTIVE;
+        $user->status = User::STATUS_ACTIVE;
         $user->removeEmailConfirmToken();
         return $user->save(false);
     }

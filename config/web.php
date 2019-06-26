@@ -1,6 +1,6 @@
 <?php
 
-use app\models\user\UserMaster;
+use app\models\user\User;
 use sbs\behaviors\LastVisitBehavior;
 
 return yii\helpers\ArrayHelper::merge(
@@ -10,7 +10,7 @@ return yii\helpers\ArrayHelper::merge(
         'id' => 'basic',
         'components' => [
             'user' => [
-                'identityClass' => UserMaster::class,
+                'identityClass' => User::class,
                 'loginUrl' => ['user/login'],
                 'enableAutoLogin' => true,
                 'as afterLogin' => LastVisitBehavior::class,

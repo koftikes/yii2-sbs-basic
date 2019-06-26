@@ -13,8 +13,8 @@ use vova07\imperavi\Widget as Editor;
 use app\models\NewsCategory;
 
 ?>
-<div class="admin-user-form">
-    <?php $form = ActiveForm::begin(); ?>
+<div class="admin-news-category-form">
+    <?php $form = ActiveForm::begin(['id' => 'admin-news-category-form']); ?>
     <?= $form->field($model, 'parent_id')->widget(TreeDropDown::class, [
         'options' => ['prompt' => ''],
         'query'   => NewsCategory::find()->where(['parent_id' => null]),

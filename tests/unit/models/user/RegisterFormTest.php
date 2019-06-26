@@ -4,8 +4,8 @@ namespace tests\unit\models\user;
 
 use Codeception\Test\Unit;
 use app\models\user\RegisterForm;
-use app\models\user\UserMaster;
-use app\console\fixtures\UserMasterFixture;
+use app\models\user\User;
+use app\console\fixtures\UserFixture;
 
 class RegisterFormTest extends Unit
 {
@@ -17,16 +17,15 @@ class RegisterFormTest extends Unit
     public function testCorrectRegister()
     {
         $form = new RegisterForm([
-            'name' => 'Some Name',
-            'email' => 'some_email@example.com',
-            'password' => 'some_password',
+            'name'            => 'Some Name',
+            'email'           => 'some_email@example.com',
+            'password'        => 'some_password',
             'password_repeat' => 'some_password',
         ]);
 
         $user = $form->register();
 
-        expect($user)->isInstanceOf(UserMaster::class);
-
+        expect($user)->isInstanceOf(User::class);
         expect($user->username)->equals('Some Name');
         expect($user->email)->equals('some_email@example.com');
         expect($user->validatePassword('some_password'))->true();
@@ -35,15 +34,15 @@ class RegisterFormTest extends Unit
     public function testNotCorrectRegister()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
-            ]
+            'user' => [
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
+            ],
         ]);
-        $manager = $this->tester->grabFixture('user_master', 'manager');
+        $manager = $this->tester->grabFixture('user', 'manager');
 
         $form = new RegisterForm([
-            'email' => $manager['email'],
+            'email'    => $manager['email'],
             'password' => 'some_password',
         ]);
 
@@ -52,12 +51,9 @@ class RegisterFormTest extends Unit
         expect_that($form->getErrors('email'));
         expect_that($form->getErrors('password_repeat'));
 
-        expect($form->getFirstError('name'))
-            ->equals('Name cannot be blank.');
-        expect($form->getFirstError('email'))
-            ->equals('Email "manager@example.com" has already been taken.');
-        expect($form->getFirstError('password_repeat'))
-            ->equals('Password Repeat cannot be blank.');
+        expect($form->getFirstError('name'))->equals('Name cannot be blank.');
+        expect($form->getFirstError('email'))->equals('Email "manager@example.com" has already been taken.');
+        expect($form->getFirstError('password_repeat'))->equals('Password Repeat cannot be blank.');
     }
 
     public function testThrowException()
@@ -73,7 +69,6 @@ class RegisterFormTest extends Unit
 
         expect_not($form->register());
         expect_that($form->getErrors('email'));
-        expect($form->getFirstError('email'))
-            ->equals('Unable to save record by unknown reason.');
+        expect($form->getFirstError('email'))->equals('Unable to save record by unknown reason.');
     }
 }

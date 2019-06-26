@@ -1,6 +1,6 @@
 <?php
 
-use app\models\user\UserMaster;
+use app\models\user\User;
 
 $date = date('Y-m-d H:i:s');
 
@@ -11,7 +11,7 @@ return [
         'email_confirm_token' => Yii::$app->security->generateRandomString(),
         'auth_key' => Yii::$app->security->generateRandomString(),
         'password_hash' => Yii::$app->security->generatePasswordHash('admin'),
-        'status' => UserMaster::STATUS_ACTIVE,
+        'status' => User::STATUS_ACTIVE,
         'create_date' => $date,
         'update_date' => $date,
     ],
@@ -21,7 +21,7 @@ return [
         'email_confirm_token' => Yii::$app->security->generateRandomString(),
         'auth_key' => Yii::$app->security->generateRandomString(),
         'password_hash' => Yii::$app->security->generatePasswordHash('manager'),
-        'status' => UserMaster::STATUS_ACTIVE,
+        'status' => User::STATUS_ACTIVE,
         'create_date' => $date,
         'update_date' => $date,
     ],
@@ -31,7 +31,7 @@ return [
         'email_confirm_token' => Yii::$app->security->generateRandomString(),
         'auth_key' => Yii::$app->security->generateRandomString(),
         'password_hash' => Yii::$app->security->generatePasswordHash('user'),
-        'status' => UserMaster::STATUS_ACTIVE,
+        'status' => User::STATUS_ACTIVE,
         'create_date' => $date,
         'update_date' => $date,
     ],

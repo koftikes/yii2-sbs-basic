@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user app\models\user\UserMaster */
+/* @var $user app\models\user\User */
 
 $this->title = 'Password reset on the portal ' . Yii::$app->name;
 $resetLink = Yii::$app->urlManager->createAbsoluteUrl(['user/password-reset', 'token' => $user->password_reset_token]);

@@ -1,7 +1,9 @@
 <?php
 
-use app\models\user\UserMaster;
-use app\console\fixtures\UserMasterFixture;
+namespace functional;
+
+use app\models\user\User;
+use app\console\fixtures\UserFixture;
 use app\console\fixtures\UserProfileFixture;
 
 class LoginCest
@@ -10,6 +12,7 @@ class LoginCest
     /**
      * Load fixtures before db transaction begin
      * Called in _before()
+     *
      * @return array
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
@@ -17,18 +20,18 @@ class LoginCest
     public function _fixtures()
     {
         return [
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php',
+            'user'         => [
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
             'user_profile' => [
-                'class' => UserProfileFixture::class,
+                'class'    => UserProfileFixture::class,
                 'dataFile' => codecept_data_dir() . 'user_profile.php',
             ],
         ];
     }
 
-    public function _before(FunctionalTester $I)
+    public function _before(\FunctionalTester $I)
     {
         $I->amOnRoute('user/login');
     }
@@ -36,18 +39,18 @@ class LoginCest
     protected function formParams($login, $password)
     {
         return [
-            'LoginForm[login]' => $login,
+            'LoginForm[login]'    => $login,
             'LoginForm[password]' => $password,
         ];
     }
 
-    public function ensureThatLoginPageWorks(FunctionalTester $I)
+    public function ensureThatPageWorks(\FunctionalTester $I)
     {
         $I->see('Login', 'h1');
     }
 
     // demonstrates `amLoggedInAs` method
-    public function internalLoginById(FunctionalTester $I)
+    public function internalLoginById(\FunctionalTester $I)
     {
         $I->amLoggedInAs(1);
         $I->amOnPage('/');
@@ -55,14 +58,14 @@ class LoginCest
     }
 
     // demonstrates `amLoggedInAs` method
-    public function internalLoginByInstance(FunctionalTester $I)
+    public function internalLoginByInstance(\FunctionalTester $I)
     {
-        $I->amLoggedInAs(UserMaster::findByLogin('admin@example.com'));
+        $I->amLoggedInAs(User::findByLogin('admin@example.com'));
         $I->amOnPage('/');
         $I->see('Logout (Admin User)');
     }
 
-    public function loginWithEmptyCredentials(FunctionalTester $I)
+    public function loginWithEmptyCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#form-login', $this->formParams('', ''));
         $I->expectTo('see validations errors');
@@ -70,19 +73,32 @@ class LoginCest
         $I->see('Password cannot be blank.');
     }
 
-    public function loginWithWrongCredentials(FunctionalTester $I)
+    public function loginWithWrongCredentials(\FunctionalTester $I)
     {
         $I->submitForm('#form-login', $this->formParams('admin@example.com', 'wrong'));
         $I->expectTo('see validations errors');
         $I->see('Incorrect username or password.');
     }
 
-    public function loginSuccessfully(FunctionalTester $I)
+    public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#form-login', $this->formParams('admin@example.com', 'password_0'));
         $I->see('Logout (Admin User)', 'form button[type=submit]');
         $I->dontSeeElement('form#form-login');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Register');
+        $I->amOnRoute('user/login');
+    }
+
+    public function logoutSuccessfully(\FunctionalTester $I)
+    {
+        $I->amLoggedInAs(User::findByLogin('admin@example.com'));
+        $I->amOnPage('/');
+        $I->see('Logout (Admin User)');
+        $I->seeElement('form#form-logout');
+        $I->submitForm('#form-logout', []);
+        $I->dontSeeElement('form#form-logout');
+        $I->seeLink('Login');
+        $I->seeLink('Register');
     }
 }

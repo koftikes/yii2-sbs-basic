@@ -10,6 +10,6 @@ class UserProfileFixture extends ActiveFixture
     public $modelClass = UserProfile::class;
 
     public $depends = [
-        UserMasterFixture::class,
+        UserFixture::class,
     ];
 }

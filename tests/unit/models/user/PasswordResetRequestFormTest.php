@@ -4,9 +4,9 @@ namespace tests\unit\models\user;
 
 use Yii;
 use Codeception\Test\Unit;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use app\models\user\PasswordResetRequestForm;
-use app\console\fixtures\UserMasterFixture;
+use app\console\fixtures\UserFixture;
 use yii\mail\MessageInterface;
 
 class PasswordResetRequestFormTest extends Unit
@@ -28,12 +28,12 @@ class PasswordResetRequestFormTest extends Unit
     public function testNotSendEmailsToInactiveUser()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
             ],
         ]);
-        $manager = $this->tester->grabFixture('user_master', 'manager');
+        $manager = $this->tester->grabFixture('user', 'manager');
 
         $form = new PasswordResetRequestForm(['email' => $manager['email']]);
         expect_not($form->sendEmail());
@@ -45,12 +45,12 @@ class PasswordResetRequestFormTest extends Unit
     public function testSendEmailsToUserWithExpiredToken()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
             ],
         ]);
-        $user = $this->tester->grabFixture('user_master', 'user');
+        $user = $this->tester->grabFixture('user', 'user');
 
         $form = new PasswordResetRequestForm(['email' => $user['email']]);
         expect_that($form->sendEmail());
@@ -59,15 +59,15 @@ class PasswordResetRequestFormTest extends Unit
     public function testSendEmailSuccessfully()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
             ],
         ]);
-        $admin = $this->tester->grabFixture('user_master', 'admin');
+        $admin = $this->tester->grabFixture('user', 'admin');
 
         $form = new PasswordResetRequestForm(['email' => $admin['email']]);
-        $user = UserMaster::findOne(['password_reset_token' => $admin['password_reset_token']]);
+        $user = User::findOne(['password_reset_token' => $admin['password_reset_token']]);
 
         expect_that($form->sendEmail());
         expect_that($user->password_reset_token);

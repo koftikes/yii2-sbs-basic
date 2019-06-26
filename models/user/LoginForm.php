@@ -9,7 +9,7 @@ use yii\base\Model;
  * Class LoginForm is the model behind the login form.
  * @package app\models\user
  *
- * @property UserMaster|null $user This property is read-only.
+ * @property User|null $user This property is read-only.
  */
 class LoginForm extends Model
 {
@@ -18,7 +18,7 @@ class LoginForm extends Model
     public $rememberMe = true;
 
     /**
-     * @var UserMaster|null
+     * @var User|null
      */
     private $_user;
 
@@ -64,12 +64,12 @@ class LoginForm extends Model
     /**
      * Finds user by [[login]]
      *
-     * @return UserMaster|null
+     * @return User|null
      */
     public function getUser()
     {
-        if (!$this->_user instanceof UserMaster) {
-            $this->_user = UserMaster::findByLogin($this->login);
+        if (!$this->_user instanceof User) {
+            $this->_user = User::findByLogin($this->login);
         }
 
         return $this->_user;

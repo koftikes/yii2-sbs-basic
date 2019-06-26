@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $user app\models\user\UserMaster */
+/* @var $user app\models\user\User */
 /* @var $password - user password */
 
 $this->title = 'Registration on the portal ' . Yii::$app->name;

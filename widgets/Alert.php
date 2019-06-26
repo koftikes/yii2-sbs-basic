@@ -5,6 +5,7 @@ namespace app\widgets;
 use Yii;
 use yii\bootstrap4\Widget;
 use kartik\growl\Growl;
+use yii\web\Session;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
@@ -28,10 +29,10 @@ use kartik\growl\Growl;
  */
 class Alert extends Widget
 {
-    const ERROR = 'error';
+    const ERROR   = 'error';
     const WARNING = 'warning';
     const SUCCESS = 'success';
-    const INFO = 'info';
+    const INFO    = 'info';
 
     /**
      * @var array the alert types configuration for the flash messages.
@@ -40,11 +41,12 @@ class Alert extends Widget
      * - $value is the bootstrap alert type (i.e. danger, success, info, warning)
      */
     public $alertTypes = [
-        self::ERROR => Growl::TYPE_DANGER,
+        self::ERROR   => Growl::TYPE_DANGER,
         self::WARNING => Growl::TYPE_WARNING,
         self::SUCCESS => Growl::TYPE_SUCCESS,
-        self::INFO => Growl::TYPE_INFO,
+        self::INFO    => Growl::TYPE_INFO,
     ];
+
     /**
      * @var array the options for rendering the close button tag.
      * Array will be passed to [[\yii\bootstrap\Alert::closeButton]].
@@ -52,21 +54,21 @@ class Alert extends Widget
     public $closeButton = [];
 
     public $alertIcon = [
-        self::ERROR => 'fas fa-times-circle',
+        self::ERROR   => 'fas fa-times-circle',
         self::WARNING => 'fas fa-exclamation-circle',
         self::SUCCESS => 'fas fa-check-circle',
-        self::INFO => 'fas fa-info-circle',
+        self::INFO    => 'fas fa-info-circle',
     ];
 
     /**
      * {@inheritdoc}
      *
-     * @return string|void
      * @throws \Exception
+     * @return string|void
      */
     public function run()
     {
-        $flashes = Yii::$app->session->getAllFlashes();
+        $flashes     = Yii::$app->session->getAllFlashes();
         $appendClass = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
 
         foreach ($flashes as $type => $flash) {
@@ -74,7 +76,7 @@ class Alert extends Widget
                 continue;
             }
 
-            foreach ((array)$flash as $i => $message) {
+            foreach ((array) $flash as $i => $message) {
                 /* initialize css class for each alert box */
                 $this->options['class'] = $this->alertTypes[$type] . $appendClass;
 
@@ -82,10 +84,10 @@ class Alert extends Widget
                 $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
                 echo Growl::widget([
-                    'type' => $this->alertTypes[$type],
-                    'icon' => $this->alertIcon[$type],
-                    'closeButton' => $this->closeButton,
-                    'body' => $message,
+                    'type'          => $this->alertTypes[$type],
+                    'icon'          => $this->alertIcon[$type],
+                    'closeButton'   => $this->closeButton,
+                    'body'          => $message,
                     'pluginOptions' => ['delay' => $this->getDelay($type)],
                 ]);
             }
@@ -95,8 +97,14 @@ class Alert extends Widget
     }
 
     /**
+     * Return delay time (ms) if parameter Session::setFlash(... $removeAfterAccess) set in false.
+     * If parameter set in true (default value) skip return time and return false.
+     *
      * @param string $type type of flash message
-     * @return bool|int return false if stop delay else time in ms.
+     *
+     * @return bool|int
+     *
+     * @see Session::setFlash()
      */
     private function getDelay($type)
     {

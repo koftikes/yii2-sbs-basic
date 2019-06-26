@@ -1,6 +1,6 @@
 <?php
 
-use app\models\user\UserMaster;
+use app\models\user\User;
 
 /**
  * Application configuration shared by all test types
@@ -13,7 +13,7 @@ return yii\helpers\ArrayHelper::merge(
         'aliases' => ['@tests' => '@app/tests'],
         'components' => [
             'user' => [
-                'identityClass' => UserMaster::class,
+                'identityClass' => User::class,
                 'loginUrl' => ['user/login'],
             ],
             'urlManager' => [

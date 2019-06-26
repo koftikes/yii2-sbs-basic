@@ -45,10 +45,10 @@ class m000000_000002_news extends DbMigration
         $this->addForeignKey(
             'fk_news_category', '{{%news}}', 'category_id', '{{%news_category}}', 'id', 'set null', 'no action');
         $this->addForeignKey(
-            'fk_news_create_user', '{{%news}}', 'create_user', '{{%user_master}}', 'id', 'set null', 'no action'
+            'fk_news_create_user', '{{%news}}', 'create_user', '{{%user}}', 'id', 'set null', 'no action'
         );
         $this->addForeignKey(
-            'fk_news_update_user', '{{%news}}', 'update_user', '{{%user_master}}', 'id', 'set null', 'no action'
+            'fk_news_update_user', '{{%news}}', 'update_user', '{{%user}}', 'id', 'set null', 'no action'
         );
     }
 

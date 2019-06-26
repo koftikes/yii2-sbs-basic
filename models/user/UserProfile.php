@@ -17,7 +17,7 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  * @property int $subscribe
  * @property string $info
  *
- * @property UserMaster $user
+ * @property User $user
  */
 class UserProfile extends ActiveRecord
 {
@@ -52,7 +52,7 @@ class UserProfile extends ActiveRecord
                 ['user_id'],
                 'exist',
                 'skipOnError' => true,
-                'targetClass' => UserMaster::class,
+                'targetClass' => User::class,
                 'targetAttribute' => ['user_id' => 'id']
             ],
         ];
@@ -80,6 +80,6 @@ class UserProfile extends ActiveRecord
      */
     public function getUser()
     {
-        return $this->hasOne(UserMaster::class, ['id' => 'user_id']);
+        return $this->hasOne(User::class, ['id' => 'user_id']);
     }
 }
