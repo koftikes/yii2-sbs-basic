@@ -1,8 +1,12 @@
 <?php
 
+namespace functional;
+
+use Yii;
+
 class HomeCest
 {
-    public function ensureThatHomePageWorks(FunctionalTester $I)
+    public function ensureThatPageWorks(\FunctionalTester $I)
     {
         $I->amOnPage(Yii::$app->homeUrl);
         $I->see('My Application');

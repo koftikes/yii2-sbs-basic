@@ -8,12 +8,13 @@ use kartik\grid\ActionColumn;
 use sbs\actions\Redirect;
 use sbs\actions\GridViewAction;
 use sbs\actions\DeleteAction;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use app\modules\admin\models\UserForm;
 use yii\web\NotFoundHttpException;
 
 /**
  * Class UserController
+ *
  * @package app\modules\admin\controllers
  */
 class UserController extends BaseController
@@ -24,64 +25,62 @@ class UserController extends BaseController
     public function actions()
     {
         return [
-            'index' => [
-                'class' => GridViewAction::class,
-                'modelClass' => UserMaster::class,
-                'gridClass' => GridView::class,
-                'gridConfig' => [
-                    'columns' => [
+            'index'  => [
+                'class'        => GridViewAction::class,
+                'modelClass'   => User::class,
+                'gridClass'    => GridView::class,
+                'gridConfig'   => [
+                    'columns'  => [
                         'id',
                         'email',
                         [
                             'attribute' => 'username',
-                            'label' => Yii::t('app', 'Name')
+                            'label'     => Yii::t('app', 'Name'),
                         ],
                         [
                             'attribute' => 'status',
-                            'value' => function ($model) {
-                                return UserMaster::statuses($model->status);
-                            }
+                            'value'     => function ($model) {
+                                return User::statuses($model->status);
+                            },
                         ],
                         [
                             'attribute' => 'last_visit',
-                            'format' => 'date',
+                            'format'    => 'date',
                         ],
                         [
-                            'class' => ActionColumn::class,
+                            'class'    => ActionColumn::class,
                             'template' => '{update} {delete}',
                         ],
                     ],
-                    'export' => false,
+                    'export'   => false,
                     'bordered' => false,
-                    'hover' => true,
+                    'hover'    => true,
                 ],
                 'dataProvider' => [
-                    'pagination' => ['pageSize' => 15]
+                    'pagination' => ['pageSize' => 15],
                 ],
             ],
             'delete' => [
-                'class' => DeleteAction::class,
-                'modelClass' => UserMaster::class,
-                'handlers' => [
+                'class'      => DeleteAction::class,
+                'modelClass' => User::class,
+                'handlers'   => [
                     'success' => [
-                        'class' => Redirect::class,
-                        'route' => 'user/index',
+                        'class'         => Redirect::class,
+                        'route'         => 'user/index',
                         'refererParams' => ['page', 'per-page'],
                     ],
                 ],
-            ]
+            ],
         ];
     }
 
     /**
-     * @return string|yii\web\Response
-     * @throws NotFoundHttpException
      * @throws yii\base\Exception
+     * @return string|yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new UserForm();
-        $model->setScenario('create');
+        $model = (new UserForm())->create();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'The user is successfully created.'));
             return $this->redirect(['user/index']);
@@ -92,13 +91,14 @@ class UserController extends BaseController
 
     /**
      * @param $id
-     * @return string|yii\web\Response
+     *
      * @throws NotFoundHttpException
      * @throws yii\base\Exception
+     * @return string|yii\web\Response
      */
     public function actionUpdate($id)
     {
-        $model = new UserForm($id);
+        $model = (new UserForm())->find($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'The user is successfully updated.'));
             return $this->refresh();

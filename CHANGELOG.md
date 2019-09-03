@@ -12,6 +12,9 @@
 
 ### In Development
 
+### 30-08-2019
+* Update tests. Fixed some minor bugs.
+
 ### 11-06-2019
 * Added News Module:
     * Added migration for News and NewsCategory.
@@ -46,7 +49,7 @@
 
 ### 24-03-2019
 * Advanced work with user:
-    * Added initial migration for UserMaster and UserProfile
+    * Added initial migration for User and UserProfile
     * Added ability to registration, reset a password, confirm registration (for now just email).
 * Included **sbs/yii2-core-kit** development version.
 * Included **sbs/yii2-transliterator-helper** version ^0.2.

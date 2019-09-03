@@ -9,7 +9,7 @@ use yii\base\NotSupportedException;
 use sbs\behaviors\DateTimeBehavior;
 
 /**
- * This is the model class for table "{{%user_master}}".
+ * This is the model class for table "{{%user}}".
  *
  * @property int $id
  * @property string $email
@@ -26,7 +26,7 @@ use sbs\behaviors\DateTimeBehavior;
  *
  * @property UserProfile $profile
  */
-class UserMaster extends ActiveRecord implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     const STATUS_PENDING = 0;
     const STATUS_ACTIVE = 1;
@@ -37,7 +37,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
      */
     public static function tableName()
     {
-        return '{{%user_master}}';
+        return '{{%user}}';
     }
 
     /**
@@ -219,9 +219,6 @@ class UserMaster extends ActiveRecord implements IdentityInterface
      */
     public static function isPasswordResetTokenValid($token)
     {
-        if (!$token) {
-            return false;
-        }
         $timestamp = (int)substr($token, strrpos($token, '_') + 1);
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         return $timestamp + $expire >= time();
@@ -247,7 +244,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     /**
      * @param $email
      * @param $password
-     * @return UserMaster
+     * @return User
      * @throws yii\base\Exception
      */
     public static function create($email, $password)
@@ -257,7 +254,7 @@ class UserMaster extends ActiveRecord implements IdentityInterface
         $user->setPassword($password);
         $user->generateAuthKey();
         $user->generateRegisterConfirmToken();
-        $user->status = Yii::$app->params['user.registerConfirm'] ? UserMaster::STATUS_PENDING : UserMaster::STATUS_ACTIVE;
+        $user->status = Yii::$app->params['user.registerConfirm'] ? User::STATUS_PENDING : User::STATUS_ACTIVE;
 
         return $user;
     }
@@ -296,9 +293,9 @@ class UserMaster extends ActiveRecord implements IdentityInterface
     public static function statuses($status = null)
     {
         $data = [
-            UserMaster::STATUS_PENDING => Yii::t('app', 'Pending'),
-            UserMaster::STATUS_ACTIVE => Yii::t('app', 'Active'),
-            UserMaster::STATUS_BLOCKED => Yii::t('app', 'Blocked')
+            User::STATUS_PENDING => Yii::t('app', 'Pending'),
+            User::STATUS_ACTIVE => Yii::t('app', 'Active'),
+            User::STATUS_BLOCKED => Yii::t('app', 'Blocked')
         ];
 
         return $status !== null ? $data[$status] : $data;

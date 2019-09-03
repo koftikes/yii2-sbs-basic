@@ -15,7 +15,7 @@ use vova07\imperavi\Widget as Editor;
 ?>
 
 <div class="admin-news-form">
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id' => 'admin-news-form']); ?>
 
     <?= $form->field($model, 'category_id')->widget(TreeDropDown::class, [
         'options' => ['prompt' => ''],

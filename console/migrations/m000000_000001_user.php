@@ -1,7 +1,7 @@
 <?php
 
 use sbs\components\DbMigration;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use app\models\user\UserProfile;
 
 class m000000_000001_user extends DbMigration
@@ -11,14 +11,14 @@ class m000000_000001_user extends DbMigration
      */
     public function safeUp()
     {
-        $this->createTable('{{%user_master}}', [
+        $this->createTable('{{%user}}', [
             'id' => $this->primaryKey(),
             'email' => $this->string()->notNull()->unique(),
             'email_confirm_token' => $this->string(32)->unique(),
             'auth_key' => $this->string(32)->notNull(),
             'password_hash' => $this->string()->notNull(),
             'password_reset_token' => $this->string()->unique(),
-            'status' => $this->tinyInteger()->notNull()->defaultValue(UserMaster::STATUS_PENDING),
+            'status' => $this->tinyInteger()->notNull()->defaultValue(User::STATUS_PENDING),
             'create_date' => $this->dateTime()->notNull(),
             'update_date' => $this->dateTime()->notNull(),
             'last_visit' => $this->dateTime(),
@@ -37,7 +37,7 @@ class m000000_000001_user extends DbMigration
         $this->addForeignKey(
             'fk_user_profile',
             '{{%user_profile}}', 'user_id',
-            '{{%user_master}}', 'id',
+            '{{%user}}', 'id',
             'cascade', 'no action'
         );
     }
@@ -48,6 +48,6 @@ class m000000_000001_user extends DbMigration
     public function safeDown()
     {
         $this->dropTable('{{%user_profile}}');
-        $this->dropTable('{{%user_master}}');
+        $this->dropTable('{{%user}}');
     }
 }

@@ -5,7 +5,7 @@ namespace tests\unit\models\user;
 use Yii;
 use Codeception\Test\Unit;
 use app\models\user\LoginForm;
-use app\console\fixtures\UserMasterFixture;
+use app\console\fixtures\UserFixture;
 
 class LoginFormTest extends Unit
 {
@@ -46,12 +46,12 @@ class LoginFormTest extends Unit
     public function testLoginCorrect()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
             ],
         ]);
-        $admin = $this->tester->grabFixture('user_master', 'admin');
+        $admin = $this->tester->grabFixture('user', 'admin');
 
         $form = new LoginForm([
             'login' => $admin['email'],

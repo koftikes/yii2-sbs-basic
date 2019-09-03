@@ -8,13 +8,17 @@ use yii\base\Model;
 
 /**
  * Class RegisterForm
+ *
  * @package app\models\user
  */
 class RegisterForm extends Model
 {
     public $name;
+
     public $email;
+
     public $password;
+
     public $password_repeat;
 
     /**
@@ -27,21 +31,21 @@ class RegisterForm extends Model
             [['password', 'password_repeat', 'email', 'name'], 'required'],
             ['email', 'email'],
             [['email', 'name'], 'string', 'max' => 255],
-            ['email', 'unique', 'targetClass' => UserMaster::class],
+            ['email', 'unique', 'targetClass' => User::class],
             ['password', 'string', 'min' => 6],
             [
                 'password_repeat',
                 'compare',
                 'compareAttribute' => 'password',
-                'message' => Yii::t('app', 'Passwords don\'t match')
-            ]
+                'message'          => Yii::t('app', 'Passwords don\'t match.'),
+            ],
         ];
     }
 
     /**
      * Registration user
      *
-     * @return UserMaster|bool the saved model or false if saving fails
+     * @return User|bool the saved model or false if saving fails
      */
     public function register()
     {
@@ -51,28 +55,29 @@ class RegisterForm extends Model
 
         $transaction = Yii::$app->db->beginTransaction();
         try {
-            $user = UserMaster::create($this->email, $this->password);
+            $user = User::create($this->email, $this->password);
             if ($user->save()) {
-                $profile = new UserProfile();
+                $profile          = new UserProfile();
                 $profile->user_id = $user->getId();
-                $profile->name = $this->name;
+                $profile->name    = $this->name;
                 if ($profile->save() && $this->sendEmail($user)) {
                     $transaction->commit();
 
                     return $user;
                 }
             }
-            throw new Exception(Yii::t('app','Unable to save record by unknown reason.'));
+            throw new Exception(Yii::t('app', 'Unable to save record by unknown reason.'));
         } catch (\Exception $exception) {
             $this->addError('email', $exception->getMessage());
             $transaction->rollBack();
-        }
 
-        return false;
+            return false;
+        }
     }
 
     /**
-     * @param UserMaster $user
+     * @param User $user
+     *
      * @return bool
      */
     protected function sendEmail($user)

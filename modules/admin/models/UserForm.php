@@ -7,51 +7,65 @@ use yii\base\Model;
 use yii\base\Exception;
 use yii\helpers\ArrayHelper;
 use yii\web\NotFoundHttpException;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use app\models\user\UserProfile;
 
 /**
  * Class UserForm
+ *
  * @package app\modules\admin\models
  */
 class UserForm extends Model
 {
     /**
-     * @var UserMaster
+     * @var User
      */
     public $user;
+
     /**
      * @var UserProfile
      */
     public $profile;
 
     public $password;
+
     public $password_repeat;
 
     /**
-     * UserForm constructor.
-     * @param null $id
-     * @param array $config
-     * @throws NotFoundHttpException
+     * Create User
+     *
+     * @return UserForm
      */
-    public function __construct($id = null, $config = [])
+    public function create()
     {
-        if (null === $id) {
-            $this->user = new UserMaster();
-        } else {
-            $this->user = UserMaster::findOne($id);
-            $this->profile = $this->user->profile;
+        $this->user    = new User();
+        $this->profile = new UserProfile();
+        $this->setScenario('create');
 
-            if (!$this->user instanceof UserMaster) {
-                throw new NotFoundHttpException(Yii::t('app', 'The user was not found.'));
-            }
+        return $this;
+    }
+
+    /**
+     * Find User by id
+     *
+     * @param $id
+     *
+     * @throws NotFoundHttpException
+     * @return UserForm
+     */
+    public function find($id)
+    {
+        $this->user = User::findOne($id);
+        if (!$this->user instanceof User) {
+            throw new NotFoundHttpException(Yii::t('app', 'The user was not found.'));
         }
 
+        $this->profile = $this->user->profile;
         if (!$this->profile instanceof UserProfile) {
             $this->profile = new UserProfile();
         }
 
-        parent::__construct($config);
+        return $this;
     }
 
     /**
@@ -69,12 +83,11 @@ class UserForm extends Model
                     'password_repeat',
                     'compare',
                     'compareAttribute' => 'password',
-                    'on' => 'create',
-                    'message' => Yii::t('app', 'Passwords don\'t match')
-                ]
+                    'on'               => 'create',
+                    'message'          => Yii::t('app', 'Passwords don\'t match'),
+                ],
             ]);
     }
-
 
     /**
      * {@inheritdoc}
@@ -97,8 +110,8 @@ class UserForm extends Model
      */
     public function validate($attributeNames = null, $clearErrors = true)
     {
-        return parent::validate(['password', 'password_repeat'])
-            && $this->user->validate() && $this->profile->validate();
+        return
+            parent::validate(['password', 'password_repeat']) && $this->user->validate() && $this->profile->validate();
     }
 
     /**
@@ -110,27 +123,24 @@ class UserForm extends Model
             return false;
         }
 
-        $transaction = Yii::$app->db->beginTransaction();
         try {
             if ($this->user->save()) {
                 $this->profile->user_id = $this->user->getId();
                 if ($this->profile->save() && $this->sendEmail($this->user)) {
-                    $transaction->commit();
-
                     return true;
                 }
             }
             throw new Exception(Yii::t('app', 'Unable to save record by unknown reason.'));
         } catch (\Exception $exception) {
             $this->user->addError('email', $exception->getMessage());
-            $transaction->rollBack();
         }
 
         return false;
     }
 
     /**
-     * @param $user UserMaster
+     * @param $user User
+     *
      * @return bool
      */
     protected function sendEmail($user)
@@ -144,7 +154,7 @@ class UserForm extends Model
             ->mailer
             ->compose([
                 'html' => '@app/modules/admin/mail/user-create-html',
-                'text' => '@app/modules/admin/mail/user-create-text'
+                'text' => '@app/modules/admin/mail/user-create-text',
             ], ['user' => $user, 'password' => $this->password])
             ->setFrom([Yii::$app->params['supportEmail'] => Yii::$app->name . ' Robot'])
             ->setTo($user->email)

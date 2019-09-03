@@ -5,14 +5,14 @@
  */
 
 use yii\helpers\Html;
-use app\models\user\UserMaster;
+use app\models\user\User;
 
 $this->registerJs("window.paceOptions = { ajax: false }", yii\web\View::POS_HEAD);
 $this->title = 'System Statistic';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-statistic">
-    <h1><?= Html::encode($this->title) ?></h1>
+    <h3><?= Html::encode($this->title) ?></h3>
     <div class="card-columns">
         <div class="card">
             <div class="card-header">
@@ -56,7 +56,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="card">
             <div class="card-header">
-                <i class="fas fa-spinner"></i> <?= Yii::t('app', 'Load average'); ?>
+                <i class="fas fa-spinner"></i> <?= Yii::t('app', 'Load Average'); ?>
             </div>
             <div class="card-body">
                 <h4><?= $provider->getLoadAverage(); ?></h4>
@@ -134,7 +134,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <div class="row">
                     <div class="col-sm-4">
-                        <h4><?= UserMaster::find()->count(); ?></h4>
+                        <h4><?= User::find()->count(); ?></h4>
                     </div>
                     <div class="col-sm-8">
                         <?= Html::a(

@@ -3,7 +3,7 @@
 namespace tests\unit\models\user;
 
 use Codeception\Test\Unit;
-use app\console\fixtures\UserMasterFixture;
+use app\console\fixtures\UserFixture;
 use app\models\user\PasswordResetForm;
 use yii\base\InvalidArgumentException;
 
@@ -28,30 +28,32 @@ class PasswordResetFormTest extends Unit
     public function testResetEmptyForm()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
-        $admin = $this->tester->grabFixture('user_master', 'admin');
+        $admin = $this->tester->grabFixture('user', 'admin');
 
         $form = new PasswordResetForm($admin['password_reset_token']);
         expect_not($form->reset());
         expect($form->errors)->hasKey('password');
+        expect($form->errors)->hasKey('password_repeat');
     }
 
     public function testResetCorrectToken()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
-        $admin = $this->tester->grabFixture('user_master', 'admin');
+        $admin = $this->tester->grabFixture('user', 'admin');
 
-        $form = new PasswordResetForm($admin['password_reset_token']);
-        $form->password = 'admin123456';
+        $form                  = new PasswordResetForm($admin['password_reset_token']);
+        $form->password        = 'admin123456';
+        $form->password_repeat = 'admin123456';
         expect_that($form->reset());
     }
 }

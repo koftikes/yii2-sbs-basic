@@ -1,7 +1,7 @@
 <?php
 
 /* @var $this yii\web\View */
-/* @var $user app\models\user\UserMaster */
+/* @var $user app\models\user\User */
 /* @var $password - user password */
 
 $confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['user/register-confirm', 'token' => $user->email_confirm_token]);

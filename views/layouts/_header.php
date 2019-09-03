@@ -38,7 +38,7 @@ if (Yii::$app->user->isGuest) {
             ],
         ]
     ]);
-    echo Html::beginForm(['/user/logout'], 'post', ['class' => 'form-inline my-2 my-lg-0'])
+    echo Html::beginForm(['/user/logout'], 'post', ['id' => 'form-logout', 'class' => 'form-inline my-2 my-lg-0'])
         . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-outline-success logout'])
         . Html::endForm();
 }

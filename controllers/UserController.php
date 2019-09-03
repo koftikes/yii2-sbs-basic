@@ -25,17 +25,17 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only' => ['logout'],
+                'only'  => ['logout'],
                 'rules' => [
                     [
                         'actions' => ['logout'],
-                        'allow' => true,
-                        'roles' => ['@'],
+                        'allow'   => true,
+                        'roles'   => ['@'],
                     ],
                 ],
             ],
-            'verbs' => [
-                'class' => VerbFilter::class,
+            'verbs'  => [
+                'class'   => VerbFilter::class,
                 'actions' => [
                     'logout' => ['post'],
                 ],
@@ -96,8 +96,9 @@ class UserController extends Controller
 
     /**
      * @param $token
-     * @return Response
+     *
      * @throws BadRequestHttpException
+     * @return Response
      */
     public function actionRegisterConfirm($token)
     {
@@ -105,13 +106,10 @@ class UserController extends Controller
             $model = new RegisterConfirmForm($token);
             if ($model->confirm()) {
                 Yii::$app->session->setFlash('success',
-                    Yii::t('app', 'Registration was confirm. Now you can login to portal.'));
-            } else {
-                Yii::$app->session->setFlash('error',
-                    Yii::t('app', 'Sorry, we are unable to confirm this email address.'));
+                    Yii::t('app', 'Registration was confirm. Now you can login to portal.')
+                );
             }
             return $this->goHome();
-
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
@@ -120,8 +118,8 @@ class UserController extends Controller
     /**
      * Requests password reset.
      *
-     * @return string|Response
      * @throws \yii\base\Exception
+     * @return string|Response
      */
     public function actionPasswordResetRequest()
     {
@@ -137,9 +135,10 @@ class UserController extends Controller
 
     /**
      * @param $token
-     * @return string|Response
+     *
      * @throws BadRequestHttpException
      * @throws \yii\base\Exception
+     * @return string|Response
      */
     public function actionPasswordReset($token)
     {
@@ -154,7 +153,6 @@ class UserController extends Controller
             }
 
             return $this->render('password-reset', ['model' => $model]);
-
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }

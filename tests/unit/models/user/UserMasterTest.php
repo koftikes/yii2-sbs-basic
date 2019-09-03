@@ -3,11 +3,11 @@
 namespace tests\unit\models\user;
 
 use Codeception\Test\Unit;
-use app\models\user\UserMaster;
-use app\console\fixtures\UserMasterFixture;
+use app\models\user\User;
+use app\console\fixtures\UserFixture;
 use yii\base\NotSupportedException;
 
-class UserMasterTest extends Unit
+class UserTest extends Unit
 {
     /**
      * @var \UnitTester
@@ -22,43 +22,43 @@ class UserMasterTest extends Unit
     public function _before()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
-        $this->admin = $this->tester->grabFixture('user_master', 'admin');
+        $this->admin = $this->tester->grabFixture('user', 'admin');
     }
 
     public function testFindIdentityByAccessToken()
     {
         $this->tester->expectException(NotSupportedException::class, function () {
-            UserMaster::findIdentityByAccessToken('notexistingtoken_1391882543');
+            User::findIdentityByAccessToken('notexistingtoken_1391882543');
         });
     }
 
     public function testIsPasswordResetTokenNotValid()
     {
-        expect_not(UserMaster::isPasswordResetTokenValid(false));
+        expect_not(User::isPasswordResetTokenValid(false));
     }
 
     public function testIsPasswordResetTokenValid()
     {
-        expect_that(UserMaster::isPasswordResetTokenValid('token_' . time()));
+        expect_that(User::isPasswordResetTokenValid('token_' . time()));
     }
 
     public function testFindUserById()
     {
-        expect_that($user = UserMaster::findIdentity($this->admin['id']));
+        expect_that($user = User::findIdentity($this->admin['id']));
         expect($user->username)->equals($this->admin['email']);
 
-        expect_not(UserMaster::findIdentity(9999));
+        expect_not(User::findIdentity(9999));
     }
 
     public function testFindUserByUsername()
     {
-        expect_that($user = UserMaster::findByLogin($this->admin['email']));
-        expect_not(UserMaster::findByLogin('not-admin@example.com'));
+        expect_that($user = User::findByLogin($this->admin['email']));
+        expect_not(User::findByLogin('not-admin@example.com'));
     }
 
     /**
@@ -66,11 +66,20 @@ class UserMasterTest extends Unit
      */
     public function testValidateUser()
     {
-        $user = UserMaster::findByLogin($this->admin['email']);
+        $user = User::findByLogin($this->admin['email']);
         expect_that($user->validateAuthKey($this->admin['auth_key']));
         expect_not($user->validateAuthKey('test102key'));
 
         expect_that($user->validatePassword('password_0'));
         expect_not($user->validatePassword('123456'));
+    }
+
+    public function testStatuses()
+    {
+        $statuses = User::statuses();
+        expect($statuses)->count(3);
+
+        $status = User::statuses(User::STATUS_ACTIVE);
+        expect($status)->equals('Active');
     }
 }

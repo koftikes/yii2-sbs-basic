@@ -6,7 +6,7 @@ use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveRecord;
 use yii\db\ActiveQueryInterface;
-use app\models\user\UserMaster;
+use app\models\user\User;
 use sbs\behaviors\DateTimeBehavior;
 
 /**
@@ -28,11 +28,14 @@ use sbs\behaviors\DateTimeBehavior;
  * @property string       $update_date
  *
  * @property NewsCategory $category
- * @property UserMaster   $createUser
- * @property UserMaster   $updateUser
+ * @property User         $createUser
+ * @property User         $updateUser
  */
 class News extends ActiveRecord
 {
+    const STATUS_DISABLE = 0;
+    const STATUS_ENABLE  = 1;
+
     /**
      * {@inheritdoc}
      */
@@ -62,11 +65,12 @@ class News extends ActiveRecord
     public function rules()
     {
         return [
+            ['status', 'in', 'range' => [self::STATUS_DISABLE, self::STATUS_ENABLE]],
             [['category_id', 'views', 'status', 'create_user', 'update_user'], 'integer'],
             [['title', 'slug', 'text', 'publish_date'], 'required'],
             [['preview', 'text'], 'string'],
             [['publish_date', 'create_date', 'update_date'], 'safe'],
-            [['title', 'slug', 'image'], 'string', 'max' => 255],
+            [['title', 'slug'], 'string', 'max' => 255],
             [['slug'], 'unique'],
             [
                 ['category_id'],
@@ -79,14 +83,14 @@ class News extends ActiveRecord
                 ['create_user'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => UserMaster::class,
+                'targetClass'     => User::class,
                 'targetAttribute' => ['create_user' => 'id'],
             ],
             [
                 ['update_user'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => UserMaster::class,
+                'targetClass'     => User::class,
                 'targetAttribute' => ['update_user' => 'id'],
             ],
         ];
@@ -94,6 +98,7 @@ class News extends ActiveRecord
 
     /**
      * {@inheritdoc}
+     * {@codeCoverageIgnore}
      */
     public function attributeLabels()
     {
@@ -107,7 +112,7 @@ class News extends ActiveRecord
             'text'         => Yii::t('app', 'Text'),
             'views'        => Yii::t('app', 'Views'),
             'status'       => Yii::t('app', 'Status'),
-            'publish_date' => Yii::t('app', 'Publish'),
+            'publish_date' => Yii::t('app', 'Publish Date'),
             'create_user'  => Yii::t('app', 'Create User'),
             'update_user'  => Yii::t('app', 'Update User'),
             'create_date'  => Yii::t('app', 'Create Date'),
@@ -121,8 +126,8 @@ class News extends ActiveRecord
      *
      * @param ActiveQueryInterface $query
      *
-     * @return ActiveQueryInterface
      * @throws \Exception
+     * @return ActiveQueryInterface
      */
     public function applyFilter(ActiveQueryInterface $query)
     {
@@ -160,7 +165,7 @@ class News extends ActiveRecord
      */
     public function getCreateUser()
     {
-        return $this->hasOne(UserMaster::class, ['id' => 'create_user']);
+        return $this->hasOne(User::class, ['id' => 'create_user']);
     }
 
     /**
@@ -168,6 +173,6 @@ class News extends ActiveRecord
      */
     public function getUpdateUser()
     {
-        return $this->hasOne(UserMaster::class, ['id' => 'update_user']);
+        return $this->hasOne(User::class, ['id' => 'update_user']);
     }
 }

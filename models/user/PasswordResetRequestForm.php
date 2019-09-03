@@ -26,7 +26,7 @@ class PasswordResetRequestForm extends Model
             [
                 'email',
                 'exist',
-                'targetClass' => UserMaster::class,
+                'targetClass' => User::class,
                 'message' => Yii::t('app', 'There is no user with this email address.')
             ],
         ];
@@ -44,14 +44,14 @@ class PasswordResetRequestForm extends Model
         }
 
         try {
-            /* @var $user UserMaster */
-            $user = UserMaster::findOne(['email' => $this->email]);
-            if ($user->status !== UserMaster::STATUS_ACTIVE) {
+            /* @var $user User */
+            $user = User::findOne(['email' => $this->email]);
+            if ($user->status !== User::STATUS_ACTIVE) {
                 throw new Exception(Yii::t('app',
                     'The user is not active. We cannot send email to this type of user.'));
             }
 
-            if (!UserMaster::isPasswordResetTokenValid($user->password_reset_token)) {
+            if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
                 $user->generatePasswordResetToken();
                 $user->save(false);
             }

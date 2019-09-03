@@ -2,7 +2,7 @@
 
 namespace tests\unit\models\user;
 
-use app\console\fixtures\UserMasterFixture;
+use app\console\fixtures\UserFixture;
 use Codeception\Test\Unit;
 use yii\base\InvalidArgumentException;
 use app\models\user\RegisterConfirmForm;
@@ -28,12 +28,12 @@ class RegisterConfirmFormTest extends Unit
     public function testResetCorrectToken()
     {
         $this->tester->haveFixtures([
-            'user_master' => [
-                'class' => UserMasterFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_master.php'
+            'user' => [
+                'class' => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php'
             ],
         ]);
-        $admin = $this->tester->grabFixture('user_master', 'manager');
+        $admin = $this->tester->grabFixture('user', 'manager');
 
         $form = new RegisterConfirmForm($admin['email_confirm_token']);
         expect_that($form->confirm());

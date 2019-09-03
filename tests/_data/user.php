@@ -1,6 +1,6 @@
 <?php
 
-use app\models\user\UserMaster;
+use app\models\user\User;
 
 $date = date('Y-m-d H:i:s');
 $timestamp = time();
@@ -17,7 +17,7 @@ return [
         'password_reset_token' => 't5GU9NwpuGYSfb7FEZMAxqtuz2PkEvv_' . $timestamp,
         'create_date' => $date,
         'update_date' => $date,
-        'status' => UserMaster::STATUS_ACTIVE,
+        'status' => User::STATUS_ACTIVE,
     ],
     'manager' => [
         'id' => 2,
@@ -29,7 +29,7 @@ return [
         'password_reset_token' => '4BSNyiZNAuxjs5M7FEZMAxqtuz2PkEv_' . $timestamp,
         'create_date' => $date,
         'update_date' => $date,
-        'status' => UserMaster::STATUS_PENDING,
+        'status' => User::STATUS_PENDING,
     ],
     'user' => [
         'id' => 3,
@@ -42,6 +42,6 @@ return [
         'password_reset_token' => 'H0GzA0ZimNII2NEmgbCyNmQ7Ay6H14PQ_' . ($timestamp - $expire - $expire),
         'create_date' => $date,
         'update_date' => $date,
-        'status' => UserMaster::STATUS_ACTIVE,
+        'status' => User::STATUS_ACTIVE,
     ],
 ];

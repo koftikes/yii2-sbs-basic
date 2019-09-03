@@ -2,6 +2,7 @@
 
 namespace app\models\user;
 
+use Yii;
 use yii\base\InvalidArgumentException;
 use yii\base\Model;
 
@@ -17,7 +18,12 @@ class PasswordResetForm extends Model
     public $password;
 
     /**
-     * @var UserMaster|null
+     * @var string
+     */
+    public $password_repeat;
+
+    /**
+     * @var User|null
      */
     private $_user;
 
@@ -33,8 +39,8 @@ class PasswordResetForm extends Model
         if (empty($token) || !is_string($token)) {
             throw new InvalidArgumentException('Password reset token cannot be blank.');
         }
-        $this->_user = UserMaster::findByPasswordResetToken($token);
-        if (!$this->_user instanceof UserMaster) {
+        $this->_user = User::findByPasswordResetToken($token);
+        if (!$this->_user instanceof User) {
             throw new InvalidArgumentException('Wrong password reset token.');
         }
         parent::__construct($config);
@@ -46,8 +52,15 @@ class PasswordResetForm extends Model
     public function rules()
     {
         return [
-            ['password', 'required'],
-            ['password', 'string', 'min' => 6],
+            [['password', 'password_repeat'], 'trim'],
+            [['password', 'password_repeat'], 'required'],
+            [['password', 'password_repeat'], 'string', 'min' => 6],
+            [
+                'password_repeat',
+                'compare',
+                'compareAttribute' => 'password',
+                'message'          => Yii::t('app', 'Passwords don\'t match.'),
+            ],
         ];
     }
 

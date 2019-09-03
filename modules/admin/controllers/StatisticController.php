@@ -8,6 +8,7 @@ use Probe\ProviderFactory;
 
 /**
  * Class StatisticController
+ *
  * @package app\modules\admin\controllers
  */
 class StatisticController extends BaseController
@@ -29,9 +30,9 @@ class StatisticController extends BaseController
                             return ($provider->getTotalMem() - $provider->getFreeMem()) / $provider->getTotalMem();
                     }
                 }
-            } else {
-                return $this->render('index', ['provider' => $provider]);
             }
+
+            return $this->render('index', ['provider' => $provider]);
         }
         return $this->render('fail');
     }

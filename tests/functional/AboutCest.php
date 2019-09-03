@@ -1,13 +1,15 @@
 <?php
 
+namespace functional;
+
 class AboutCest
 {
-    public function _before(FunctionalTester $I)
+    public function _before(\FunctionalTester $I)
     {
-        $I->amOnRoute('/site/about');
+        $I->amOnRoute('site/about');
     }
 
-    public function ensureThatAboutWorks(FunctionalTester $I)
+    public function ensureThatPageWorks(\FunctionalTester $I)
     {
         $I->see('About', 'h1');
     }

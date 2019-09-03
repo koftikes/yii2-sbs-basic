@@ -1,14 +1,14 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $form kartik\form\ActiveForm
+ * @var $this  yii\web\View
+ * @var $form  kartik\form\ActiveForm
  * @var $model app\models\user\PasswordResetForm
  */
 
 use yii\helpers\Html;
 use kartik\form\ActiveForm;
 
-$this->title = 'Password Reset';
+$this->title                   = 'Password Reset';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="password-reset">
@@ -18,6 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-lg-5">
             <?php $form = ActiveForm::begin(['id' => 'form-password-reset']); ?>
             <?= $form->field($model, 'password')->passwordInput(['autofocus' => true]) ?>
+            <?= $form->field($model, 'password_repeat')->passwordInput() ?>
             <div class="form-group">
                 <?= Html::submitButton('Save', ['class' => 'btn btn-primary']) ?>
             </div>
