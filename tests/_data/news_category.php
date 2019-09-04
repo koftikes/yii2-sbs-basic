@@ -2,7 +2,7 @@
 
 use app\models\NewsCategory;
 
-$date = date('Y-m-d H:i:s');
+$date = \date('Y-m-d H:i:s');
 
 return [
     'business'   => [

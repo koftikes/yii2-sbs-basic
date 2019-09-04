@@ -1,19 +1,20 @@
 <?php
 
-namespace functional\modules\admin;
+namespace tests\functional\modules\admin;
 
+use app\console\fixtures\NewsCategoryFixture;
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
-use app\console\fixtures\NewsCategoryFixture;
 use yii\helpers\Url;
 
 class NewsCategoryCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */
@@ -44,7 +45,7 @@ class NewsCategoryCest
         $I->dontSee('News Category', 'h3');
         $I->see('News', 'h3');
         foreach ($I->grabFixture('news_category') as $category) {
-            if ($category['parent_id'] !== null) {
+            if (null !== $category['parent_id']) {
                 continue;
             }
             $I->see($category['name']);

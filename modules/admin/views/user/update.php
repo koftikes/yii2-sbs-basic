@@ -1,15 +1,14 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $model app\modules\admin\models\UserForm
+ * @var yii\web\View
+ * @var app\modules\admin\models\UserForm $model
  */
-
-$this->title = 'Update User: ' . $model->user->username;
+$this->title                 = 'Update User: ' . $model->user->username;
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     ['label' => 'Users', 'url' => ['user/index']],
     $model->user->username,
-    'Update'
+    'Update',
 ];
 ?>
 <div class="admin-user-update">

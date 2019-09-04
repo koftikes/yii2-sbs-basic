@@ -1,18 +1,19 @@
 <?php
 
-namespace functional\modules\admin;
+namespace tests\functional\modules\admin;
 
-use yii\helpers\Url;
-use app\models\user\User;
 use app\console\fixtures\UserFixture;
+use app\models\user\User;
+use yii\helpers\Url;
 
 class StatisticCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */

@@ -1,13 +1,16 @@
 <?php
-
+/**
+ * @var yii\web\View
+ * @var app\models\user\User $user
+ * @var string               $password - user password
+ */
 use yii\helpers\Html;
 
-/* @var $this yii\web\View */
-/* @var $user app\models\user\User */
-/* @var $password - user password */
-
 $this->title = 'Registration on the portal ' . Yii::$app->name;
-$confirmLink = Yii::$app->urlManager->createAbsoluteUrl(['user/register-confirm', 'token' => $user->email_confirm_token]);
+$confirmLink = Yii::$app->urlManager->createAbsoluteUrl([
+    'user/register-confirm',
+    'token' => $user->email_confirm_token,
+]);
 ?>
 <p>Hello, <?= Html::encode($user->username); ?></p>
 <p>Thank you for registering on our portal!</p>

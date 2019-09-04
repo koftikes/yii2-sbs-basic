@@ -1,42 +1,41 @@
 <?php
 /**
- * @var $this \yii\web\View
- * @var $content string
+ * @var yii\web\View
+ * @var string       $content
  */
-
-use yii\helpers\Html;
 use app\assets\AppAsset;
 use app\widgets\Alert;
+use yii\helpers\Html;
 
 AppAsset::register($this);
 ?>
-<?php $this->beginPage() ?>
+<?php $this->beginPage(); ?>
 <!DOCTYPE html>
-<html lang="<?= Yii::$app->language ?>">
+<html lang="<?= Yii::$app->language; ?>">
 <head>
-    <meta charset="<?= Yii::$app->charset ?>">
+    <meta charset="<?= Yii::$app->charset; ?>">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <?php $this->registerCsrfMetaTags() ?>
-    <title><?= Html::encode($this->title) ?></title>
-    <?php $this->head() ?>
+    <?php $this->registerCsrfMetaTags(); ?>
+    <title><?= Html::encode($this->title); ?></title>
+    <?php $this->head(); ?>
 </head>
 <body>
-<?php $this->beginBody() ?>
+<?php $this->beginBody(); ?>
 
 <main role="main" class="wrap">
     <?= $this->render('@app/views/layouts/_header.php'); ?>
     <?= Alert::widget(); ?>
-    <?= $content ?>
+    <?= $content; ?>
 </main>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . date('Y') ?></p>
+        <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . \date('Y'); ?></p>
     </div>
 </footer>
 
-<?php $this->endBody() ?>
+<?php $this->endBody(); ?>
 </body>
 </html>
-<?php $this->endPage() ?>
+<?php $this->endPage(); ?>

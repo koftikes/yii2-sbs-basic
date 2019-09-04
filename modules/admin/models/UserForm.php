@@ -2,18 +2,16 @@
 
 namespace app\modules\admin\models;
 
-use Yii;
-use yii\base\Model;
-use yii\base\Exception;
-use yii\helpers\ArrayHelper;
-use yii\web\NotFoundHttpException;
 use app\models\user\User;
 use app\models\user\UserProfile;
+use Yii;
+use yii\base\Exception;
+use yii\base\Model;
+use yii\helpers\ArrayHelper;
+use yii\web\NotFoundHttpException;
 
 /**
- * Class UserForm
- *
- * @package app\modules\admin\models
+ * Class UserForm.
  */
 class UserForm extends Model
 {
@@ -32,7 +30,7 @@ class UserForm extends Model
     public $password_repeat;
 
     /**
-     * Create User
+     * Create User.
      *
      * @return UserForm
      */
@@ -46,20 +44,22 @@ class UserForm extends Model
     }
 
     /**
-     * Find User by id
+     * Find User by id.
      *
-     * @param $id
+     * @param int $id
      *
      * @throws NotFoundHttpException
+     *
      * @return UserForm
      */
     public function find($id)
     {
-        $this->user = User::findOne($id);
-        if (!$this->user instanceof User) {
+        $user = User::findOne($id);
+        if (!$user instanceof User) {
             throw new NotFoundHttpException(Yii::t('app', 'The user was not found.'));
         }
 
+        $this->user    = $user;
         $this->profile = $this->user->profile;
         if (!$this->profile instanceof UserProfile) {
             $this->profile = new UserProfile();
@@ -86,7 +86,8 @@ class UserForm extends Model
                     'on'               => 'create',
                     'message'          => Yii::t('app', 'Passwords don\'t match'),
                 ],
-            ]);
+            ]
+        );
     }
 
     /**
@@ -102,6 +103,7 @@ class UserForm extends Model
             $this->user->generateAuthKey();
             $this->user->generateRegisterConfirmToken();
         }
+
         return $this->user->load($data) && $this->profile->load($data);
     }
 
@@ -125,7 +127,7 @@ class UserForm extends Model
 
         try {
             if ($this->user->save()) {
-                $this->profile->user_id = $this->user->getId();
+                $this->profile->user_id = $this->user->id;
                 if ($this->profile->save() && $this->sendEmail($this->user)) {
                     return true;
                 }
@@ -139,14 +141,14 @@ class UserForm extends Model
     }
 
     /**
-     * @param $user User
+     * @param User $user
      *
      * @return bool
      */
     protected function sendEmail($user)
     {
         //TODO: Create emails for update user info.
-        if ($this->scenario !== 'create') {
+        if ('create' !== $this->scenario) {
             return true;
         }
 

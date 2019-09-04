@@ -11,14 +11,17 @@ use yii\base\Model;
 class ContactForm extends Model
 {
     public $name;
+
     public $email;
+
     public $subject;
+
     public $body;
+
     public $verifyCode;
 
-
     /**
-     * @return array the validation rules.
+     * @return array the validation rules
      */
     public function rules()
     {
@@ -34,7 +37,7 @@ class ContactForm extends Model
 
     /**
      * @return array customized attribute labels
-     * {@codeCoverageIgnore}
+     *               {@codeCoverageIgnore}
      */
     public function attributeLabels()
     {
@@ -45,7 +48,9 @@ class ContactForm extends Model
 
     /**
      * Sends an email to the specified email address using the information collected by this model.
+     *
      * @param string $email the target email address
+     *
      * @return bool whether the model passes validation
      */
     public function contact($email)

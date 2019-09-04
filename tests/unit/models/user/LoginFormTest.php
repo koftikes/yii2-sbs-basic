@@ -2,10 +2,10 @@
 
 namespace tests\unit\models\user;
 
-use Yii;
-use Codeception\Test\Unit;
-use app\models\user\LoginForm;
 use app\console\fixtures\UserFixture;
+use app\models\user\LoginForm;
+use Codeception\Test\Unit;
+use Yii;
 
 class LoginFormTest extends Unit
 {
@@ -22,7 +22,7 @@ class LoginFormTest extends Unit
     public function testLoginNoUser()
     {
         $form = new LoginForm([
-            'login' => 'not_existing_username',
+            'login'    => 'not_existing_username',
             'password' => 'not_existing_password',
         ]);
 
@@ -33,7 +33,7 @@ class LoginFormTest extends Unit
     public function testLoginWrongPassword()
     {
         $form = new LoginForm([
-            'login' => 'demo',
+            'login'    => 'demo',
             'password' => 'wrong_password',
         ]);
 
@@ -47,14 +47,14 @@ class LoginFormTest extends Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
         $admin = $this->tester->grabFixture('user', 'admin');
 
         $form = new LoginForm([
-            'login' => $admin['email'],
+            'login'    => $admin['email'],
             'password' => 'password_0',
         ]);
 

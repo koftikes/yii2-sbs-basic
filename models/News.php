@@ -2,12 +2,12 @@
 
 namespace app\models;
 
-use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\db\ActiveRecord;
-use yii\db\ActiveQueryInterface;
 use app\models\user\User;
 use sbs\behaviors\DateTimeBehavior;
+use Yii;
+use yii\behaviors\BlameableBehavior;
+use yii\db\ActiveQueryInterface;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%news}}".
@@ -26,7 +26,6 @@ use sbs\behaviors\DateTimeBehavior;
  * @property int          $update_user
  * @property string       $create_date
  * @property string       $update_date
- *
  * @property NewsCategory $category
  * @property User         $createUser
  * @property User         $updateUser
@@ -34,6 +33,7 @@ use sbs\behaviors\DateTimeBehavior;
 class News extends ActiveRecord
 {
     const STATUS_DISABLE = 0;
+
     const STATUS_ENABLE  = 1;
 
     /**
@@ -98,7 +98,7 @@ class News extends ActiveRecord
 
     /**
      * {@inheritdoc}
-     * {@codeCoverageIgnore}
+     * {@codeCoverageIgnore}.
      */
     public function attributeLabels()
     {
@@ -120,13 +120,13 @@ class News extends ActiveRecord
         ];
     }
 
-
     /**
-     * Grid filtering conditions
+     * Grid filtering conditions.
      *
      * @param ActiveQueryInterface $query
      *
      * @throws \Exception
+     *
      * @return ActiveQueryInterface
      */
     public function applyFilter(ActiveQueryInterface $query)
@@ -153,7 +153,7 @@ class News extends ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getCategory()
     {
@@ -161,7 +161,7 @@ class News extends ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getCreateUser()
     {
@@ -169,7 +169,7 @@ class News extends ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getUpdateUser()
     {

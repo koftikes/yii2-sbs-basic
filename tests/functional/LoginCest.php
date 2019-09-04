@@ -1,19 +1,19 @@
 <?php
 
-namespace functional;
+namespace tests\functional;
 
-use app\models\user\User;
 use app\console\fixtures\UserFixture;
 use app\console\fixtures\UserProfileFixture;
+use app\models\user\User;
 
 class LoginCest
 {
-
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */

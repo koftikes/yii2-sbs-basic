@@ -3,9 +3,9 @@
 namespace tests\unit\models\user;
 
 use app\console\fixtures\UserFixture;
+use app\models\user\RegisterConfirmForm;
 use Codeception\Test\Unit;
 use yii\base\InvalidArgumentException;
-use app\models\user\RegisterConfirmForm;
 
 class RegisterConfirmFormTest extends Unit
 {
@@ -29,8 +29,8 @@ class RegisterConfirmFormTest extends Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
         $admin = $this->tester->grabFixture('user', 'manager');

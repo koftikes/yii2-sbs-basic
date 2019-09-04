@@ -7,9 +7,7 @@ use yii\base\Exception;
 use yii\base\Model;
 
 /**
- * Class RegisterForm
- *
- * @package app\models\user
+ * Class RegisterForm.
  */
 class RegisterForm extends Model
 {
@@ -43,9 +41,9 @@ class RegisterForm extends Model
     }
 
     /**
-     * Registration user
+     * Registration user.
      *
-     * @return User|bool the saved model or false if saving fails
+     * @return bool|User the saved model or false if saving fails
      */
     public function register()
     {
@@ -54,11 +52,12 @@ class RegisterForm extends Model
         }
 
         $transaction = Yii::$app->db->beginTransaction();
+
         try {
             $user = User::create($this->email, $this->password);
             if ($user->save()) {
                 $profile          = new UserProfile();
-                $profile->user_id = $user->getId();
+                $profile->user_id = $user->id;
                 $profile->name    = $this->name;
                 if ($profile->save() && $this->sendEmail($user)) {
                     $transaction->commit();

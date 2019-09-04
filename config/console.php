@@ -1,23 +1,23 @@
 <?php
 
-use yii\console\controllers\MigrateController;
 use yii\console\controllers\FixtureController;
+use yii\console\controllers\MigrateController;
 
 return yii\helpers\ArrayHelper::merge(
     require __DIR__ . '/common.php',
     require __DIR__ . '/common-local.php',
     [
-        'id' => 'basic-console',
-        'aliases' => ['@console' => '@app/console'],
+        'id'                  => 'basic-console',
+        'aliases'             => ['@console' => '@app/console'],
         'controllerNamespace' => 'app\console\commands',
-        'controllerMap' => [
+        'controllerMap'       => [
             'migrate' => [
-                'class' => MigrateController::class,
+                'class'         => MigrateController::class,
                 'migrationPath' => '@console/migrations',
-                'templateFile' => '@vendor/sbs/yii2-core-kit/src/views/migration.php',
+                'templateFile'  => '@vendor/sbs/yii2-core-kit/src/views/migration.php',
             ],
             'fixture' => [
-                'class' => FixtureController::class,
+                'class'     => FixtureController::class,
                 'namespace' => 'app\console\fixtures',
             ],
         ],

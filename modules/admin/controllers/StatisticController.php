@@ -2,14 +2,13 @@
 
 namespace app\modules\admin\controllers;
 
+use Probe\Provider\AbstractProvider;
+use Probe\ProviderFactory;
 use Yii;
 use yii\web\Response;
-use Probe\ProviderFactory;
 
 /**
- * Class StatisticController
- *
- * @package app\modules\admin\controllers
+ * Class StatisticController.
  */
 class StatisticController extends BaseController
 {
@@ -19,7 +18,7 @@ class StatisticController extends BaseController
     public function actionIndex()
     {
         $provider = ProviderFactory::create();
-        if ($provider) {
+        if ($provider instanceof AbstractProvider) {
             if (Yii::$app->request->isAjax) {
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 if ($key = Yii::$app->request->get('data')) {
@@ -34,6 +33,7 @@ class StatisticController extends BaseController
 
             return $this->render('index', ['provider' => $provider]);
         }
+
         return $this->render('fail');
     }
 }

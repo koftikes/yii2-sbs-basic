@@ -7,23 +7,24 @@ use yii\base\Model;
 
 /**
  * Class LoginForm is the model behind the login form.
- * @package app\models\user
  *
- * @property User|null $user This property is read-only.
+ * @property null|User $user This property is read-only.
  */
 class LoginForm extends Model
 {
     public $login;
+
     public $password;
+
     public $rememberMe = true;
 
     /**
-     * @var User|null
+     * @var null|User
      */
     private $_user;
 
     /**
-     * @return array the validation rules.
+     * @return array the validation rules
      */
     public function rules()
     {
@@ -51,6 +52,7 @@ class LoginForm extends Model
 
     /**
      * Logs in a user using the provided username and password.
+     *
      * @return bool whether the user is logged in successfully
      */
     public function login()
@@ -58,13 +60,14 @@ class LoginForm extends Model
         if ($this->validate()) {
             return Yii::$app->user->login($this->getUser(), $this->rememberMe ? Yii::$app->params['user.rememberMeDuration'] : 0);
         }
+
         return false;
     }
 
     /**
-     * Finds user by [[login]]
+     * Finds user by [[login]].
      *
-     * @return User|null
+     * @return null|User
      */
     public function getUser()
     {

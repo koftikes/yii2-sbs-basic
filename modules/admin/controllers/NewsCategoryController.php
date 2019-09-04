@@ -2,19 +2,18 @@
 
 namespace app\modules\admin\controllers;
 
-use yii\grid\ActionColumn;
-use yii\grid\DataColumn;
+use app\models\NewsCategory;
+use dkhlystov\widgets\TreeGrid;
 use sbs\actions\CreateAction;
-use sbs\actions\UpdateAction;
 use sbs\actions\DeleteAction;
 use sbs\actions\GridViewAction;
 use sbs\actions\Redirect;
-use dkhlystov\widgets\TreeGrid;
-use app\models\NewsCategory;
+use sbs\actions\UpdateAction;
+use yii\grid\ActionColumn;
+use yii\grid\DataColumn;
 
 /**
- * Class NewsCategoryController
- * @package app\modules\admin\controllers
+ * Class NewsCategoryController.
  */
 class NewsCategoryController extends BaseController
 {
@@ -25,53 +24,53 @@ class NewsCategoryController extends BaseController
     {
         return [
             'index' => [
-                'class' => GridViewAction::class,
+                'class'      => GridViewAction::class,
                 'modelClass' => NewsCategory::class,
-                'gridClass' => TreeGrid::class,
+                'gridClass'  => TreeGrid::class,
                 'gridConfig' => [
                     'columns' => [
                         'id',
                         'name',
                         'slug',
                         [
-                            'class' => DataColumn::class,
+                            'class'     => DataColumn::class,
                             'attribute' => 'status',
-                            'value' => function ($model) {
+                            'value'     => function ($model) {
                                 return $model->status ? 'Yes' : 'No';
-                            }
+                            },
                         ],
                         [
-                            'class' => ActionColumn::class,
+                            'class'    => ActionColumn::class,
                             'template' => '{update} {delete}',
 
                         ],
                     ],
-                    'showRoots' => true,
+                    'showRoots'    => true,
                     'rootParentId' => null,
-                    'lazyLoad' => true,
+                    'lazyLoad'     => true,
                 ],
                 'dataProvider' => [
                     'pagination' => false,
                 ],
             ],
             'create' => [
-                'class' => CreateAction::class,
+                'class'      => CreateAction::class,
                 'modelClass' => NewsCategory::class,
-                'handlers' => [
+                'handlers'   => [
                     'success' => ['class' => Redirect::class],
                 ],
             ],
             'update' => [
-                'class' => UpdateAction::class,
+                'class'      => UpdateAction::class,
                 'modelClass' => NewsCategory::class,
-                'handlers' => [
+                'handlers'   => [
                     'success' => ['class' => Redirect::class],
                 ],
             ],
             'delete' => [
-                'class' => DeleteAction::class,
+                'class'      => DeleteAction::class,
                 'modelClass' => NewsCategory::class,
-                'handlers' => [
+                'handlers'   => [
                     'success' => ['class' => Redirect::class],
                 ],
             ],

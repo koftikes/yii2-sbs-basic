@@ -3,9 +3,9 @@
 use app\models\News;
 use sbs\helpers\TransliteratorHelper;
 
-$date = date('Y-m-d H:i:s');
+$date = \date('Y-m-d H:i:s');
 
-if (!function_exists('generate')) {
+if (!\function_exists('generate')) {
     function generate($slug)
     {
         return \mb_strtolower(TransliteratorHelper::process(\str_replace(' ', '-', $slug)));

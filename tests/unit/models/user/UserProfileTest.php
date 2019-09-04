@@ -2,11 +2,11 @@
 
 namespace tests\unit\models\user;
 
-use app\models\user\UserProfile;
-use Codeception\Test\Unit;
-use app\models\user\User;
 use app\console\fixtures\UserFixture;
 use app\console\fixtures\UserProfileFixture;
+use app\models\user\User;
+use app\models\user\UserProfile;
+use Codeception\Test\Unit;
 
 class UserProfileTest extends Unit
 {
@@ -19,11 +19,11 @@ class UserProfileTest extends Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
             'user_profile' => [
-                'class' => UserProfileFixture::class,
+                'class'    => UserProfileFixture::class,
                 'dataFile' => codecept_data_dir() . 'user_profile.php',
             ],
         ]);
@@ -31,9 +31,10 @@ class UserProfileTest extends Unit
 
     public function testGetUser()
     {
-        $admin = $this->tester->grabFixture('user', 'admin');
+        $admin        = $this->tester->grabFixture('user', 'admin');
         $adminProfile = $this->tester->grabFixture('user_profile', 'admin');
-        $userProfile = UserProfile::findOne(['name' => $adminProfile['name']]);
+        /** @var UserProfile $userProfile */
+        $userProfile  = UserProfile::findOne(['name' => $adminProfile['name']]);
         expect($userProfile->user)->isInstanceOf(User::class);
         expect($userProfile->user->email)->equals($admin['email']);
     }

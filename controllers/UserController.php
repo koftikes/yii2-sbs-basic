@@ -2,18 +2,18 @@
 
 namespace app\controllers;
 
-use Yii;
-use yii\filters\AccessControl;
-use yii\filters\VerbFilter;
-use yii\base\InvalidArgumentException;
-use yii\web\BadRequestHttpException;
-use yii\web\Controller;
-use yii\web\Response;
 use app\models\user\LoginForm;
 use app\models\user\PasswordResetForm;
 use app\models\user\PasswordResetRequestForm;
-use app\models\user\RegisterForm;
 use app\models\user\RegisterConfirmForm;
+use app\models\user\RegisterForm;
+use Yii;
+use yii\base\InvalidArgumentException;
+use yii\filters\AccessControl;
+use yii\filters\VerbFilter;
+use yii\web\BadRequestHttpException;
+use yii\web\Controller;
+use yii\web\Response;
 
 class UserController extends Controller
 {
@@ -58,6 +58,7 @@ class UserController extends Controller
             return $this->goBack();
         }
         $model->password = '';
+
         return $this->render('login', ['model' => $model]);
     }
 
@@ -74,18 +75,22 @@ class UserController extends Controller
     }
 
     /**
-     * @return string|Response
+     * @return Response|string
      */
     public function actionRegister()
     {
         $model = new RegisterForm();
         if ($model->load(Yii::$app->request->post()) && $user = $model->register()) {
             if (!Yii::$app->params['user.registerConfirm'] && Yii::$app->user->login($user)) {
-                Yii::$app->session->setFlash('success',
-                    Yii::t('app', 'Thank you for registration. You was automatically login to portal.'));
+                Yii::$app->session->setFlash(
+                    'success',
+                    Yii::t('app', 'Thank you for registration. You was automatically login to portal.')
+                );
             } else {
-                Yii::$app->session->setFlash('success',
-                    Yii::t('app', 'Thank you for registration. Check your email for further instructions.'));
+                Yii::$app->session->setFlash(
+                    'success',
+                    Yii::t('app', 'Thank you for registration. Check your email for further instructions.')
+                );
             }
 
             return $this->goHome();
@@ -95,9 +100,10 @@ class UserController extends Controller
     }
 
     /**
-     * @param $token
+     * @param string $token
      *
      * @throws BadRequestHttpException
+     *
      * @return Response
      */
     public function actionRegisterConfirm($token)
@@ -105,10 +111,12 @@ class UserController extends Controller
         try {
             $model = new RegisterConfirmForm($token);
             if ($model->confirm()) {
-                Yii::$app->session->setFlash('success',
+                Yii::$app->session->setFlash(
+                    'success',
                     Yii::t('app', 'Registration was confirm. Now you can login to portal.')
                 );
             }
+
             return $this->goHome();
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
@@ -118,8 +126,7 @@ class UserController extends Controller
     /**
      * Requests password reset.
      *
-     * @throws \yii\base\Exception
-     * @return string|Response
+     * @return Response|string
      */
     public function actionPasswordResetRequest()
     {
@@ -134,11 +141,12 @@ class UserController extends Controller
     }
 
     /**
-     * @param $token
+     * @param string $token
      *
      * @throws BadRequestHttpException
-     * @throws \yii\base\Exception
-     * @return string|Response
+     * @throws yii\base\Exception
+     *
+     * @return Response|string
      */
     public function actionPasswordReset($token)
     {
@@ -146,8 +154,10 @@ class UserController extends Controller
             $model = new PasswordResetForm($token);
 
             if ($model->load(Yii::$app->request->post()) && $model->reset()) {
-                Yii::$app->session->setFlash('success',
-                    Yii::t('app', 'New password saved. Now you can login to portal.'));
+                Yii::$app->session->setFlash(
+                    'success',
+                    Yii::t('app', 'New password saved. Now you can login to portal.')
+                );
 
                 return $this->goHome();
             }

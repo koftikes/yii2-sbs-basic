@@ -25,7 +25,6 @@ class ContactFormTest extends Unit
 
     public function testEmailIsSentOnContact()
     {
-        /** @var ContactForm $form */
         $form = $this->getMockBuilder(ContactForm::class)
             ->setMethods(['validate'])
             ->getMock();
@@ -35,10 +34,10 @@ class ContactFormTest extends Unit
             ->willReturn(true);
 
         $form->attributes = [
-            'name' => 'Tester',
-            'email' => 'tester@example.com',
+            'name'    => 'Tester',
+            'email'   => 'tester@example.com',
             'subject' => 'very important letter subject',
-            'body' => 'body of current message',
+            'body'    => 'body of current message',
         ];
 
         expect_that($form->contact('admin@example.com'));

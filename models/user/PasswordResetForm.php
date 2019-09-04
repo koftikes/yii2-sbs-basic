@@ -7,8 +7,7 @@ use yii\base\InvalidArgumentException;
 use yii\base\Model;
 
 /**
- * Class PasswordResetForm
- * @package app\models\user
+ * Class PasswordResetForm.
  */
 class PasswordResetForm extends Model
 {
@@ -23,7 +22,7 @@ class PasswordResetForm extends Model
     public $password_repeat;
 
     /**
-     * @var User|null
+     * @var User
      */
     private $_user;
 
@@ -31,18 +30,20 @@ class PasswordResetForm extends Model
      * Creates a form model given a token.
      *
      * @param string $token
-     * @param array $config name-value pairs that will be used to initialize the object properties
+     * @param array  $config name-value pairs that will be used to initialize the object properties
+     *
      * @throws InvalidArgumentException if token is empty or not valid
      */
     public function __construct($token, $config = [])
     {
-        if (empty($token) || !is_string($token)) {
+        if (empty($token) || !\is_string($token)) {
             throw new InvalidArgumentException('Password reset token cannot be blank.');
         }
-        $this->_user = User::findByPasswordResetToken($token);
-        if (!$this->_user instanceof User) {
+        $user = User::findByPasswordResetToken($token);
+        if (!$user instanceof User) {
             throw new InvalidArgumentException('Wrong password reset token.');
         }
+        $this->_user = $user;
         parent::__construct($config);
     }
 
@@ -67,9 +68,9 @@ class PasswordResetForm extends Model
     /**
      * Resets password.
      *
-     * @return bool if password was reset.
-     *
      * @throws \yii\base\Exception
+     *
+     * @return bool if password was reset
      */
     public function reset()
     {
@@ -82,6 +83,7 @@ class PasswordResetForm extends Model
         $user->removePasswordResetToken();
         // Remove email confirm token because letter send to the same email it's means email confirmed too.
         $user->removeEmailConfirmToken();
+
         return $user->save(false);
     }
 }

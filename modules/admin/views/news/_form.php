@@ -1,17 +1,17 @@
 <?php
 /**
- * @var $this  yii\web\View
- * @var $model app\models\News
- * @var $form  kartik\widgets\ActiveForm
+ * @var yii\web\View
+ * @var app\models\News           $model
+ * @var kartik\widgets\ActiveForm $form
  */
-
+use app\models\NewsCategory;
+use kartik\datetime\DateTimePicker;
+use kartik\widgets\ActiveForm;
 use sbs\widgets\SlugInput;
 use sbs\widgets\TreeDropDown;
-use yii\helpers\Html;
-use app\models\NewsCategory;
-use kartik\widgets\ActiveForm;
-use kartik\datetime\DateTimePicker;
 use vova07\imperavi\Widget as Editor;
+use yii\helpers\Html;
+
 ?>
 
 <div class="admin-news-form">
@@ -23,9 +23,10 @@ use vova07\imperavi\Widget as Editor;
     ]); ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]); ?>
     <?= $form->field($model, 'slug')->widget(SlugInput::class, ['sourceAttribute' => 'title']); ?>
-    <?php //echo $form->field($model, 'image')->textInput(['maxlength' => true]); ?>
+    <?php //echo $form->field($model, 'image')->textInput(['maxlength' => true]);?>
     <?= $form->field($model, 'preview')->widget(
-        Editor::class, [
+        Editor::class,
+        [
             'settings' => [
                 'plugins'         => ['fullscreen', 'fontcolor', 'video'],
                 'minHeight'       => 200,
@@ -37,7 +38,8 @@ use vova07\imperavi\Widget as Editor;
         ]
     ); ?>
     <?= $form->field($model, 'text')->widget(
-        Editor::class, [
+        Editor::class,
+        [
             'settings' => [
                 'plugins'         => ['fullscreen', 'fontcolor', 'video'],
                 'minHeight'       => 400,
@@ -49,14 +51,18 @@ use vova07\imperavi\Widget as Editor;
         ]
     ); ?>
     <?= $form->field($model, 'publish_date')->widget(
-        DateTimePicker::class, [
+        DateTimePicker::class,
+        [
         'removeButton'  => false,
         'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd HH:ii:ss'],
-    ]); ?>
+    ]
+    ); ?>
     <?= $form->field($model, 'status')->checkbox(); ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
-            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton(
+        $model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    ); ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

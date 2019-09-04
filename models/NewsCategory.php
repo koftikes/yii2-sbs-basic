@@ -3,12 +3,9 @@
 namespace app\models;
 
 use phpDocumentor\Reflection\Types\This;
-use sbs\behaviors\SlugBehavior;
-use Yii;
-use yii\behaviors\BlameableBehavior;
-use yii\db\ActiveRecord;
 use sbs\behaviors\DateTimeBehavior;
-use yii\helpers\ArrayHelper;
+use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "{{%news_category}}".
@@ -21,7 +18,6 @@ use yii\helpers\ArrayHelper;
  * @property int            $status
  * @property string         $create_date
  * @property string         $update_date
- *
  * @property News[]         $news
  * @property NewsCategory   $parent
  * @property NewsCategory[] $children
@@ -29,6 +25,7 @@ use yii\helpers\ArrayHelper;
 class NewsCategory extends ActiveRecord
 {
     const STATUS_DISABLE = 0;
+
     const STATUS_ENABLE  = 1;
 
     /**
@@ -56,7 +53,7 @@ class NewsCategory extends ActiveRecord
     {
         return [
             ['status', 'in', 'range' => [self::STATUS_DISABLE, self::STATUS_ENABLE]],
-            [['name','slug'], 'required'],
+            [['name', 'slug'], 'required'],
             [['description'], 'string'],
             [['parent_id', 'status'], 'integer'],
             [['create_date', 'update_date'], 'safe'],
@@ -66,7 +63,7 @@ class NewsCategory extends ActiveRecord
                 ['parent_id'],
                 'exist',
                 'skipOnError'     => true,
-                'targetClass'     => NewsCategory::class,
+                'targetClass'     => self::class,
                 'targetAttribute' => ['parent_id' => 'id'],
             ],
         ];
@@ -74,7 +71,7 @@ class NewsCategory extends ActiveRecord
 
     /**
      * {@inheritdoc}
-     * {@codeCoverageIgnore}
+     * {@codeCoverageIgnore}.
      */
     public function attributeLabels()
     {
@@ -91,7 +88,7 @@ class NewsCategory extends ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getNews()
     {
@@ -99,18 +96,18 @@ class NewsCategory extends ActiveRecord
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getParent()
     {
-        return $this->hasOne(NewsCategory::class, ['id' => 'parent_id']);
+        return $this->hasOne(self::class, ['id' => 'parent_id']);
     }
 
     /**
-     * @return yii\db\ActiveQuery
+     * @return \yii\db\ActiveQuery
      */
     public function getChildren()
     {
-        return $this->hasMany(NewsCategory::class, ['parent_id' => 'id']);
+        return $this->hasMany(self::class, ['parent_id' => 'id']);
     }
 }

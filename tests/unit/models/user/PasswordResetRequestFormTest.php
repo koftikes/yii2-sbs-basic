@@ -2,11 +2,11 @@
 
 namespace tests\unit\models\user;
 
-use Yii;
-use Codeception\Test\Unit;
-use app\models\user\User;
-use app\models\user\PasswordResetRequestForm;
 use app\console\fixtures\UserFixture;
+use app\models\user\PasswordResetRequestForm;
+use app\models\user\User;
+use Codeception\Test\Unit;
+use Yii;
 use yii\mail\MessageInterface;
 
 class PasswordResetRequestFormTest extends Unit
@@ -29,8 +29,8 @@ class PasswordResetRequestFormTest extends Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
         $manager = $this->tester->grabFixture('user', 'manager');
@@ -41,13 +41,12 @@ class PasswordResetRequestFormTest extends Unit
             ->equals('The user is not active. We cannot send email to this type of user.');
     }
 
-
     public function testSendEmailsToUserWithExpiredToken()
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
         $user = $this->tester->grabFixture('user', 'user');
@@ -60,13 +59,14 @@ class PasswordResetRequestFormTest extends Unit
     {
         $this->tester->haveFixtures([
             'user' => [
-                'class' => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php'
+                'class'    => UserFixture::class,
+                'dataFile' => codecept_data_dir() . 'user.php',
             ],
         ]);
         $admin = $this->tester->grabFixture('user', 'admin');
 
         $form = new PasswordResetRequestForm(['email' => $admin['email']]);
+        /** @var User $user */
         $user = User::findOne(['password_reset_token' => $admin['password_reset_token']]);
 
         expect_that($form->sendEmail());

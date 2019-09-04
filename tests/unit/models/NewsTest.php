@@ -1,15 +1,15 @@
 <?php
 
-namespace tests\unit\models\user;
+namespace tests\unit\models;
 
+use app\console\fixtures\NewsCategoryFixture;
+use app\console\fixtures\NewsFixture;
+use app\console\fixtures\UserFixture;
+use app\models\News;
+use app\models\NewsCategory;
+use app\models\user\User;
 use Codeception\Test\Unit;
 use yii\db\ActiveQuery;
-use app\models\News;
-use app\models\user\User;
-use app\models\NewsCategory;
-use app\console\fixtures\UserFixture;
-use app\console\fixtures\NewsFixture;
-use app\console\fixtures\NewsCategoryFixture;
 
 class NewsTest extends Unit
 {
@@ -62,6 +62,7 @@ class NewsTest extends Unit
         ];
         $model = new News($param);
         $query = new ActiveQuery(News::class);
+        /** @var ActiveQuery $query */
         $query = $model->applyFilter($query);
         expect($query->createCommand()->getRawSql())->equals(
             "SELECT * FROM `news` WHERE (`status`={$param['status']}) AND (`title` LIKE '%{$param['title']}%') AND (`slug` LIKE '%{$param['slug']}%') AND (`publish_date` BETWEEN '{$param['publish_date']} 00:00:00' AND '{$param['publish_date']} 23:59:59')"

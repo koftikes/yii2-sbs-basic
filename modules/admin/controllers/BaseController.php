@@ -2,9 +2,9 @@
 
 namespace app\modules\admin\controllers;
 
-use yii\web\Controller;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
+use yii\web\Controller;
 
 class BaseController extends Controller
 {
@@ -29,7 +29,7 @@ class BaseController extends Controller
                 ],
             ],
             'verbs' => [
-                'class' => VerbFilter::class,
+                'class'   => VerbFilter::class,
                 'actions' => [
                     'delete' => ['post'],
                 ],

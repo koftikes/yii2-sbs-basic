@@ -3,12 +3,11 @@
 namespace app\models\user;
 
 use Yii;
-use yii\base\Model;
 use yii\base\Exception;
+use yii\base\Model;
 
 /**
- * Class PasswordResetRequestForm
- * @package app\models\user
+ * Class PasswordResetRequestForm.
  */
 class PasswordResetRequestForm extends Model
 {
@@ -27,7 +26,7 @@ class PasswordResetRequestForm extends Model
                 'email',
                 'exist',
                 'targetClass' => User::class,
-                'message' => Yii::t('app', 'There is no user with this email address.')
+                'message'     => Yii::t('app', 'There is no user with this email address.'),
             ],
         ];
     }
@@ -44,14 +43,16 @@ class PasswordResetRequestForm extends Model
         }
 
         try {
-            /* @var $user User */
+            /** @var User $user */
             $user = User::findOne(['email' => $this->email]);
-            if ($user->status !== User::STATUS_ACTIVE) {
-                throw new Exception(Yii::t('app',
-                    'The user is not active. We cannot send email to this type of user.'));
+            if (User::STATUS_ACTIVE !== $user->status) {
+                throw new Exception(Yii::t(
+                    'app',
+                    'The user is not active. We cannot send email to this type of user.'
+                ));
             }
 
-            if (!User::isPasswordResetTokenValid($user->password_reset_token)) {
+            if (null !== $user->password_reset_token && !User::isPasswordResetTokenValid($user->password_reset_token)) {
                 $user->generatePasswordResetToken();
                 $user->save(false);
             }
@@ -66,7 +67,6 @@ class PasswordResetRequestForm extends Model
                 ->setTo($this->email)
                 ->setSubject(Yii::t('app', 'Password reset on {portal}', ['portal' => Yii::$app->name]))
                 ->send();
-
         } catch (Exception $exception) {
             $this->addError('email', $exception->getMessage());
 

@@ -2,24 +2,22 @@
 
 namespace app\modules\admin\controllers;
 
-use sbs\widgets\TreeDropDown;
 use app\models\News;
 use app\models\NewsCategory;
-use kartik\grid\GridView;
+use kartik\detail\DetailView;
 use kartik\grid\ActionColumn;
 use kartik\grid\BooleanColumn;
-use kartik\detail\DetailView;
+use kartik\grid\GridView;
 use sbs\actions\CreateAction;
-use sbs\actions\UpdateAction;
 use sbs\actions\DeleteAction;
-use sbs\actions\GridViewAction;
 use sbs\actions\DetailViewAction;
+use sbs\actions\GridViewAction;
 use sbs\actions\Redirect;
+use sbs\actions\UpdateAction;
+use sbs\widgets\TreeDropDown;
 
 /**
- * Class NewsController
- *
- * @package app\modules\admin\controllers
+ * Class NewsController.
  */
 class NewsController extends BaseController
 {
@@ -138,5 +136,4 @@ class NewsController extends BaseController
             ],
         ];
     }
-
 }

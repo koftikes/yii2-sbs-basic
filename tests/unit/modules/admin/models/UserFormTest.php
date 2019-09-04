@@ -3,7 +3,6 @@
 namespace tests\unit\modules\admin\models;
 
 use app\console\fixtures\UserFixture;
-use app\console\fixtures\UserProfileFixture;
 use app\models\user\User;
 use app\models\user\UserProfile;
 use app\modules\admin\models\UserForm;
@@ -75,7 +74,6 @@ class UserFormTest extends Unit
         expect($emailMessage->getTo())->hasKey('new_user@example.com');
         expect($emailMessage->getFrom())->hasKey('support@example.com');
     }
-
 
     public function testUserUpdate()
     {

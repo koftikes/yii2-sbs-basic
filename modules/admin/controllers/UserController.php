@@ -2,20 +2,18 @@
 
 namespace app\modules\admin\controllers;
 
-use Yii;
-use kartik\grid\GridView;
-use kartik\grid\ActionColumn;
-use sbs\actions\Redirect;
-use sbs\actions\GridViewAction;
-use sbs\actions\DeleteAction;
 use app\models\user\User;
 use app\modules\admin\models\UserForm;
+use kartik\grid\ActionColumn;
+use kartik\grid\GridView;
+use sbs\actions\DeleteAction;
+use sbs\actions\GridViewAction;
+use sbs\actions\Redirect;
+use Yii;
 use yii\web\NotFoundHttpException;
 
 /**
- * Class UserController
- *
- * @package app\modules\admin\controllers
+ * Class UserController.
  */
 class UserController extends BaseController
 {
@@ -40,7 +38,7 @@ class UserController extends BaseController
                         [
                             'attribute' => 'status',
                             'value'     => function ($model) {
-                                return User::statuses($model->status);
+                                return User::status($model->status);
                             },
                         ],
                         [
@@ -75,14 +73,16 @@ class UserController extends BaseController
     }
 
     /**
-     * @throws yii\base\Exception
-     * @return string|yii\web\Response
+     * @throws \yii\base\Exception
+     *
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
         $model = (new UserForm())->create();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'The user is successfully created.'));
+
             return $this->redirect(['user/index']);
         }
 
@@ -90,17 +90,19 @@ class UserController extends BaseController
     }
 
     /**
-     * @param $id
+     * @param int $id
      *
      * @throws NotFoundHttpException
-     * @throws yii\base\Exception
-     * @return string|yii\web\Response
+     * @throws \yii\base\Exception
+     *
+     * @return string|\yii\web\Response
      */
     public function actionUpdate($id)
     {
         $model = (new UserForm())->find($id);
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             Yii::$app->session->setFlash('success', Yii::t('app', 'The user is successfully updated.'));
+
             return $this->refresh();
         }
 

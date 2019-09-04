@@ -2,14 +2,14 @@
 
 namespace app\widgets;
 
+use kartik\growl\Growl;
 use Yii;
 use yii\bootstrap4\Widget;
-use kartik\growl\Growl;
 use yii\web\Session;
 
 /**
  * Alert widget renders a message from session flash. All flash messages are displayed
- * in the sequence they were assigned using setFlash. You can set message as following:
+ * in the sequence they were assigned using setFlash. You can set message as following:.
  *
  * ```php
  * \Yii::$app->session->setFlash('error', 'This is the "Error" message');
@@ -30,15 +30,18 @@ use yii\web\Session;
 class Alert extends Widget
 {
     const ERROR   = 'error';
+
     const WARNING = 'warning';
+
     const SUCCESS = 'success';
+
     const INFO    = 'info';
 
     /**
      * @var array the alert types configuration for the flash messages.
-     * This array is setup as $key => $value, where:
-     * - $key is the name of the session flash variable
-     * - $value is the bootstrap alert type (i.e. danger, success, info, warning)
+     *            This array is setup as $key => $value, where:
+     *            - $key is the name of the session flash variable
+     *            - $value is the bootstrap alert type (i.e. danger, success, info, warning)
      */
     public $alertTypes = [
         self::ERROR   => Growl::TYPE_DANGER,
@@ -49,7 +52,7 @@ class Alert extends Widget
 
     /**
      * @var array the options for rendering the close button tag.
-     * Array will be passed to [[\yii\bootstrap\Alert::closeButton]].
+     *            Array will be passed to [[\yii\bootstrap\Alert::closeButton]].
      */
     public $closeButton = [];
 
@@ -64,6 +67,7 @@ class Alert extends Widget
      * {@inheritdoc}
      *
      * @throws \Exception
+     *
      * @return string|void
      */
     public function run()
@@ -77,10 +81,10 @@ class Alert extends Widget
             }
 
             foreach ((array) $flash as $i => $message) {
-                /* initialize css class for each alert box */
+                // initialize css class for each alert box
                 $this->options['class'] = $this->alertTypes[$type] . $appendClass;
 
-                /* assign unique id to each alert box */
+                // assign unique id to each alert box
                 $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
                 echo Growl::widget([

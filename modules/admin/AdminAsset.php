@@ -2,10 +2,10 @@
 
 namespace app\modules\admin;
 
-use yii\web\YiiAsset;
-use yii\web\AssetBundle;
-use yii\bootstrap4\BootstrapPluginAsset;
 use machour\flot\ChartAsset;
+use yii\bootstrap4\BootstrapPluginAsset;
+use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 class AdminAsset extends AssetBundle
 {
@@ -18,7 +18,7 @@ class AdminAsset extends AssetBundle
      * {@inheritdoc}
      */
     public $js = [
-        'js/system-information.js'
+        'js/system-information.js',
     ];
 
     /**
@@ -32,6 +32,6 @@ class AdminAsset extends AssetBundle
     public $depends = [
         YiiAsset::class,
         BootstrapPluginAsset::class,
-        ChartAsset::class
+        ChartAsset::class,
     ];
 }

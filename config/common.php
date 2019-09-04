@@ -1,30 +1,30 @@
 <?php
 
-use yii\db\Connection;
-use yii\log\FileTarget;
-use yii\caching\FileCache;
-use yii\swiftmailer\Mailer;
 use app\modules\admin\AdminModule;
 use kartik\grid\Module as GridModule;
 use kartik\icons\FontAwesomeAsset;
 use sbs\controllers\TransliterationController;
+use yii\caching\FileCache;
+use yii\db\Connection;
+use yii\log\FileTarget;
+use yii\swiftmailer\Mailer;
 
 return [
-    'basePath' => dirname(__DIR__),
-    'language' => 'en-US',
+    'basePath'  => \dirname(__DIR__),
+    'language'  => 'en-US',
     'bootstrap' => ['log'],
-    'aliases' => [
+    'aliases'   => [
         '@bower' => '@vendor/bower-asset',
-        '@npm' => '@vendor/npm-asset',
+        '@npm'   => '@vendor/npm-asset',
     ],
     'controllerMap' => [
         'transliteration' => [
             'class' => TransliterationController::class,
-        ]
+        ],
     ],
     'components' => [
         'db' => [
-            'class' => Connection::class,
+            'class'   => Connection::class,
             'charset' => 'utf8',
         ],
         'mailer' => [
@@ -35,28 +35,28 @@ return [
         ],
         'log' => [
             'traceLevel' => YII_DEBUG ? 3 : 0,
-            'targets' => [
+            'targets'    => [
                 [
-                    'class' => FileTarget::class,
+                    'class'  => FileTarget::class,
                     'levels' => ['error', 'warning'],
                 ],
             ],
         ],
         'assetManager' => [
             'basePath' => '@app/web/assets',
-            'bundles' => [
+            'bundles'  => [
                 FontAwesomeAsset::class => [
-                    'js' => [],
+                    'js'  => [],
                     'css' => [
-                        'https://use.fontawesome.com/releases/v5.8.1/css/all.css'
-                    ]
-                ]
-            ]
+                        'https://use.fontawesome.com/releases/v5.8.1/css/all.css',
+                    ],
+                ],
+            ],
         ],
     ],
     'modules' => [
         'gridview' => ['class' => GridModule::class],
-        'admin' => ['class' => AdminModule::class],
+        'admin'    => ['class' => AdminModule::class],
     ],
     'params' => require __DIR__ . '/params.php',
 ];

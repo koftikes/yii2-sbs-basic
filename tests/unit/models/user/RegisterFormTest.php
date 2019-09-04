@@ -2,10 +2,10 @@
 
 namespace tests\unit\models\user;
 
-use Codeception\Test\Unit;
+use app\console\fixtures\UserFixture;
 use app\models\user\RegisterForm;
 use app\models\user\User;
-use app\console\fixtures\UserFixture;
+use Codeception\Test\Unit;
 
 class RegisterFormTest extends Unit
 {
@@ -23,6 +23,7 @@ class RegisterFormTest extends Unit
             'password_repeat' => 'some_password',
         ]);
 
+        /** @var User $user */
         $user = $form->register();
 
         expect($user)->isInstanceOf(User::class);
@@ -58,7 +59,6 @@ class RegisterFormTest extends Unit
 
     public function testThrowException()
     {
-        /** @var RegisterForm $form */
         $form = $this->getMockBuilder(RegisterForm::class)
             ->setMethods(['validate'])
             ->getMock();

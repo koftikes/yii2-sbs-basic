@@ -1,20 +1,21 @@
 <?php
 
-namespace functional\modules\admin;
+namespace tests\functional\modules\admin;
 
+use app\console\fixtures\NewsCategoryFixture;
+use app\console\fixtures\NewsFixture;
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
-use app\console\fixtures\NewsFixture;
-use app\console\fixtures\NewsCategoryFixture;
 use yii\helpers\Url;
 
 class NewsCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */
@@ -97,7 +98,7 @@ class NewsCest
     public function updateTakenSlug(\FunctionalTester $I)
     {
         $asia  = $I->grabFixture('news', 'asia');
-        $usa = $I->grabFixture('news', 'usa');
+        $usa   = $I->grabFixture('news', 'usa');
         $I->amOnRoute('admin/news/update', ['id' => $asia['id']]);
         $I->fillField('News[slug]', $usa['slug']);
         $I->click('Update');

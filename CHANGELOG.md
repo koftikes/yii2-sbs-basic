@@ -2,8 +2,6 @@
 * Registration using social network
 * Move console files and scripts to one directory
 * Initials fixtures (?)
-* Code style checks (fixed all code style).
-* Travis CI 
 * Universal modal window
 * Add translate to all views.
 * Add pretty URL.
@@ -11,6 +9,11 @@
 * Add author behavior with ability run console command.  
 
 ### In Development
+
+### 09-09-2019
+* Added Travis CI 
+* Added code style checks (fixed all code style).
+* Added coverage (https://codecov.io).
 
 ### 30-08-2019
 * Update tests. Fixed some minor bugs.
