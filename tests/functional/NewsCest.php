@@ -1,17 +1,18 @@
 <?php
 
-namespace functional;
+namespace tests\functional;
 
-use app\console\fixtures\NewsFixture;
 use app\console\fixtures\NewsCategoryFixture;
+use app\console\fixtures\NewsFixture;
 
 class NewsCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */

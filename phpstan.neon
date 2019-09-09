@@ -1,0 +1,44 @@
+includes:
+    - vendor/phpstan/phpstan-phpunit/extension.neon
+parameters:
+    ignoreErrors:
+        -
+            message: '#Call to an undefined method [a-zA-Z0-9\\_]+::endContent\(\).#'
+            paths:
+                - %currentWorkingDirectory%/views/*
+                - %currentWorkingDirectory%/modules/*/views/*
+        -
+            message: '#Variable \$this might not be defined.#'
+            paths:
+                - %currentWorkingDirectory%/views/*
+                - %currentWorkingDirectory%/modules/*/views/*
+        -
+            message: '#Using \$this outside a class.#'
+            paths:
+                - %currentWorkingDirectory%/mail/*
+                - %currentWorkingDirectory%/views/*
+                - %currentWorkingDirectory%/modules/*/views/*
+        -
+            message: '#Undefined variable: \$[a-zA-Z0-9\\_]+#'
+            paths:
+                - %currentWorkingDirectory%/mail/*
+                - %currentWorkingDirectory%/views/*
+                - %currentWorkingDirectory%/modules/*/mail/*
+                - %currentWorkingDirectory%/modules/*/views/*
+        - '#Access to static property \$app on an unknown class Yii.#'
+        - '#Call to static method [a-zA-Z0-9\\_]+\(\) on an unknown class Yii.#'
+        - '#Constant YII_ENV_[A-Z0-9\\_]+ not found.#'
+        - '#Constant YII_DEBUG not found.#'
+    autoload_directories:
+        - %currentWorkingDirectory%/tests/_support
+    autoload_files:
+        - %currentWorkingDirectory%/vendor/codeception/base/autoload.php
+    excludes_analyse:
+        - %currentWorkingDirectory%/requirements.php #TODO: Need to fix this file
+        - %currentWorkingDirectory%/console/migrations/*
+        - %currentWorkingDirectory%/tests/_data/*
+        - %currentWorkingDirectory%/tests/_output/*
+        - %currentWorkingDirectory%/tests/_support/_generated*
+        - %currentWorkingDirectory%/vendor/*
+        - %currentWorkingDirectory%/runtime/*
+        - %currentWorkingDirectory%/web/assets/*

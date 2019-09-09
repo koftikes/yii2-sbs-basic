@@ -1,6 +1,6 @@
 <?php
 
-namespace functional;
+namespace tests\functional;
 
 class ContactCest
 {

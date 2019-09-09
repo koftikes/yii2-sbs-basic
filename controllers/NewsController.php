@@ -2,16 +2,14 @@
 
 namespace app\controllers;
 
-use Yii;
 use app\models\News;
+use Yii;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 
 /**
- * Class NewsController
- *
- * @package app\controllers
+ * Class NewsController.
  */
 class NewsController extends Controller
 {
@@ -32,12 +30,13 @@ class NewsController extends Controller
      *
      * @param string $slug
      *
-     * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
+     *
+     * @return mixed
      */
     public function actionView($slug)
     {
-        if (($model = News::findOne(['slug' => $slug])) === null) {
+        if (null === ($model = News::findOne(['slug' => $slug]))) {
             throw new NotFoundHttpException(Yii::t('app', 'The requested page does not exist.'));
         }
 

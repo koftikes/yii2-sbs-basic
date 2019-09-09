@@ -1,15 +1,14 @@
 <?php
 
 /**
- * @var $this yii\web\View
- * @var $model app\models\News
+ * @var yii\web\View
+ * @var app\models\News $model
  */
-
-$this->title = 'Create News Category';
+$this->title                 = 'Create News Category';
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     ['label' => 'News Categories', 'url' => ['news-category/index']],
-    'Create'
+    'Create',
 ];
 ?>
 <div class="admin-news-category-create">

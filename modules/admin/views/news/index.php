@@ -1,12 +1,11 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $widget kartik\grid\GridView
+ * @var yii\web\View
+ * @var kartik\grid\GridView $widget
  */
-
 use yii\helpers\Html;
 
-$this->title = 'News';
+$this->title                 = 'News';
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     $this->title,

@@ -1,11 +1,9 @@
 <?php
-
-use yii\helpers\Html;
-
 /**
- * @var $this yii\web\View
- * @var $model app\models\News
+ * @var yii\web\View
+ * @var app\models\News $model
  */
+use yii\helpers\Html;
 
 $this->registerCssFile('/css/news.css');
 $this->title                 = $model->title;

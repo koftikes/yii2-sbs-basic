@@ -1,12 +1,12 @@
 <?php
 
-namespace tests\unit\models\user;
+namespace tests\unit\models;
 
+use app\console\fixtures\NewsCategoryFixture;
+use app\console\fixtures\NewsFixture;
 use app\models\News;
 use app\models\NewsCategory;
 use Codeception\Test\Unit;
-use app\console\fixtures\NewsFixture;
-use app\console\fixtures\NewsCategoryFixture;
 
 class NewsCategoryTest extends Unit
 {

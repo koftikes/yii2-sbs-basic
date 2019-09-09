@@ -6,9 +6,7 @@ use app\models\News;
 use yii\test\ActiveFixture;
 
 /**
- * Class NewsFixture
- *
- * @package app\console\fixtures
+ * Class NewsFixture.
  */
 class NewsFixture extends ActiveFixture
 {

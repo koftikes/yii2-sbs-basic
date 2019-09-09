@@ -1,14 +1,13 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $form kartik\form\ActiveForm
- * @var $model app\models\user\RegisterForm
+ * @var yii\web\View
+ * @var kartik\form\ActiveForm       $form
+ * @var app\models\user\RegisterForm $model
  */
-
-use yii\helpers\Html;
 use kartik\form\ActiveForm;
+use yii\helpers\Html;
 
-$this->title = 'Register';
+$this->title                   = 'Register';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="register">

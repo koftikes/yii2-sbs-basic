@@ -1,21 +1,23 @@
 <?php
 /**
- * @link http://www.yiiframework.com/
+ * @see http://www.yiiframework.com/
+ *
  * @copyright Copyright (c) 2008 Yii Software LLC
  * @license http://www.yiiframework.com/license/
  */
 
 namespace app\assets;
 
-use yii\web\YiiAsset;
-use yii\web\AssetBundle;
-use yii\bootstrap4\BootstrapAsset;
 use kartik\icons\FontAwesomeAsset;
+use yii\bootstrap4\BootstrapAsset;
+use yii\web\AssetBundle;
+use yii\web\YiiAsset;
 
 /**
  * Main application asset bundle.
  *
  * @author Qiang Xue <qiang.xue@gmail.com>
+ *
  * @since 2.0
  */
 class AppAsset extends AssetBundle
@@ -34,6 +36,6 @@ class AppAsset extends AssetBundle
     public $depends = [
         YiiAsset::class,
         BootstrapAsset::class,
-        FontAwesomeAsset::class
+        FontAwesomeAsset::class,
     ];
 }

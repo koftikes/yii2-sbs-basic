@@ -1,15 +1,14 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $model app\models\NewsCategory
+ * @var yii\web\View
+ * @var app\models\NewsCategory $model
  */
-
-$this->title = 'Update News Category: ' . $model->name;
+$this->title                 = 'Update News Category: ' . $model->name;
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     ['label' => 'News Categories', 'url' => ['news-category/index']],
     $model->name,
-    'Update'
+    'Update',
 ];
 ?>
 <div class="admin-news-category-update">

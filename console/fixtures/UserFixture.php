@@ -2,12 +2,11 @@
 
 namespace app\console\fixtures;
 
-use yii\test\ActiveFixture;
 use app\models\user\User;
+use yii\test\ActiveFixture;
 
 /**
- * Class UserFixture
- * @package app\console\fixtures
+ * Class UserFixture.
  */
 class UserFixture extends ActiveFixture
 {

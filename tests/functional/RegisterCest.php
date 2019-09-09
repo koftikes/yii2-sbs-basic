@@ -1,18 +1,19 @@
 <?php
 
-namespace functional;
+namespace tests\functional;
 
-use Yii;
-use app\models\user\User;
 use app\console\fixtures\UserFixture;
+use app\models\user\User;
+use Yii;
 
 class RegisterCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */

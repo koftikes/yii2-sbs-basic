@@ -1,6 +1,6 @@
 <?php
 
-namespace functional;
+namespace tests\functional;
 
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
@@ -9,9 +9,10 @@ class PasswordResetCest
 {
     /**
      * Load fixtures before db transaction begin
-     * Called in _before()
+     * Called in _before().
      *
      * @return array
+     *
      * @see \Codeception\Module\Yii2::loadFixtures()
      * @see \Codeception\Module\Yii2::_before()
      */
@@ -79,7 +80,7 @@ class PasswordResetCest
         $I->seeEmailIsSent();
         /** @var User $user */
         $user = $I->grabRecord(User::class, ['email' => 'user@example.com']);
-        expect_that($user->password_reset_token !== null);
+        expect_that(null !== $user->password_reset_token);
     }
 
     public function passwordResetWrongToken(\FunctionalTester $I)
@@ -135,8 +136,6 @@ class PasswordResetCest
         $I->amOnRoute('user/password-reset', ['token' => $user->password_reset_token]);
         $I->submitForm('#form-password-reset', $this->formResetParams('password_0', 'password_0'));
         $user = $I->grabRecord(User::class, ['email' => 'admin@example.com']);
-        expect_that($user->password_reset_token === null);
+        expect_that(null === $user->password_reset_token);
     }
 }
-
-

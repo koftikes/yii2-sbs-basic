@@ -2,9 +2,9 @@
 
 namespace app\models\user;
 
+use borales\extensions\phoneInput\PhoneInputValidator;
 use Yii;
 use yii\db\ActiveRecord;
-use borales\extensions\phoneInput\PhoneInputValidator;
 
 /**
  * This is the model class for table "{{%user_profile}}".
@@ -16,16 +16,18 @@ use borales\extensions\phoneInput\PhoneInputValidator;
  * @property int $gender
  * @property int $subscribe
  * @property string $info
- *
  * @property User $user
  */
 class UserProfile extends ActiveRecord
 {
     const GENDER_THING = 0;
+
     const GENDER_MALE = 1;
+
     const GENDER_FEMALE = 2;
 
     const SUBSCRIBE_NOT_ACTIVE = 0;
+
     const SUBSCRIBE_ACTIVE = 1;
 
     /**
@@ -51,27 +53,27 @@ class UserProfile extends ActiveRecord
             [
                 ['user_id'],
                 'exist',
-                'skipOnError' => true,
-                'targetClass' => User::class,
-                'targetAttribute' => ['user_id' => 'id']
+                'skipOnError'     => true,
+                'targetClass'     => User::class,
+                'targetAttribute' => ['user_id' => 'id'],
             ],
         ];
     }
 
     /**
      * {@inheritdoc}
-     * {@codeCoverageIgnore}
+     * {@codeCoverageIgnore}.
      */
     public function attributeLabels()
     {
         return [
-            'user_id' => Yii::t('app', 'User ID'),
-            'name' => Yii::t('app', 'Name'),
-            'phone' => Yii::t('app', 'Phone'),
-            'DOB' => Yii::t('app', 'Dob'),
-            'gender' => Yii::t('app', 'Gender'),
+            'user_id'   => Yii::t('app', 'User ID'),
+            'name'      => Yii::t('app', 'Name'),
+            'phone'     => Yii::t('app', 'Phone'),
+            'DOB'       => Yii::t('app', 'Dob'),
+            'gender'    => Yii::t('app', 'Gender'),
             'subscribe' => Yii::t('app', 'Subscribe'),
-            'info' => Yii::t('app', 'Info'),
+            'info'      => Yii::t('app', 'Info'),
         ];
     }
 

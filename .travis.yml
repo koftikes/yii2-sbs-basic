@@ -1,50 +1,35 @@
 language: php
 
-matrix:
-  fast_finish: true
-  include:
-    - php: "7.3"
-    - php: "7.2"
-    - php: "7.1"
-    - php: "7.0"
-    - php: "5.6"
-    - php: "5.5"
-      dist: trusty
-    - php: "5.4"
-      dist: trusty
+php:
+    - '7.2'
+    - '7.3'
 
 # faster builds on new travis setup not using sudo
 sudo: false
 
 # cache vendor dirs
 cache:
-  directories:
-    - $HOME/.composer/cache
+    directories:
+        - $HOME/.composer/cache
 
 services:
-  - mysql
+    - mysql
 
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS yii2_basic_tests;'
+    - mysql -e 'CREATE DATABASE IF NOT EXISTS yii2_basic_tests;'
+    - mysql -e "use mysql; update user set authentication_string=PASSWORD('root') where User='root';FLUSH PRIVILEGES;"
 
 install:
-  - travis_retry composer self-update && composer --version
-  - travis_retry composer update --dev --prefer-dist --no-interaction
-  # install php extensions
-  - |
-    if (php --version | grep -i HipHop > /dev/null); then
-      echo "Skipping imagick and gmagick tests on HHVM"
-    else
-      pear config-set preferred_state beta
-      printf "\n" | pecl install imagick
-      # gmagick is not installed on travis currently
-      #printf "\n" | pecl install gmagick
-    fi
-# setup application:
-  - |
-    php init --env=Development --overwrite=n
+    - composer config github-oauth.github.com ${GH_TOKEN}
+    - composer update --prefer-dist --no-interaction
+    - php init --env=Development --overwrite=n
+    - php tests/bin/yii migrate/up --interactive=0
 
 script:
-  - |
-    php -S localhost:8080 -t web > /dev/null 2>&1 &
-    vendor/bin/codecept run
+    - vendor/bin/codecept build
+    - vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v --dry-run --using-cache=no
+    - vendor/bin/phpstan analyse -c phpstan.neon -l max .
+    - vendor/bin/codecept run --coverage-xml
+
+after_success:
+    - bash <(curl -s https://codecov.io/bash)

@@ -3,13 +3,13 @@
 return [
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yii2_basic',
+            'dsn'      => 'mysql:host=localhost;dbname=yii2_basic',
             'username' => 'root',
             'password' => 'root',
             // Schema cache options (for production environment)
-            'enableSchemaCache' => true,
+            'enableSchemaCache'   => true,
             'schemaCacheDuration' => 60,
-            'schemaCache' => 'cache',
+            'schemaCache'         => 'cache',
         ],
         'mailer' => [
             // By default application send all mails to a file. For production environment you have

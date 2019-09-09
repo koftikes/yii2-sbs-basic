@@ -2,9 +2,9 @@
 
 namespace tests\unit\models\user;
 
-use Codeception\Test\Unit;
-use app\models\user\User;
 use app\console\fixtures\UserFixture;
+use app\models\user\User;
+use Codeception\Test\Unit;
 use yii\base\NotSupportedException;
 
 class UserTest extends Unit
@@ -39,19 +39,20 @@ class UserTest extends Unit
 
     public function testIsPasswordResetTokenNotValid()
     {
-        expect_not(User::isPasswordResetTokenValid(false));
+        expect_not(User::isPasswordResetTokenValid('false'));
     }
 
     public function testIsPasswordResetTokenValid()
     {
-        expect_that(User::isPasswordResetTokenValid('token_' . time()));
+        expect_that(User::isPasswordResetTokenValid('token_' . \time()));
     }
 
     public function testFindUserById()
     {
-        expect_that($user = User::findIdentity($this->admin['id']));
+        /** @var User $user */
+        $user = User::findIdentity($this->admin['id']);
+        expect($user)->isInstanceOf(User::class);
         expect($user->username)->equals($this->admin['email']);
-
         expect_not(User::findIdentity(9999));
     }
 
@@ -66,6 +67,7 @@ class UserTest extends Unit
      */
     public function testValidateUser()
     {
+        /** @var User $user */
         $user = User::findByLogin($this->admin['email']);
         expect_that($user->validateAuthKey($this->admin['auth_key']));
         expect_not($user->validateAuthKey('test102key'));
@@ -74,12 +76,15 @@ class UserTest extends Unit
         expect_not($user->validatePassword('123456'));
     }
 
-    public function testStatuses()
+    public function testStaticStatuses()
     {
         $statuses = User::statuses();
         expect($statuses)->count(3);
+    }
 
-        $status = User::statuses(User::STATUS_ACTIVE);
+    public function testStaticStatus()
+    {
+        $status = User::status(User::STATUS_ACTIVE);
         expect($status)->equals('Active');
     }
 }

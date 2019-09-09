@@ -1,18 +1,17 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $provider probe\provider\ProviderInterface
+ * @var yii\web\View
+ * @var probe\provider\ProviderInterface $provider
  */
-
-use yii\helpers\Html;
 use app\models\user\User;
+use yii\helpers\Html;
 
-$this->registerJs("window.paceOptions = { ajax: false }", yii\web\View::POS_HEAD);
-$this->title = 'System Statistic';
+$this->registerJs('window.paceOptions = { ajax: false }', yii\web\View::POS_HEAD);
+$this->title                   = 'System Statistic';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="admin-statistic">
-    <h3><?= Html::encode($this->title) ?></h3>
+    <h3><?= Html::encode($this->title); ?></h3>
     <div class="card-columns">
         <div class="card">
             <div class="card-header">
@@ -51,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i class="fas fa-history"></i> <?= Yii::t('app', 'Uptime'); ?>
             </div>
             <div class="card-body">
-                <h4><?= gmdate('H:i:s', $provider->getUptime()); ?></h4>
+                <h4><?= \gmdate('H:i:s', $provider->getUptime()); ?></h4>
             </div>
         </div>
         <div class="card">
@@ -85,11 +84,11 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="card-body">
                 <dl class="dl-horizontal">
                     <dt><?= Yii::t('app', 'System Date'); ?></dt>
-                    <dd><?= Yii::$app->formatter->asDate(time()) ?></dd>
+                    <dd><?= Yii::$app->formatter->asDate(\time()); ?></dd>
                     <dt><?= Yii::t('app', 'System Time'); ?></dt>
-                    <dd><?= Yii::$app->formatter->asTime(time()) ?></dd>
+                    <dd><?= Yii::$app->formatter->asTime(\time()); ?></dd>
                     <dt><?= Yii::t('app', 'Timezone'); ?></dt>
-                    <dd><?= date_default_timezone_get(); ?></dd>
+                    <dd><?= \date_default_timezone_get(); ?></dd>
                 </dl>
             </div>
         </div>
@@ -138,10 +137,10 @@ $this->params['breadcrumbs'][] = $this->title;
                     </div>
                     <div class="col-sm-8">
                         <?= Html::a(
-                            Yii::t('app', 'More info') . ' <i class="fa fa-arrow-circle-right"></i>',
-                            ['user/index'],
-                            ['class' => 'float-right btn btn-success']
-                        ); ?>
+    Yii::t('app', 'More info') . ' <i class="fa fa-arrow-circle-right"></i>',
+    ['user/index'],
+    ['class' => 'float-right btn btn-success']
+); ?>
                     </div>
                 </div>
             </div>
@@ -155,11 +154,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="btn-group btn-group-toggle float-right realtime" data-toggle="buttons">
                         <label class="btn btn-sm btn-secondary active" data-toggle="on">
                             <input type="radio" name="options" autocomplete="off">
-                            <?= Yii::t('app', 'On') ?>
+                            <?= Yii::t('app', 'On'); ?>
                         </label>
                         <label class="btn btn-sm btn-secondary" data-toggle="off">
                             <input type="radio" name="options" autocomplete="off">
-                            <?= Yii::t('app', 'Off') ?>
+                            <?= Yii::t('app', 'Off'); ?>
                         </label>
                     </div>
                 </div>
@@ -173,11 +172,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     <div class="btn-group btn-group-toggle float-right realtime" data-toggle="buttons">
                         <label class="btn btn-sm btn-secondary active" data-toggle="on">
                             <input type="radio" name="options" autocomplete="off">
-                            <?= Yii::t('app', 'On') ?>
+                            <?= Yii::t('app', 'On'); ?>
                         </label>
                         <label class="btn btn-sm btn-secondary" data-toggle="off">
                             <input type="radio" name="options" autocomplete="off">
-                            <?= Yii::t('app', 'Off') ?>
+                            <?= Yii::t('app', 'Off'); ?>
                         </label>
                     </div>
                 </div>

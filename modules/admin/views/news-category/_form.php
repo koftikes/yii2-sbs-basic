@@ -1,16 +1,15 @@
 <?php
 /**
- * @var $this  yii\web\View
- * @var $model app\models\NewsCategory
- * @var $form  kartik\widgets\ActiveForm
+ * @var yii\web\View
+ * @var app\models\NewsCategory   $model
+ * @var kartik\widgets\ActiveForm $form
  */
-
-use yii\helpers\Html;
-use sbs\widgets\TreeDropDown;
-use sbs\widgets\SlugInput;
-use kartik\widgets\ActiveForm;
-use vova07\imperavi\Widget as Editor;
 use app\models\NewsCategory;
+use kartik\widgets\ActiveForm;
+use sbs\widgets\SlugInput;
+use sbs\widgets\TreeDropDown;
+use vova07\imperavi\Widget as Editor;
+use yii\helpers\Html;
 
 ?>
 <div class="admin-news-category-form">
@@ -34,8 +33,10 @@ use app\models\NewsCategory;
     ]); ?>
     <?= $form->field($model, 'status')->checkbox(); ?>
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
-            ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton(
+        $model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),
+        ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']
+    ); ?>
     </div>
     <?php ActiveForm::end(); ?>
 </div>

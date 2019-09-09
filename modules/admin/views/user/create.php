@@ -1,14 +1,13 @@
 <?php
 /**
- * @var $this yii\web\View
- * @var $model app\modules\admin\models\UserForm
+ * @var yii\web\View
+ * @var app\modules\admin\models\UserForm $model
  */
-
-$this->title = 'Create User';
+$this->title                 = 'Create User';
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     ['label' => 'Users', 'url' => ['user/index']],
-    'Create'
+    'Create',
 ];
 ?>
 <div class="admin-user-create">

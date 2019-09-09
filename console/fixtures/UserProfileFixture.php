@@ -2,8 +2,8 @@
 
 namespace app\console\fixtures;
 
-use yii\test\ActiveFixture;
 use app\models\user\UserProfile;
+use yii\test\ActiveFixture;
 
 class UserProfileFixture extends ActiveFixture
 {

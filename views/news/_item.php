@@ -1,9 +1,8 @@
 <?php
 /**
- * @var $this  yii\web\View
- * @var $model app\models\News
+ * @var yii\web\View
+ * @var app\models\News $model
  */
-
 use yii\helpers\Html;
 use yii\helpers\StringHelper;
 

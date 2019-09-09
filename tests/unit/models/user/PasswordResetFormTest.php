@@ -2,9 +2,9 @@
 
 namespace tests\unit\models\user;
 
-use Codeception\Test\Unit;
 use app\console\fixtures\UserFixture;
 use app\models\user\PasswordResetForm;
+use Codeception\Test\Unit;
 use yii\base\InvalidArgumentException;
 
 class PasswordResetFormTest extends Unit

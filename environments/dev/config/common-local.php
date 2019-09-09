@@ -3,7 +3,7 @@
 $config = [
     'components' => [
         'db' => [
-            'dsn' => 'mysql:host=localhost;dbname=yii2_basic',
+            'dsn'      => 'mysql:host=localhost;dbname=yii2_basic',
             'username' => 'root',
             'password' => 'root',
         ],
@@ -20,20 +20,20 @@ $config = [
 ];
 
 if (YII_ENV_TEST) {
-    $config['aliases']['@tests'] = '@app/tests';
+    $config['aliases']['@tests']       = '@app/tests';
     $config['components']['db']['dsn'] = 'mysql:host=localhost;dbname=yii2_basic_tests';
 }
 
 // configuration adjustments for 'dev' environment
 if (YII_ENV_DEV) {
-    $config['bootstrap'][] = 'debug';
+    $config['bootstrap'][]      = 'debug';
     $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module'
+        'class' => 'yii\debug\Module',
     ];
 
-    $config['bootstrap'][] = 'gii';
+    $config['bootstrap'][]    = 'gii';
     $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module'
+        'class' => 'yii\gii\Module',
     ];
 }
 

@@ -2,10 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\ContactForm;
 use Yii;
 use yii\web\Controller;
 use yii\web\Response;
-use app\models\ContactForm;
 
 class SiteController extends Controller
 {
@@ -50,6 +50,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
+
         return $this->render('contact', [
             'model' => $model,
         ]);
