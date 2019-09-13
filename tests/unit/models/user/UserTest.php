@@ -32,7 +32,7 @@ class UserTest extends Unit
 
     public function testFindIdentityByAccessToken()
     {
-        $this->tester->expectException(NotSupportedException::class, function () {
+        $this->tester->expectThrowable(NotSupportedException::class, function () {
             User::findIdentityByAccessToken('notexistingtoken_1391882543');
         });
     }

@@ -7,6 +7,7 @@
 use app\models\NewsCategory;
 use kartik\datetime\DateTimePicker;
 use kartik\widgets\ActiveForm;
+use sbs\widgets\SeoForm;
 use sbs\widgets\SlugInput;
 use sbs\widgets\TreeDropDown;
 use vova07\imperavi\Widget as Editor;
@@ -53,11 +54,12 @@ use yii\helpers\Html;
     <?= $form->field($model, 'publish_date')->widget(
         DateTimePicker::class,
         [
-        'removeButton'  => false,
-        'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd HH:ii:ss'],
-    ]
+            'removeButton'  => false,
+            'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd HH:ii:ss'],
+        ]
     ); ?>
     <?= $form->field($model, 'status')->checkbox(); ?>
+    <?= SeoForm::widget(['model' => $model, 'form' => $form, 'fields' => ['keywords', 'description']]); ?>
     <div class="form-group">
         <?= Html::submitButton(
         $model->isNewRecord ? Yii::t('app', 'Create') : Yii::t('app', 'Update'),

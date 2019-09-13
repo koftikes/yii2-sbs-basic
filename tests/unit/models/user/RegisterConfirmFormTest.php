@@ -16,11 +16,11 @@ class RegisterConfirmFormTest extends Unit
 
     public function testResetWrongToken()
     {
-        $this->tester->expectException(InvalidArgumentException::class, function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new RegisterConfirmForm('');
         });
 
-        $this->tester->expectException(InvalidArgumentException::class, function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new RegisterConfirmForm('notexistingtoken_1391882543');
         });
     }
