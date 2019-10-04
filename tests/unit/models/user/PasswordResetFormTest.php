@@ -16,11 +16,11 @@ class PasswordResetFormTest extends Unit
 
     public function testResetWrongToken()
     {
-        $this->tester->expectException(InvalidArgumentException::class, function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new PasswordResetForm('');
         });
 
-        $this->tester->expectException(InvalidArgumentException::class, function () {
+        $this->tester->expectThrowable(InvalidArgumentException::class, function () {
             new PasswordResetForm('notexistingtoken_1391882543');
         });
     }

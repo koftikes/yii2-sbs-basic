@@ -24,6 +24,7 @@
         "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
 
         "sbs/yii2-core-kit": "dev-master",
+        "sbs/yii2-seo": "dev-master",
         "sbs/yii2-transliterator-helper": "^0.3",
 
         "kartik-v/yii2-widgets": "^3.4",
@@ -48,7 +49,7 @@
         "codeception/verify": "^1.0",
         "codeception/specify": "^1.1",
         "symfony/browser-kit": ">=2.8 <=4.3",
-        
+
         "phpstan/phpstan": "^0.11",
         "phpstan/phpstan-phpunit": "^0.11",
         "friendsofphp/php-cs-fixer": "^2.15"
@@ -67,6 +68,7 @@
             "type": "composer",
             "url": "https://asset-packagist.org"
         },
-        {"type": "vcs", "url": "https://github.com/koftikes/yii2-core-kit.git"}
+        {"type": "vcs", "url": "https://github.com/koftikes/yii2-core-kit.git"},
+        {"type": "vcs", "url": "https://github.com/koftikes/yii2-seo.git"}
     ]
 }

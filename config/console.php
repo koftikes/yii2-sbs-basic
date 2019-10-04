@@ -13,7 +13,10 @@ return yii\helpers\ArrayHelper::merge(
         'controllerMap'       => [
             'migrate' => [
                 'class'         => MigrateController::class,
-                'migrationPath' => '@console/migrations',
+                'migrationPath' => [
+                    '@console/migrations',
+                    '@vendor/sbs/yii2-seo/src/migrations',
+                ],
                 'templateFile'  => '@vendor/sbs/yii2-core-kit/src/views/migration.php',
             ],
             'fixture' => [

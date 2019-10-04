@@ -4,6 +4,7 @@ namespace tests\functional;
 
 use app\console\fixtures\NewsCategoryFixture;
 use app\console\fixtures\NewsFixture;
+use app\models\News;
 
 class NewsCest
 {
@@ -19,11 +20,11 @@ class NewsCest
     public function _fixtures()
     {
         return [
-            'news'          => [
+            'news'       => [
                 'class'    => NewsFixture::class,
                 'dataFile' => codecept_data_dir() . 'news.php',
             ],
-            'news_category' => [
+            'categories' => [
                 'class'    => NewsCategoryFixture::class,
                 'dataFile' => codecept_data_dir() . 'news_category.php',
             ],
@@ -35,9 +36,29 @@ class NewsCest
         $I->amOnRoute('news/index');
         $I->seeInTitle('News');
         $I->see('News', 'h1');
-        $I->see('Spirited Away: Japanese anime trounces Toy Story 4 at China box office', 'h2');
-        $I->see('Migrant children crisis: Democrats agree $4.5bn aid for migrants at border', 'h2');
-        $I->see('France heatwave: Paris region closes schools', 'h2');
+        foreach ($I->grabFixture('news') as $news) {
+            $I->see($news['title'], 'h2');
+        }
+    }
+
+    public function ensureThatCategoryPageWorks(\FunctionalTester $I)
+    {
+        foreach ($I->grabFixture('categories') as $category) {
+            $I->amOnRoute('news/category', ['slug' => $category['slug']]);
+            $I->seeInTitle($category['name']);
+            $I->see('News: ' . $category['name'], 'h1');
+            $news = $I->grabRecord(News::class, ['category_id' => $category['id']]);
+            if ($news instanceof News) {
+                $I->see($news->title, 'h2');
+            }
+        }
+    }
+
+    public function ensureThatCategoryPage404(\FunctionalTester $I)
+    {
+        $I->amOnRoute('news/category', ['slug' => 'bla-bla-bla']);
+        $I->seePageNotFound();
+        $I->see('The requested page does not exist.');
     }
 
     public function ensureThatViewPageWorks(\FunctionalTester $I)

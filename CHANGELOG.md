@@ -1,14 +1,24 @@
 ### TODO 
-* Registration using social network
-* Move console files and scripts to one directory
+* Registration using social network.
+* Move console files and scripts to one directory.
 * Initials fixtures (?)
-* Universal modal window
+* Universal modal window.
 * Add translate to all views.
 * Add pretty URL.
 * Add ability work with images.
-* Add author behavior with ability run console command.  
+* Add author behavior with ability run console command.
+* Add comment module.
+* Add ability update change UserProfile from front.
+* Add ability to edit static page from admin.
+* Add metro module.
+* Add Geo Location functionality.
 
 ### In Development
+
+### 04-10-2019
+* News by category on front.
+* Included **sbs/yii2-seo** development version.
+* Update News and NewsCategory for use SEO fields.
 
 ### 09-09-2019
 * Added Travis CI 

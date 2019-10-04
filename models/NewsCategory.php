@@ -2,8 +2,9 @@
 
 namespace app\models;
 
-use phpDocumentor\Reflection\Types\This;
 use sbs\behaviors\DateTimeBehavior;
+use sbs\behaviors\SeoBehavior;
+use sbs\models\Seo;
 use Yii;
 use yii\db\ActiveRecord;
 
@@ -21,6 +22,7 @@ use yii\db\ActiveRecord;
  * @property News[]         $news
  * @property NewsCategory   $parent
  * @property NewsCategory[] $children
+ * @property Seo          $seo
  */
 class NewsCategory extends ActiveRecord
 {
@@ -43,6 +45,7 @@ class NewsCategory extends ActiveRecord
     {
         return [
             DateTimeBehavior::class,
+            SeoBehavior::class,
         ];
     }
 

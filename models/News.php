@@ -2,8 +2,11 @@
 
 namespace app\models;
 
+use app\models\query\NewsQuery;
 use app\models\user\User;
 use sbs\behaviors\DateTimeBehavior;
+use sbs\behaviors\SeoBehavior;
+use sbs\models\Seo;
 use Yii;
 use yii\behaviors\BlameableBehavior;
 use yii\db\ActiveQueryInterface;
@@ -29,12 +32,13 @@ use yii\db\ActiveRecord;
  * @property NewsCategory $category
  * @property User         $createUser
  * @property User         $updateUser
+ * @property Seo          $seo
  */
 class News extends ActiveRecord
 {
     const STATUS_DISABLE = 0;
 
-    const STATUS_ENABLE  = 1;
+    const STATUS_ENABLE = 1;
 
     /**
      * {@inheritdoc}
@@ -56,6 +60,7 @@ class News extends ActiveRecord
                 'createdByAttribute' => 'create_user',
                 'updatedByAttribute' => 'update_user',
             ],
+            SeoBehavior::class,
         ];
     }
 
@@ -174,5 +179,13 @@ class News extends ActiveRecord
     public function getUpdateUser()
     {
         return $this->hasOne(User::class, ['id' => 'update_user']);
+    }
+
+    /**
+     * @return NewsQuery - the active query used by this AR class
+     */
+    public static function find()
+    {
+        return new NewsQuery(\get_called_class());
     }
 }

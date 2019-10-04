@@ -18,7 +18,7 @@ class UserFormTest extends Unit
 
     public function testUserNotFound()
     {
-        $this->tester->expectException(NotFoundHttpException::class, function () {
+        $this->tester->expectThrowable(NotFoundHttpException::class, function () {
             (new UserForm())->find(100);
         });
     }
