@@ -44,4 +44,17 @@ return [
         'update_date'          => $date,
         'status'               => User::STATUS_ACTIVE,
     ],
+    'no_profile' => [
+        'id'                  => 4,
+        'email'               => 'no_profile@example.com',
+        'email_confirm_token' => 'zBCvo2k4gxY8tDq4YGXALl6vNw1gsJ1v',
+        'auth_key'            => 'Q4rHqHGBsPGIFSABYX1UQAbq0Hd5MZr-',
+        // password_0
+        'password_hash' => '$2y$13$nJ1WDlBaGcbCdbNC5.5l4.sgy.OMEKCqtDQOdQ2OWpgiKRWYyzzne',
+        // password_reset_token is expired
+        'password_reset_token' => 'H0WEwA0ZimNII2NEabcCyNmQ7Ay7H14PQ_' . $timestamp,
+        'create_date'          => $date,
+        'update_date'          => $date,
+        'status'               => User::STATUS_ACTIVE,
+    ],
 ];

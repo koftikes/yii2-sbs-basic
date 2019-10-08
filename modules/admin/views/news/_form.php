@@ -17,47 +17,38 @@ use yii\helpers\Html;
 
 <div class="admin-news-form">
     <?php $form = ActiveForm::begin(['id' => 'admin-news-form']); ?>
-
     <?= $form->field($model, 'category_id')->widget(TreeDropDown::class, [
         'options' => ['prompt' => ''],
         'query'   => NewsCategory::find()->where(['parent_id' => null]),
     ]); ?>
     <?= $form->field($model, 'title')->textInput(['maxlength' => true]); ?>
-    <?= $form->field($model, 'slug')->widget(SlugInput::class, ['sourceAttribute' => 'title']); ?>
+    <?= $form->field($model, 'slug')->widget(SlugInput::class, ['sourceAttribute' => 'title'])
+        ->hint(Yii::t('app', 'If you\'ll leave this field empty, slug will be generated automatically.')); ?>
     <?php //echo $form->field($model, 'image')->textInput(['maxlength' => true]);?>
-    <?= $form->field($model, 'preview')->widget(
-        Editor::class,
-        [
-            'settings' => [
-                'plugins'         => ['fullscreen', 'fontcolor', 'video'],
-                'minHeight'       => 200,
-                'maxHeight'       => 200,
-                'buttonSource'    => true,
-                'convertDivs'     => false,
-                'removeEmptyTags' => false,
-            ],
-        ]
-    ); ?>
-    <?= $form->field($model, 'text')->widget(
-        Editor::class,
-        [
-            'settings' => [
-                'plugins'         => ['fullscreen', 'fontcolor', 'video'],
-                'minHeight'       => 400,
-                'maxHeight'       => 400,
-                'buttonSource'    => true,
-                'convertDivs'     => false,
-                'removeEmptyTags' => false,
-            ],
-        ]
-    ); ?>
-    <?= $form->field($model, 'publish_date')->widget(
-        DateTimePicker::class,
-        [
-            'removeButton'  => false,
-            'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd HH:ii:ss'],
-        ]
-    ); ?>
+    <?= $form->field($model, 'preview')->widget(Editor::class, [
+        'settings' => [
+            'plugins'         => ['fullscreen', 'fontcolor', 'video'],
+            'minHeight'       => 200,
+            'maxHeight'       => 200,
+            'buttonSource'    => true,
+            'convertDivs'     => false,
+            'removeEmptyTags' => false,
+        ],
+    ]); ?>
+    <?= $form->field($model, 'text')->widget(Editor::class, [
+        'settings' => [
+            'plugins'         => ['fullscreen', 'fontcolor', 'video'],
+            'minHeight'       => 400,
+            'maxHeight'       => 400,
+            'buttonSource'    => true,
+            'convertDivs'     => false,
+            'removeEmptyTags' => false,
+        ],
+    ]); ?>
+    <?= $form->field($model, 'publish_date')->widget(DateTimePicker::class, [
+        'removeButton'  => false,
+        'pluginOptions' => ['autoclose' => true, 'format' => 'yyyy-mm-dd HH:ii:ss'],
+    ]); ?>
     <?= $form->field($model, 'status')->checkbox(); ?>
     <?= SeoForm::widget(['model' => $model, 'form' => $form, 'fields' => ['keywords', 'description']]); ?>
     <div class="form-group">

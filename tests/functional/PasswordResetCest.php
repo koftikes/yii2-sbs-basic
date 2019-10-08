@@ -4,8 +4,9 @@ namespace tests\functional;
 
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
+use yii\helpers\ArrayHelper;
 
-class PasswordResetCest
+class PasswordResetCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -18,12 +19,15 @@ class PasswordResetCest
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user' => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)

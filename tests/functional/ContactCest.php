@@ -2,7 +2,7 @@
 
 namespace tests\functional;
 
-class ContactCest
+class ContactCest extends _BeforeRun
 {
     public function _before(\FunctionalTester $I)
     {

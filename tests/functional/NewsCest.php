@@ -5,8 +5,9 @@ namespace tests\functional;
 use app\console\fixtures\NewsCategoryFixture;
 use app\console\fixtures\NewsFixture;
 use app\models\News;
+use yii\helpers\ArrayHelper;
 
-class NewsCest
+class NewsCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -19,16 +20,19 @@ class NewsCest
      */
     public function _fixtures()
     {
-        return [
-            'news'       => [
-                'class'    => NewsFixture::class,
-                'dataFile' => codecept_data_dir() . 'news.php',
-            ],
-            'categories' => [
-                'class'    => NewsCategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'news_category.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'news'       => [
+                    'class'    => NewsFixture::class,
+                    'dataFile' => codecept_data_dir() . 'news.php',
+                ],
+                'categories' => [
+                    'class'    => NewsCategoryFixture::class,
+                    'dataFile' => codecept_data_dir() . 'news_category.php',
+                ],
+            ]
+        );
     }
 
     public function ensureThatMainPageWorks(\FunctionalTester $I)

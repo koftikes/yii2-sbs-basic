@@ -4,7 +4,7 @@ namespace tests\functional;
 
 use Yii;
 
-class HomeCest
+class HomeCest extends _BeforeRun
 {
     public function ensureThatPageWorks(\FunctionalTester $I)
     {

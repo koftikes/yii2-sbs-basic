@@ -26,7 +26,7 @@ class ContactFormTest extends Unit
     public function testEmailIsSentOnContact()
     {
         $form = $this->getMockBuilder(ContactForm::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $form->expects($this->once())

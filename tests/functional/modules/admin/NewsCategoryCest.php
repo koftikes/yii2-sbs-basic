@@ -5,9 +5,11 @@ namespace tests\functional\modules\admin;
 use app\console\fixtures\NewsCategoryFixture;
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
+use tests\functional\_BeforeRun;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class NewsCategoryCest
+class NewsCategoryCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -20,16 +22,19 @@ class NewsCategoryCest
      */
     public function _fixtures()
     {
-        return [
-            'user'          => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-            'news_category' => [
-                'class'    => NewsCategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'news_category.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user'          => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+                'news_category' => [
+                    'class'    => NewsCategoryFixture::class,
+                    'dataFile' => codecept_data_dir() . 'news_category.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)

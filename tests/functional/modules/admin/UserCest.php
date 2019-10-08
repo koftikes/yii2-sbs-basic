@@ -4,9 +4,11 @@ namespace tests\functional\modules\admin;
 
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
+use tests\functional\_BeforeRun;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class UserCest
+class UserCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -19,12 +21,15 @@ class UserCest
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user' => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)
@@ -36,9 +41,9 @@ class UserCest
     {
         $I->amOnRoute('admin/user/index');
         $I->see('Users', 'h3');
-        $I->see('admin@example.com', 'td');
-        $I->see('manager@example.com', 'td');
-        $I->see('user@example.com', 'td');
+        foreach ($I->grabFixture('user') as $user) {
+            $I->see($user['email'], 'td');
+        }
     }
 
     public function createWithEmptyFields(\FunctionalTester $I)

@@ -2,18 +2,21 @@
 * Registration using social network.
 * Move console files and scripts to one directory.
 * Initials fixtures (?)
-* Universal modal window.
 * Add translate to all views.
 * Add pretty URL.
 * Add ability work with images.
 * Add author behavior with ability run console command.
 * Add comment module.
-* Add ability update change UserProfile from front.
-* Add ability to edit static page from admin.
 * Add metro module.
 * Add Geo Location functionality.
+* Add permissions functionality.
 
 ### In Development
+
+### 11-10-2019
+* Added ability to edit static page from Admin Panel.
+* Added universal modal window.
+* Added ability update UserProfile from front.
 
 ### 04-10-2019
 * News by category on front.

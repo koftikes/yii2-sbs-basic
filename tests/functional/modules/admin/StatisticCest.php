@@ -4,9 +4,11 @@ namespace tests\functional\modules\admin;
 
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
+use tests\functional\_BeforeRun;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class StatisticCest
+class StatisticCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -19,12 +21,15 @@ class StatisticCest
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user' => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)

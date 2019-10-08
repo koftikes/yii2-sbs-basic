@@ -1,5 +1,6 @@
 <?php
 
+use app\models\StaticPage;
 use kartik\nav\NavX;
 use yii\bootstrap4\NavBar;
 use yii\helpers\Html;
@@ -15,7 +16,7 @@ echo NavX::widget([
     'items'   => [
         ['label' => 'News', 'url' => ['/news/index']],
         ['label' => 'Contact', 'url' => ['/site/contact']],
-        ['label' => 'About', 'url' => ['/site/about']],
+        ['label' => 'About', 'url' => StaticPage::url(1)],
     ],
 ]);
 
@@ -36,10 +37,15 @@ if (Yii::$app->user->isGuest) {
                 'url'    => ['/admin/statistic'],
                 'active' => false !== \mb_strpos($this->context->route, 'admin'),
             ],
+            [
+                'label'  => Yii::$app->user->identity->username,
+                'url'    => ['/user/profile'],
+                'active' => false !== \mb_strpos($this->context->route, 'profile'),
+            ],
         ],
     ]);
-    echo Html::beginForm(['/user/logout'], 'post', ['id' => 'form-logout', 'class' => 'form-inline my-2 my-lg-0'])
-        . Html::submitButton('Logout (' . Yii::$app->user->identity->username . ')', ['class' => 'btn btn-outline-success logout'])
+    echo Html::beginForm(['/user/logout'], 'post', ['id' => 'form-logout'])
+        . Html::submitButton('Logout', ['class' => 'btn btn-outline-success logout'])
         . Html::endForm();
 }
 NavBar::end();
