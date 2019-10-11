@@ -19,6 +19,8 @@ class RegisterForm extends Model
 
     public $password_repeat;
 
+    public $agreement;
+
     /**
      * {@inheritdoc}
      */
@@ -26,7 +28,7 @@ class RegisterForm extends Model
     {
         return [
             [['password', 'password_repeat', 'email', 'name'], 'trim'],
-            [['password', 'password_repeat', 'email', 'name'], 'required'],
+            [['password', 'password_repeat', 'email', 'name', 'agreement'], 'required'],
             ['email', 'email'],
             [['email', 'name'], 'string', 'max' => 255],
             ['email', 'unique', 'targetClass' => User::class],
@@ -36,6 +38,13 @@ class RegisterForm extends Model
                 'compare',
                 'compareAttribute' => 'password',
                 'message'          => Yii::t('app', 'Passwords don\'t match.'),
+            ],
+            ['agreement', 'boolean'],
+            [
+                'agreement',
+                'in',
+                'range'   => [1],
+                'message' => Yii::t('app', 'You must agree to the terms of the User Agreement.'),
             ],
         ];
     }

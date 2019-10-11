@@ -5,6 +5,7 @@
  */
 use app\assets\AppAsset;
 use app\widgets\Alert;
+use yii\bootstrap4\Modal;
 use yii\helpers\Html;
 
 AppAsset::register($this);
@@ -34,7 +35,8 @@ AppAsset::register($this);
         <p class="pull-left">&copy; <?= Yii::$app->name . ' ' . \date('Y'); ?></p>
     </div>
 </footer>
-
+<?php Modal::begin(['id' => 'modal', 'clientOptions' => ['keyboard' => false]]); ?>
+<?php Modal::end(); ?>
 <?php $this->endBody(); ?>
 </body>
 </html>

@@ -5,8 +5,9 @@ namespace tests\functional;
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
-class RegisterCest
+class RegisterCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -19,12 +20,15 @@ class RegisterCest
      */
     public function _fixtures()
     {
-        return [
-            'user' => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user' => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)
@@ -84,6 +88,7 @@ class RegisterCest
             'RegisterForm[email]'           => 'tester.email@example.com',
             'RegisterForm[password]'        => 'tester_password',
             'RegisterForm[password_repeat]' => 'tester_password',
+            'RegisterForm[agreement]'       => '1',
         ]);
 
         $I->seeEmailIsSent();
@@ -99,6 +104,7 @@ class RegisterCest
             'RegisterForm[email]'           => 'tester.email@example.com',
             'RegisterForm[password]'        => 'tester_password',
             'RegisterForm[password_repeat]' => 'tester_password',
+            'RegisterForm[agreement]'       => '1',
         ]);
 
         $I->seeEmailIsSent();

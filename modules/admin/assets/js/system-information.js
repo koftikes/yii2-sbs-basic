@@ -1,11 +1,11 @@
-$(document).ready(function () {
+jQuery(function () {
     // CPU
     (function () {
         let data = [];
         let plot;
         let setLength = 300;
-        let updateInterval = 1000; //Fetch data ever x milliseconds
-        let realtime = "on"; //If == to on then fetch data every x seconds else stop fetching
+        let updateInterval = 1000; // Fetch data ever x milliseconds
+        let realtime = "on"; // If == to on then fetch data every x seconds else stop fetching
 
         function update() {
             $.ajax({

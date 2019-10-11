@@ -5,8 +5,10 @@ namespace tests\functional;
 use app\console\fixtures\UserFixture;
 use app\console\fixtures\UserProfileFixture;
 use app\models\user\User;
+use app\models\user\UserProfile;
+use yii\helpers\ArrayHelper;
 
-class LoginCest
+class LoginCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -19,16 +21,19 @@ class LoginCest
      */
     public function _fixtures()
     {
-        return [
-            'user'         => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-            'user_profile' => [
-                'class'    => UserProfileFixture::class,
-                'dataFile' => codecept_data_dir() . 'user_profile.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user'         => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+                'user_profile' => [
+                    'class'    => UserProfileFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user_profile.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)
@@ -54,7 +59,7 @@ class LoginCest
     {
         $I->amLoggedInAs(1);
         $I->amOnPage('/');
-        $I->see('Logout (Admin User)');
+        $I->see('Logout');
     }
 
     // demonstrates `amLoggedInAs` method
@@ -62,7 +67,7 @@ class LoginCest
     {
         $I->amLoggedInAs(User::findByLogin('admin@example.com'));
         $I->amOnPage('/');
-        $I->see('Logout (Admin User)');
+        $I->see('Logout');
     }
 
     public function loginWithEmptyCredentials(\FunctionalTester $I)
@@ -83,7 +88,7 @@ class LoginCest
     public function loginSuccessfully(\FunctionalTester $I)
     {
         $I->submitForm('#form-login', $this->formParams('admin@example.com', 'password_0'));
-        $I->see('Logout (Admin User)', 'form button[type=submit]');
+        $I->see('Logout', 'form button[type=submit]');
         $I->dontSeeElement('form#form-login');
         $I->dontSeeLink('Login');
         $I->dontSeeLink('Register');
@@ -94,11 +99,27 @@ class LoginCest
     {
         $I->amLoggedInAs(User::findByLogin('admin@example.com'));
         $I->amOnPage('/');
-        $I->see('Logout (Admin User)');
+        $I->see('Logout');
         $I->seeElement('form#form-logout');
         $I->submitForm('#form-logout', []);
         $I->dontSeeElement('form#form-logout');
         $I->seeLink('Login');
         $I->seeLink('Register');
+    }
+
+    public function profileSuccessfully(\FunctionalTester $I)
+    {
+        $I->amLoggedInAs(User::findByLogin('no_profile@example.com'));
+        $I->amOnRoute('user/profile');
+        $I->see('Update User: no_profile@example.com', 'h1');
+        $I->submitForm('#form-user-profile', [
+            'UserProfile[name]'   => 'New Name',
+            'UserProfile[phone]'  => '+12015559999',
+            'UserProfile[gender]' => UserProfile::GENDER_MALE,
+            'UserProfile[DOB]'    => '1984-03-15',
+            'UserProfile[info]'   => 'Test info: Bla-Bla-Bla',
+        ]);
+        $I->amOnRoute('user/profile');
+        $I->see('Update User: New Name', 'h1');
     }
 }

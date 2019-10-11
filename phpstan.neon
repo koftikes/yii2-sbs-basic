@@ -35,6 +35,7 @@ parameters:
         - %currentWorkingDirectory%/vendor/codeception/base/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/requirements.php #TODO: Need to fix this file
+        - %currentWorkingDirectory%/console/fixtures/data/*
         - %currentWorkingDirectory%/console/migrations/*
         - %currentWorkingDirectory%/tests/_data/*
         - %currentWorkingDirectory%/tests/_output/*

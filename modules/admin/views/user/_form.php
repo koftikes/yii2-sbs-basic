@@ -23,23 +23,22 @@ use yii\helpers\Html;
     <?php endif; ?>
     <?= $form->field($model->user, 'status')->dropDownList(User::statuses()); ?>
     <?= $form->field($model->profile, 'name')->textInput(['maxlength' => 255]); ?>
-    <?= $form->field($model->profile, 'phone')->widget(PhoneInput::class); ?>
+    <?= $form->field($model->profile, 'phone')->widget(PhoneInput::class, [
+        'jsOptions' => ['nationalMode' => false],
+    ]); ?>
     <?= $form->field($model->profile, 'gender')->dropDownlist([
         UserProfile::GENDER_THING  => Yii::t('app', 'Unknown'),
         UserProfile::GENDER_MALE   => Yii::t('app', 'Male'),
         UserProfile::GENDER_FEMALE => Yii::t('app', 'Female'),
     ]); ?>
-    <?= $form->field($model->profile, 'DOB')->widget(
-        DatePicker::class,
-        [
+    <?= $form->field($model->profile, 'DOB')->widget(DatePicker::class, [
         'options'       => ['placeholder' => Yii::t('app', 'Enter birth date ...')],
         'removeButton'  => false,
         'pluginOptions' => [
             'autoclose' => true,
             'format'    => 'yyyy-mm-dd',
         ],
-    ]
-    ); ?>
+    ]); ?>
     <?= $form->field($model->profile, 'info')->textarea(['rows' => 10]); ?>
 </div>
 <div class="box-footer">

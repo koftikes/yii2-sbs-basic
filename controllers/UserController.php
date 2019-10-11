@@ -7,6 +7,7 @@ use app\models\user\PasswordResetForm;
 use app\models\user\PasswordResetRequestForm;
 use app\models\user\RegisterConfirmForm;
 use app\models\user\RegisterForm;
+use app\models\user\UserProfile;
 use Yii;
 use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
@@ -25,10 +26,10 @@ class UserController extends Controller
         return [
             'access' => [
                 'class' => AccessControl::class,
-                'only'  => ['logout'],
+                'only'  => ['profile', 'logout'],
                 'rules' => [
                     [
-                        'actions' => ['logout'],
+                        'actions' => ['profile', 'logout'],
                         'allow'   => true,
                         'roles'   => ['@'],
                     ],
@@ -166,5 +167,22 @@ class UserController extends Controller
         } catch (InvalidArgumentException $e) {
             throw new BadRequestHttpException($e->getMessage());
         }
+    }
+
+    /**
+     * @return string
+     */
+    public function actionProfile()
+    {
+        $model = UserProfile::findOne(Yii::$app->user->id);
+        if (!$model instanceof UserProfile) {
+            $model = new UserProfile(['user_id' => Yii::$app->user->id]);
+        }
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            Yii::$app->session->setFlash('success', Yii::t('app', 'User info saved successfully!'));
+            $this->refresh();
+        }
+
+        return $this->render('profile', ['model' => $model]);
     }
 }

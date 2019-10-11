@@ -6,9 +6,11 @@ use app\console\fixtures\NewsCategoryFixture;
 use app\console\fixtures\NewsFixture;
 use app\console\fixtures\UserFixture;
 use app\models\user\User;
+use tests\functional\_BeforeRun;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Url;
 
-class NewsCest
+class NewsCest extends _BeforeRun
 {
     /**
      * Load fixtures before db transaction begin
@@ -21,20 +23,23 @@ class NewsCest
      */
     public function _fixtures()
     {
-        return [
-            'user'          => [
-                'class'    => UserFixture::class,
-                'dataFile' => codecept_data_dir() . 'user.php',
-            ],
-            'news'          => [
-                'class'    => NewsFixture::class,
-                'dataFile' => codecept_data_dir() . 'news.php',
-            ],
-            'news_category' => [
-                'class'    => NewsCategoryFixture::class,
-                'dataFile' => codecept_data_dir() . 'news_category.php',
-            ],
-        ];
+        return ArrayHelper::merge(
+            parent::_fixtures(),
+            [
+                'user'          => [
+                    'class'    => UserFixture::class,
+                    'dataFile' => codecept_data_dir() . 'user.php',
+                ],
+                'news'          => [
+                    'class'    => NewsFixture::class,
+                    'dataFile' => codecept_data_dir() . 'news.php',
+                ],
+                'news_category' => [
+                    'class'    => NewsCategoryFixture::class,
+                    'dataFile' => codecept_data_dir() . 'news_category.php',
+                ],
+            ]
+        );
     }
 
     public function _before(\FunctionalTester $I)
@@ -97,8 +102,8 @@ class NewsCest
 
     public function updateTakenSlug(\FunctionalTester $I)
     {
-        $asia  = $I->grabFixture('news', 'asia');
-        $usa   = $I->grabFixture('news', 'usa');
+        $asia = $I->grabFixture('news', 'asia');
+        $usa  = $I->grabFixture('news', 'usa');
         $I->amOnRoute('admin/news/update', ['id' => $asia['id']]);
         $I->fillField('News[slug]', $usa['slug']);
         $I->click('Update');

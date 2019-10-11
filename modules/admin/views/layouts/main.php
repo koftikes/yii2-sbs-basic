@@ -30,6 +30,11 @@ $bundle = AdminAsset::register($this);
                 'url'    => ['/admin/user'],
                 'active' => \mb_strpos($this->context->route, 'user'),
             ],
+            [
+                'label'  => 'Static Page',
+                'url'    => ['/admin/static-page'],
+                'active' => \mb_strpos($this->context->route, 'static-page'),
+            ],
         ],
     ]);
     ?>

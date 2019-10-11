@@ -21,6 +21,7 @@ class RegisterFormTest extends Unit
             'email'           => 'some_email@example.com',
             'password'        => 'some_password',
             'password_repeat' => 'some_password',
+            'agreement'       => true,
         ]);
 
         /** @var User $user */
@@ -60,7 +61,7 @@ class RegisterFormTest extends Unit
     public function testThrowException()
     {
         $form = $this->getMockBuilder(RegisterForm::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $form->expects($this->once())

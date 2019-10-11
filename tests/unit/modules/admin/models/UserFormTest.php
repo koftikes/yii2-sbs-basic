@@ -108,7 +108,7 @@ class UserFormTest extends Unit
     {
         /** @var UserForm $user */
         $form = $this->getMockBuilder(UserForm::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
 
         $form->expects($this->once())
@@ -117,7 +117,7 @@ class UserFormTest extends Unit
 
         /** @var User $user */
         $user             = $this->getMockBuilder(User::class)
-            ->setMethods(['validate'])
+            ->onlyMethods(['validate'])
             ->getMock();
         $user->attributes = ['email' => 'test@example.com'];
         $form->user       = $user;
