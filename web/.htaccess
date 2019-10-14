@@ -1,4 +1,17 @@
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule . index.php [L]
+# Mod_Rewrite
+<IfModule mod_rewrite.c>
+     # use mod_rewrite for pretty URL support
+    RewriteEngine on
+
+    # Redirect www to non-www
+    RewriteBase /
+    RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+    RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+    IndexIgnore */*
+
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteCond %{REQUEST_FILENAME} !-f
+    # otherwise forward the request to index.php
+    RewriteRule . index.php [L]
+</IfModule>
