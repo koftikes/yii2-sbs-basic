@@ -1,9 +1,7 @@
 ### TODO 
-* Registration using social network.
 * Move console files and scripts to one directory.
 * Initials fixtures (?)
 * Add translate to all views.
-* Add pretty URL.
 * Add ability work with images.
 * Add author behavior with ability run console command.
 * Add comment module.
@@ -12,6 +10,10 @@
 * Add permissions functionality.
 
 ### In Development
+* Registration using social network.
+
+### 14-10-2019
+* Added configuration for Pretty URLs.
 
 ### 11-10-2019
 * Added ability to edit static page from Admin Panel.
