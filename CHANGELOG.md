@@ -10,7 +10,11 @@
 * Add permissions functionality.
 
 ### In Development
+
+### 25-10-2019
 * Registration using social network.
+    * Included **yiisoft/yii2-authclient** version ^2.2.
+    * Added next networks: VKontakte, Facebook, Yandex, Google.
 
 ### 14-10-2019
 * Added configuration for Pretty URLs.

@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\components\AuthHandler;
 use app\models\user\LoginForm;
 use app\models\user\PasswordResetForm;
 use app\models\user\PasswordResetRequestForm;
@@ -9,6 +10,8 @@ use app\models\user\RegisterConfirmForm;
 use app\models\user\RegisterForm;
 use app\models\user\UserProfile;
 use Yii;
+use yii\authclient\AuthAction;
+use yii\authclient\BaseClient;
 use yii\base\InvalidArgumentException;
 use yii\filters\AccessControl;
 use yii\filters\VerbFilter;
@@ -44,6 +47,16 @@ class UserController extends Controller
         ];
     }
 
+    public function actions()
+    {
+        return [
+            'auth' => [
+                'class'           => AuthAction::class,
+                'successCallback' => [$this, 'onAuthSuccess'],
+            ],
+        ];
+    }
+
     /**
      * Login action.
      *
@@ -52,7 +65,7 @@ class UserController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            return Yii::$app->getResponse()->redirect(['user/profile']);
         }
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -80,6 +93,10 @@ class UserController extends Controller
      */
     public function actionRegister()
     {
+        if (!Yii::$app->user->isGuest) {
+            return Yii::$app->getResponse()->redirect(['user/profile']);
+        }
+
         $model = new RegisterForm();
         if ($model->load(Yii::$app->request->post()) && $user = $model->register()) {
             if (!Yii::$app->params['user.registerConfirm'] && Yii::$app->user->login($user)) {
@@ -184,5 +201,15 @@ class UserController extends Controller
         }
 
         return $this->render('profile', ['model' => $model]);
+    }
+
+    /**
+     * @param BaseClient $client
+     *
+     * @throws yii\base\Exception
+     */
+    public function onAuthSuccess($client)
+    {
+        (new AuthHandler($client))->handle();
     }
 }

@@ -105,7 +105,7 @@ class User extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * {@inheritdoc}
+     * @return int
      */
     public function getId()
     {

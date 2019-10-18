@@ -8,6 +8,7 @@ use app\models\user\UserProfile;
 use borales\extensions\phoneInput\PhoneInput;
 use kartik\form\ActiveForm;
 use kartik\widgets\DatePicker;
+use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Html;
 
 $this->title                   = 'Update User: ' . $model->user->username;
@@ -16,7 +17,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="user-profile">
     <h1><?= Html::encode($this->title); ?></h1>
     <div class="row">
-        <div class="col-lg-5">
+        <div class="col-lg-6">
             <?php $form = ActiveForm::begin([
                 'id'   => 'form-user-profile',
                 'type' => ActiveForm::TYPE_HORIZONTAL,
@@ -44,6 +45,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 <?= Html::submitButton('Update', ['class' => 'btn btn-success']); ?>
             </div>
             <?php ActiveForm::end(); ?>
+        </div>
+        <div class="col-lg-6">
+            <?= AuthChoice::widget(['baseAuthUrl' => ['user/auth']]); ?>
         </div>
     </div>
 </div>
