@@ -6,6 +6,7 @@
  */
 use app\models\StaticPage;
 use kartik\form\ActiveForm;
+use yii\authclient\widgets\AuthChoice;
 use yii\helpers\Html;
 
 $this->title                   = 'Register';
@@ -21,14 +22,16 @@ $this->params['breadcrumbs'][] = $this->title;
             <?= $form->field($model, 'email'); ?>
             <?= $form->field($model, 'password')->passwordInput(); ?>
             <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
-            <?= $form->field($model, 'agreement')->checkbox()
-                ->label(Yii::t(
-                    'app',
-                    'I accept these {link}',
-                    ['link' => Html::a(Yii::t('app', 'terms of use'), StaticPage::url(2), ['class' => 'showModal'])]
-                )); ?>
-            <div class="form-group">
-                <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'register-button']); ?>
+            <?= $form->field($model, 'agreement')->checkbox()->label(Yii::t(
+    'app',
+    'I accept these {link}',
+    ['link' => Html::a(Yii::t('app', 'terms of use'), StaticPage::url(2), ['class' => 'showModal'])]
+)); ?>
+            <div class="row">
+                <div class="form-group col-lg-4">
+                    <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'register-button']); ?>
+                </div>
+                <div class="col-lg-8"><?= AuthChoice::widget(['baseAuthUrl' => ['user/auth']]); ?></div>
             </div>
             <?php ActiveForm::end(); ?>
         </div>

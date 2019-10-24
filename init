@@ -86,7 +86,7 @@ foreach (['setCookieValidationKey', 'setWritable', 'setExecutable', 'createSymli
     }
 }
 
-echo "\n  ... initialization completed.\n\n";
+echo "\n  ... initialization completed. If needed update 'config/common-local.php'.\n\n";
 
 function getFileList($root, $basePath = '')
 {

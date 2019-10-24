@@ -39,7 +39,8 @@
         "machour/yii2-jquery-flot": "1.0.x-dev",
         "kartik-v/yii2-detail-view": "^1.8",
         "vova07/yii2-imperavi-widget": "^2.0",
-        "dkhlystov/yii2-treegrid": "^0.1"
+        "dkhlystov/yii2-treegrid": "^0.1",
+        "yiisoft/yii2-authclient": "^2.2"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
