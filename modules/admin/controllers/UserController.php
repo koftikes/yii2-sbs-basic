@@ -18,7 +18,7 @@ use yii\web\NotFoundHttpException;
 class UserController extends BaseController
 {
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function actions()
     {

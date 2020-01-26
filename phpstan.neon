@@ -1,6 +1,7 @@
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
+    checkMissingIterableValueType: false  #TODO: Need to fix and remove this setting
     ignoreErrors:
         -
             message: '#Call to an undefined method [a-zA-Z0-9\\_]+::endContent\(\).#'
@@ -25,6 +26,18 @@ parameters:
                 - %currentWorkingDirectory%/views/*
                 - %currentWorkingDirectory%/modules/*/mail/*
                 - %currentWorkingDirectory%/modules/*/views/*
+        -
+            message: '#PHPDoc tag @var does not specify variable name.#'
+            paths:
+                - %currentWorkingDirectory%/mail/*
+                - %currentWorkingDirectory%/modules/*/mail/*
+        -
+            message: '#Function expect invoked with [0-9] parameter|parameters, 0 required.#'
+            path: %currentWorkingDirectory%/tests/*
+        -
+            message: '#Method [a-zA-Z0-9:\\_]+\(\) has no return typehint specified.#'
+            path: %currentWorkingDirectory%/tests/*
+
         - '#Access to static property \$app on an unknown class Yii.#'
         - '#Call to static method [a-zA-Z0-9\\_]+\(\) on an unknown class Yii.#'
         - '#Constant YII_ENV_[A-Z0-9\\_]+ not found.#'

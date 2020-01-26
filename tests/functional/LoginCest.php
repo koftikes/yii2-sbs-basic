@@ -41,6 +41,12 @@ class LoginCest extends _BeforeRun
         $I->amOnRoute('user/login');
     }
 
+    /**
+     * @param string $login
+     * @param string $password
+     *
+     * @return array
+     */
     protected function formParams($login, $password)
     {
         return [

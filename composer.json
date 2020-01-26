@@ -20,9 +20,10 @@
     "require": {
         "php": ">=7.0",
         "ext-json": "*",
-        "yiisoft/yii2": "~2.0.14",
-        "yiisoft/yii2-bootstrap4": "~2.0.0",
-        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.0",
+        "yiisoft/yii2": "~2.0.32",
+        "yiisoft/yii2-bootstrap4": "~2.0.8",
+        "yiisoft/yii2-swiftmailer": "~2.0.0 || ~2.1.2",
+        "yiisoft/yii2-authclient": "~2.2.6",
 
         "sbs/yii2-core-kit": "dev-master",
         "sbs/yii2-seo": "dev-master",
@@ -34,27 +35,26 @@
         "kartik-v/yii2-bootstrap4-dropdown": "^1.0",
         "kartik-v/yii2-icons": "^1.4",
         "kartik-v/yii2-grid": "^3.3",
-        "trntv/probe": "^1.0",
-        "borales/yii2-phone-input": "^0.1",
-        "machour/yii2-jquery-flot": "1.0.x-dev",
         "kartik-v/yii2-detail-view": "^1.8",
+        "trntv/probe": "^1.0",
+        "borales/yii2-phone-input": "^0.3",
+        "machour/yii2-jquery-flot": "1.0.x-dev",
         "vova07/yii2-imperavi-widget": "^2.0",
-        "dkhlystov/yii2-treegrid": "^0.1",
-        "yiisoft/yii2-authclient": "^2.2"
+        "dkhlystov/yii2-treegrid": "^0.1"
     },
     "require-dev": {
-        "yiisoft/yii2-debug": "~2.1.0",
-        "yiisoft/yii2-gii": "~2.1.0",
-        "yiisoft/yii2-faker": "~2.0.0",
+        "yiisoft/yii2-debug": "~2.1.13",
+        "yiisoft/yii2-gii": "~2.1.4",
+        "yiisoft/yii2-faker": "~2.0.4",
 
-        "codeception/base": "^3.0",
+        "codeception/base": "^3.1",
         "codeception/verify": "^1.2",
         "codeception/specify": "^1.2",
         "symfony/browser-kit": ">=2.8 <=4.3",
 
-        "phpstan/phpstan": "^0.11",
-        "phpstan/phpstan-phpunit": "^0.11",
-        "friendsofphp/php-cs-fixer": "^2.15"
+        "phpstan/phpstan": "^0.12",
+        "phpstan/phpstan-phpunit": "^0.12",
+        "friendsofphp/php-cs-fixer": "^2.16"
     },
     "repositories": [
         {"type": "composer", "url": "https://asset-packagist.org"},

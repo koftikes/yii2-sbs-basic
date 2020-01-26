@@ -133,7 +133,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @throws yii\base\Exception
      */
-    public function generateAuthKey()
+    public function generateAuthKey(): void
     {
         $this->auth_key = Yii::$app->security->generateRandomString();
     }
@@ -143,7 +143,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @throws yii\base\Exception
      */
-    public function generateRegisterConfirmToken()
+    public function generateRegisterConfirmToken(): void
     {
         $this->email_confirm_token = Yii::$app->security->generateRandomString();
     }
@@ -153,7 +153,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $token email confirm token
      *
-     * @return null|static
+     * @return null|User
      */
     public static function findByRegisterConfirmToken($token)
     {
@@ -166,7 +166,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Removes email confirm token.
      */
-    public function removeEmailConfirmToken()
+    public function removeEmailConfirmToken(): void
     {
         $this->email_confirm_token = null;
     }
@@ -190,7 +190,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @throws yii\base\Exception
      */
-    public function setPassword($password)
+    public function setPassword($password): void
     {
         $this->password_hash = Yii::$app->security->generatePasswordHash($password);
     }
@@ -200,7 +200,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @throws yii\base\Exception
      */
-    public function generatePasswordResetToken()
+    public function generatePasswordResetToken(): void
     {
         $this->password_reset_token = Yii::$app->security->generateRandomString() . '_' . \time();
     }
@@ -208,7 +208,7 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * Removes password reset token.
      */
-    public function removePasswordResetToken()
+    public function removePasswordResetToken(): void
     {
         $this->password_reset_token = null;
     }
@@ -233,7 +233,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $token password reset token
      *
-     * @return null|static
+     * @return null|User
      */
     public static function findByPasswordResetToken($token)
     {
@@ -272,7 +272,7 @@ class User extends ActiveRecord implements IdentityInterface
      *
      * @param string $login
      *
-     * @return null|static
+     * @return null|User
      */
     public static function findByLogin($login)
     {

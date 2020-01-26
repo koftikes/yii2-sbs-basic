@@ -12,7 +12,7 @@ use sbs\actions\UpdateAction;
 class StaticPageController extends BaseController
 {
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function actions()
     {

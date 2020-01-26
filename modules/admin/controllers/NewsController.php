@@ -22,7 +22,7 @@ use sbs\widgets\TreeDropDown;
 class NewsController extends BaseController
 {
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function actions()
     {

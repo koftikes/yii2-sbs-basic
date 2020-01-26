@@ -9,6 +9,11 @@ class ContactCest extends _BeforeRun
         $I->amOnRoute('site/contact');
     }
 
+    /**
+     * @param string $email
+     *
+     * @return array
+     */
     protected function formParams($email)
     {
         return [

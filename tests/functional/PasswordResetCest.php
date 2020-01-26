@@ -35,11 +35,22 @@ class PasswordResetCest extends _BeforeRun
         $I->amOnRoute('user/password-reset-request');
     }
 
+    /**
+     * @param string $email
+     *
+     * @return array
+     */
     protected function formResetRequestParams($email)
     {
         return ['PasswordResetRequestForm[email]' => $email];
     }
 
+    /**
+     * @param string $password
+     * @param string $repeat
+     *
+     * @return array
+     */
     protected function formResetParams($password, $repeat)
     {
         return [
@@ -125,7 +136,7 @@ class PasswordResetCest extends _BeforeRun
         /** @var User $user */
         $user = $I->grabRecord(User::class, ['email' => 'admin@example.com']);
         $I->amOnRoute('user/password-reset', ['token' => $user->password_reset_token]);
-        $I->submitForm('#form-password-reset', $this->formResetParams(0, 0));
+        $I->submitForm('#form-password-reset', $this->formResetParams('0', '0'));
         $I->seeValidationError('Password should contain at least 6 characters.');
         $I->seeValidationError('Password Repeat should contain at least 6 characters.');
 

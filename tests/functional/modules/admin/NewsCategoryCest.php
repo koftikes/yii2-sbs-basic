@@ -84,7 +84,7 @@ class NewsCategoryCest extends _BeforeRun
         $I->amOnRoute('admin/news-category/create');
         $I->fillField('NewsCategory[name]', 'Test News');
         $I->fillField('NewsCategory[slug]', 'test-news');
-        $I->click('NewsCategory[status]');
+        $I->fillField('NewsCategory[status]', 1);
         $I->click('Create');
         $I->amOnRoute('admin/news-category/index');
         $I->see('Test News');

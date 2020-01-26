@@ -18,7 +18,7 @@ use yii\grid\DataColumn;
 class NewsCategoryController extends BaseController
 {
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function actions()
     {

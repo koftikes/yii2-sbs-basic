@@ -47,6 +47,9 @@ class UserController extends Controller
         ];
     }
 
+    /**
+     * @return array
+     */
     public function actions()
     {
         return [
@@ -208,7 +211,7 @@ class UserController extends Controller
      *
      * @throws yii\base\Exception
      */
-    public function onAuthSuccess($client)
+    public function onAuthSuccess($client): void
     {
         (new AuthHandler($client))->handle();
     }

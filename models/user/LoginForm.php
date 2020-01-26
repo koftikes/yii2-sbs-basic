@@ -12,10 +12,19 @@ use yii\base\Model;
  */
 class LoginForm extends Model
 {
+    /**
+     * @var string
+     */
     public $login;
 
+    /**
+     * @var string
+     */
     public $password;
 
+    /**
+     * @var bool
+     */
     public $rememberMe = true;
 
     /**
@@ -39,7 +48,7 @@ class LoginForm extends Model
      * Validates the password.
      * This method serves as the inline validation for password.
      */
-    public function validatePassword()
+    public function validatePassword(): void
     {
         if (!$this->hasErrors()) {
             $user = $this->getUser();

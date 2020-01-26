@@ -106,7 +106,6 @@ class UserFormTest extends Unit
 
     public function testThrowException()
     {
-        /** @var UserForm $user */
         $form = $this->getMockBuilder(UserForm::class)
             ->onlyMethods(['validate'])
             ->getMock();

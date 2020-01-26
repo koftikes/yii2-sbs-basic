@@ -12,7 +12,7 @@ use yii\web\Response;
 class SiteController extends Controller
 {
     /**
-     * {@inheritdoc}
+     * @return array
      */
     public function actions()
     {

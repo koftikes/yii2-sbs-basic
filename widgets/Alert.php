@@ -56,6 +56,9 @@ class Alert extends Widget
      */
     public $closeButton = [];
 
+    /**
+     * @var array
+     */
     public $alertIcon = [
         self::ERROR   => 'fas fa-times-circle',
         self::WARNING => 'fas fa-exclamation-circle',
@@ -68,12 +71,13 @@ class Alert extends Widget
      *
      * @throws \Exception
      *
-     * @return string|void
+     * @return string
      */
     public function run()
     {
         $flashes     = Yii::$app->session->getAllFlashes();
         $appendClass = isset($this->options['class']) ? ' ' . $this->options['class'] : '';
+        $output      = '';
 
         foreach ($flashes as $type => $flash) {
             if (!isset($this->alertTypes[$type])) {
@@ -87,7 +91,7 @@ class Alert extends Widget
                 // assign unique id to each alert box
                 $this->options['id'] = $this->getId() . '-' . $type . '-' . $i;
 
-                echo Growl::widget([
+                $output .= Growl::widget([
                     'type'          => $this->alertTypes[$type],
                     'icon'          => $this->alertIcon[$type],
                     'closeButton'   => $this->closeButton,
@@ -98,6 +102,8 @@ class Alert extends Widget
 
             Yii::$app->session->removeFlash($type);
         }
+
+        return $output;
     }
 
     /**

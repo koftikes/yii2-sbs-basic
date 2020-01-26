@@ -1,4 +1,8 @@
 <?php
+/**
+ * - https://mlocati.github.io/php-cs-fixer-configurator
+ * - https://github.com/FriendsOfPHP/PHP-CS-Fixer
+ */
 $finder = PhpCsFixer\Finder::create()
     ->in(__DIR__)
     ->exclude(['runtime', 'tests/_output', 'tests/_support/_generated', 'vendor', 'web/assets']);

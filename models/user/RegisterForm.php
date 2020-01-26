@@ -11,14 +11,29 @@ use yii\base\Model;
  */
 class RegisterForm extends Model
 {
+    /**
+     * @var string
+     */
     public $name;
 
+    /**
+     * @var string
+     */
     public $email;
 
+    /**
+     * @var string
+     */
     public $password;
 
+    /**
+     * @var string
+     */
     public $password_repeat;
 
+    /**
+     * @var bool
+     */
     public $agreement;
 
     /**

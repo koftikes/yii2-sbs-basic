@@ -93,7 +93,7 @@ class NewsCest extends _BeforeRun
         $I->fillField('News[slug]', 'test-news-123');
         $I->fillField('News[text]', 'Bla-Bla-Bla');
         $I->fillField('News[publish_date]', '2019-05-31 12:55:00');
-        $I->click('News[status]');
+        $I->fillField('News[status]', 1);
         $I->click('Create');
         $I->amOnRoute('admin/news/index');
         $I->see('Test News #123', 'td');

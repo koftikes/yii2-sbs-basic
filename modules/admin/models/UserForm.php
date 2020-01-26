@@ -25,8 +25,14 @@ class UserForm extends Model
      */
     public $profile;
 
+    /**
+     * @var string
+     */
     public $password;
 
+    /**
+     * @var string
+     */
     public $password_repeat;
 
     /**

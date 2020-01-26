@@ -156,7 +156,7 @@ class AuthHandler
         return true;
     }
 
-    protected function getAttributes()
+    protected function getAttributes(): void
     {
         try {
             $attributes        = $this->client->getUserAttributes();

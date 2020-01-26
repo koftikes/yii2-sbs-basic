@@ -39,7 +39,7 @@ return [
             'class' => FileCache::class,
         ],
         'log'                  => [
-            'traceLevel' => YII_DEBUG ? 3 : 0,
+            'traceLevel' => YII_DEBUG === true ? 3 : 0,
             'targets'    => [
                 [
                     'class'  => FileTarget::class,
