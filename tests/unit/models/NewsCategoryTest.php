@@ -43,7 +43,6 @@ class NewsCategoryTest extends Unit
 
     public function testGetNews()
     {
-        /** @var NewsCategory $category */
         $category = $this->tester->grabFixture('news_category', 'asia');
         $news     = $this->tester->grabFixture('news', 'asia');
 
@@ -58,7 +57,6 @@ class NewsCategoryTest extends Unit
 
     public function testGetParent()
     {
-        /** @var NewsCategory $category_asia */
         $category_asia  = $this->tester->grabFixture('news_category', 'asia');
         $category_world = $this->tester->grabFixture('news_category', 'world');
         expect($category_asia->parent)->isInstanceOf(NewsCategory::class);
@@ -67,7 +65,6 @@ class NewsCategoryTest extends Unit
 
     public function testGetChildren()
     {
-        /** @var NewsCategory $category_world */
         $category_world = $this->tester->grabFixture('news_category', 'world');
         expect($category_world->children)->count(3);
         foreach ($category_world->children as $category) {

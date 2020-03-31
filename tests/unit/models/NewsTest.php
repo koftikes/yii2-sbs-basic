@@ -71,7 +71,6 @@ class NewsTest extends Unit
 
     public function testGetCategory()
     {
-        /** @var News $news */
         $news          = $this->tester->grabFixture('news', 'asia');
         $news_category = $this->tester->grabFixture('news_category', 'asia');
         expect($news->category)->isInstanceOf(NewsCategory::class);
@@ -80,7 +79,6 @@ class NewsTest extends Unit
 
     public function testGetCreateUser()
     {
-        /** @var News $news */
         $news  = $this->tester->grabFixture('news', 'asia');
         $admin = $this->tester->grabFixture('user', 'admin');
         expect($news->createUser)->isInstanceOf(User::class);
@@ -89,7 +87,6 @@ class NewsTest extends Unit
 
     public function testGetUpdateUser()
     {
-        /** @var News $news */
         $news  = $this->tester->grabFixture('news', 'asia');
         $admin = $this->tester->grabFixture('user', 'admin');
         expect($news->updateUser)->isInstanceOf(User::class);

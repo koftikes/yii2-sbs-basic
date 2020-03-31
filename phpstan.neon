@@ -19,6 +19,7 @@ parameters:
                 - %currentWorkingDirectory%/mail/*
                 - %currentWorkingDirectory%/views/*
                 - %currentWorkingDirectory%/modules/*/views/*
+                - %currentWorkingDirectory%/modules/*/mail/*
         -
             message: '#Undefined variable: \$[a-zA-Z0-9\\_]+#'
             paths:
