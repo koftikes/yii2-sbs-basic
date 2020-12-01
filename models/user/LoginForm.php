@@ -8,7 +8,7 @@ use yii\base\Model;
 /**
  * Class LoginForm is the model behind the login form.
  *
- * @property null|User $user This property is read-only.
+ * @property-read null|User $user This property is read-only.
  */
 class LoginForm extends Model
 {

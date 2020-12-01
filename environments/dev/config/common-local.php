@@ -43,7 +43,7 @@ $config = [
 
 if (YII_ENV_TEST) {
     $config['aliases']['@tests']       = '@app/tests';
-    $config['components']['db']['dsn'] = 'mysql:host=localhost;dbname=yii2_basic_tests';
+    $config['components']['db']['dsn'] = 'mysql:host=localhost;dbname=yii2_basic_test';
 }
 
 // configuration adjustments for 'dev' environment

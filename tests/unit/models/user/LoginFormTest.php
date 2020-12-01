@@ -60,7 +60,7 @@ class LoginFormTest extends Unit
 
         expect_that($form->login());
         expect_not(Yii::$app->user->isGuest);
-        expect($form->errors)->hasntKey('login');
-        expect($form->errors)->hasntKey('password');
+        expect($form->errors)->hasNotKey('login');
+        expect($form->errors)->hasNotKey('password');
     }
 }
