@@ -1,27 +1,19 @@
 includes:
     - vendor/phpstan/phpstan-phpunit/extension.neon
 parameters:
+    bootstrapFiles:
+        - %currentWorkingDirectory%/vendor/codeception/codeception/autoload.php
+        - %currentWorkingDirectory%/tests/_support/_generated/FunctionalTesterActions.php
+        - %currentWorkingDirectory%/tests/_support/_generated/UnitTesterActions.php
     checkMissingIterableValueType: false  #TODO: Need to fix and remove this setting
     ignoreErrors:
-        -
-            message: '#Call to an undefined method [a-zA-Z0-9\\_]+::endContent\(\).#'
-            paths:
-                - %currentWorkingDirectory%/views/*
-                - %currentWorkingDirectory%/modules/*/views/*
         -
             message: '#Variable \$this might not be defined.#'
             paths:
                 - %currentWorkingDirectory%/views/*
                 - %currentWorkingDirectory%/modules/*/views/*
         -
-            message: '#Using \$this outside a class.#'
-            paths:
-                - %currentWorkingDirectory%/mail/*
-                - %currentWorkingDirectory%/views/*
-                - %currentWorkingDirectory%/modules/*/views/*
-                - %currentWorkingDirectory%/modules/*/mail/*
-        -
-            message: '#Undefined variable: \$[a-zA-Z0-9\\_]+#'
+            message: '#Variable \$[a-zA-Z0-9\\_]+ might not be defined.#'
             paths:
                 - %currentWorkingDirectory%/mail/*
                 - %currentWorkingDirectory%/views/*
@@ -43,10 +35,6 @@ parameters:
         - '#Call to static method [a-zA-Z0-9\\_]+\(\) on an unknown class Yii.#'
         - '#Constant YII_ENV_[A-Z0-9\\_]+ not found.#'
         - '#Constant YII_DEBUG not found.#'
-    autoload_directories:
-        - %currentWorkingDirectory%/tests/_support
-    autoload_files:
-        - %currentWorkingDirectory%/vendor/codeception/base/autoload.php
     excludes_analyse:
         - %currentWorkingDirectory%/requirements.php #TODO: Need to fix this file
         - %currentWorkingDirectory%/console/fixtures/data/*

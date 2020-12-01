@@ -17,7 +17,7 @@ use yii\helpers\Html;
 ]); ?>
 <div class="admin-user-form">
     <?= $form->field($model->user, 'email'); ?>
-    <?php if ($model->user->isNewRecord): ?>
+    <?php if ($model->user->isNewRecord) : ?>
         <?= $form->field($model, 'password')->passwordInput(); ?>
         <?= $form->field($model, 'password_repeat')->passwordInput(); ?>
     <?php endif; ?>
