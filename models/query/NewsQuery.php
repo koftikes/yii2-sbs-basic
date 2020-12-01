@@ -4,6 +4,7 @@ namespace app\models\query;
 
 use app\models\News;
 use yii\db\ActiveQuery;
+use yii\db\ActiveRecord;
 
 /**
  * This is the ActiveQuery class for [[\app\models\News]].
@@ -45,7 +46,7 @@ class NewsQuery extends ActiveQuery
     /**
      * {@inheritdoc}
      *
-     * @return array|News[]
+     * @return ActiveRecord[]|array
      */
     public function all($db = null)
     {
@@ -55,7 +56,7 @@ class NewsQuery extends ActiveQuery
     /**
      * {@inheritdoc}
      *
-     * @return null|array|News
+     * @return null|ActiveRecord|array
      */
     public function one($db = null)
     {
