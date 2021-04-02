@@ -1,9 +1,9 @@
 <?php
 /**
- * @var yii\web\View
- * @var StaticPage   $model
+ * @var yii\web\View          $this
+ * @var app\models\StaticPage $model
  */
-use app\models\StaticPage;
+
 use sbs\widgets\SeoTags;
 use yii\helpers\Html;
 

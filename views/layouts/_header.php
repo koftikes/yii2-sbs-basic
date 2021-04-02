@@ -1,4 +1,7 @@
 <?php
+/**
+ * @var yii\web\View $this
+ */
 
 use app\models\StaticPage;
 use kartik\nav\NavX;

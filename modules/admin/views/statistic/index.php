@@ -1,7 +1,7 @@
 <?php
 /**
- * @var yii\web\View
- * @var probe\provider\ProviderInterface $provider
+ * @var yii\web\View                        $this
+ * @var Probe\Provider\AbstractUnixProvider $provider
  */
 use app\models\user\User;
 use yii\helpers\Html;
@@ -50,7 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <i class="fas fa-history"></i> <?= Yii::t('app', 'Uptime'); ?>
             </div>
             <div class="card-body">
-                <h4><?= \gmdate('H:i:s', $provider->getUptime()); ?></h4>
+                <h4><?= \gmdate('H:i:s', (int) $provider->getUptime()); ?></h4>
             </div>
         </div>
         <div class="card">

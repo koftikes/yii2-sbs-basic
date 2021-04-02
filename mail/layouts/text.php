@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View view component instance
+ * @var yii\web\View $this view component instance
  * @var string       $content main view render result
  */
 ?>

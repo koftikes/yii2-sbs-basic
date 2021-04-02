@@ -4,6 +4,7 @@ namespace app\models;
 
 use sbs\behaviors\DateTimeBehavior;
 use sbs\behaviors\SeoBehavior;
+use sbs\models\Seo;
 use Yii;
 use yii\db\ActiveRecord;
 use yii\web\NotFoundHttpException;
@@ -16,6 +17,7 @@ use yii\web\NotFoundHttpException;
  * @property string $slug
  * @property string $text
  * @property string $update_date
+ * @property Seo $seo
  */
 class StaticPage extends ActiveRecord
 {

@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View                $this
  * @var kartik\form\ActiveForm      $form
  * @var app\models\user\UserProfile $model
  */
