@@ -58,7 +58,7 @@
 
         "phpstan/phpstan": "^0.12",
         "phpstan/phpstan-phpunit": "^0.12",
-        "friendsofphp/php-cs-fixer": "^2.16"
+        "friendsofphp/php-cs-fixer": "^2.18"
     },
     "repositories": [
         {"type": "composer", "url": "https://asset-packagist.org"},

@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View                      $this
  * @var app\modules\admin\models\UserForm $model
  */
 $this->title                 = 'Create User';

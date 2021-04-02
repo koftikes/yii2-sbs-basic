@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View          $this
  * @var app\models\StaticPage $model
  */
 $this->title                 = 'Update Static Page: ' . $model->title;

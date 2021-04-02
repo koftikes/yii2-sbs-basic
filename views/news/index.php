@@ -1,8 +1,8 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View                $this
  * @var yii\data\ActiveDataProvider $dataProvider
- * @var NewsCategory                $category
+ * @var app\models\NewsCategory     $category
  */
 use app\models\NewsCategory;
 use sbs\widgets\SeoTags;

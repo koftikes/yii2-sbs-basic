@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View $this
  * @var string       $content
  */
 use yii\bootstrap4\Breadcrumbs;

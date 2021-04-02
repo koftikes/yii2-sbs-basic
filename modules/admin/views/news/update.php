@@ -1,6 +1,6 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View    $this
  * @var app\models\News $model
  */
 $this->title                 = 'Update News: ' . $model->title;

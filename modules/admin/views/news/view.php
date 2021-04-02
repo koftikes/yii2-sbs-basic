@@ -1,9 +1,11 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View             $this
  * @var kartik\detail\DetailView $widget
+ * @var app\models\News          $model
  */
-$this->title                 = $widget->model->title;
+$model                       = $widget->model;
+$this->title                 = $model->title;
 $this->params['breadcrumbs'] = [
     ['label' => 'Admin Panel', 'url' => ['statistic/index']],
     ['label' => 'News', 'url' => ['news/index']],

@@ -1,9 +1,10 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View              $this
  * @var app\models\News           $model
  * @var kartik\widgets\ActiveForm $form
  */
+
 use app\models\NewsCategory;
 use kartik\datetime\DateTimePicker;
 use kartik\widgets\ActiveForm;

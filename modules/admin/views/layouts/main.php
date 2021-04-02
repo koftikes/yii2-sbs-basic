@@ -1,8 +1,9 @@
 <?php
 /**
- * @var yii\web\View
+ * @var yii\web\View $this
  * @var string       $content
  */
+
 use app\modules\admin\AdminAsset;
 use kartik\nav\NavX;
 use yii\bootstrap4\Breadcrumbs;
